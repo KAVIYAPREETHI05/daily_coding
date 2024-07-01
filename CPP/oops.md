@@ -92,3 +92,42 @@ int main()
     return 0;
 }
 ```
+### deposit and withdraw money from the account
+```cpp
+#include <iostream>
+using namespace std;
+class BankAccount{
+    private:
+    int accountNo;
+    double balance;
+    
+    public:
+    BankAccount( int No,double bal){
+        accountNo=No;
+        balance=bal;
+    }
+    void deposit(double amount){
+        cout<<"Initial balance: "<<balance<<endl;
+        balance+=amount;
+        cout<<"Deposit:"<<balance<<endl;
+    }
+    void withdraw(double amount){
+        if(amount>balance){
+            cout<<"Insufficient balance..";
+        }
+        else{
+            cout<<"Withdraw amount: "<<amount<<endl;
+            balance-=amount;
+            cout<<"After withdraw: "<<balance;
+        }
+    }
+};
+int main()
+{
+    BankAccount b1(101,2000);
+    b1.deposit(500);
+    b1.withdraw(200);
+    return 0;
+}
+```
+
