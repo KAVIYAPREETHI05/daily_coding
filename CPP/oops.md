@@ -27,3 +27,33 @@ int main()
     return 0;
 }
 ```
+### rectangle's area and perimeter
+```cpp
+#include <iostream>
+#include<cmath>
+using namespace std;
+class rectangle{
+    private:
+    int length;
+    int width;
+    public:
+    rectangle( int l,int b){
+        length=l;
+        width=b;
+    }
+    void areaOfReactangle(){
+        cout<<"Area is: "<<length*width<<endl;
+        
+    }
+    void perimeterOfRectangle(){
+        cout<<"Circum is: "<<2*(length+width);
+    }
+};
+int main()
+{
+    rectangle r1(3,4);
+    r1.areaOfReactangle();
+    r1.perimeterOfRectangle();
+    return 0;
+}
+```
