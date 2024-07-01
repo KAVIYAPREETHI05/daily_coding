@@ -57,3 +57,37 @@ int main()
     return 0;
 }
 ```
+### set and get values
+#include <iostream>
+using namespace std;
+class person{
+    private:
+    string name;
+    int age;
+    string country;
+    public:
+    void setNameAgeCountry( string n,int a,string c){
+        name=n;
+        age=a;
+        country=c;
+    }
+    string getName(){
+        return name;
+    }
+    int getAge(){
+        return age;
+    }
+    string getCountry(){
+        return country;
+    }
+};
+int main()
+{
+    person p1;
+    p1.setNameAgeCountry("kaviya",19,"India");
+    cout<<p1.getName()<<endl;
+    cout<<p1.getAge()<<endl;
+    cout<<p1.getCountry();
+    return 0;
+}
+```
