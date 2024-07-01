@@ -58,6 +58,7 @@ int main()
 }
 ```
 ### set and get values
+```cpp
 #include <iostream>
 using namespace std;
 class person{
