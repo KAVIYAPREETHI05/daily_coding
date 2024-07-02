@@ -233,4 +233,72 @@ int main()
         return 0;
     }
 ```
+### allocate Grade to marks
+```cpp
+    #include <iostream>
+    using namespace std;
+    class student{
+        private:
+        string name;
+        string standard;
+        int rollno;
+        double marks;
+        public:
+        student(string n,string s,int r,double m): name(n),standard(s),rollno(r),marks(m){}
+        
+        string calculateGrade(){
+            if(marks>=90 && marks<=100){
+                return "O";
+            }
+            else if(marks>=80 && marks<90){
+                return "A";
+            }
+            else if(marks>=70 && marks<80){
+                return "B";
+            }
+            else if(marks>=60 && marks<70){
+                return "C";
+            }
+            else if(marks<60 && marks>=35){
+                return "D";
+            }
+            else if(marks<35 && marks>=0){
+                return "FAIL";
+            }
+            else{
+                return "NOT APPLICABLE";
+            }
+            
+            
+        }
+        void displayDetails(){
+            cout<<"Name: "<<name<<endl;
+            cout<<"Class: "<<standard<<endl;
+            cout<<"Rollno: "<<rollno<<endl;
+            cout<<"Marks: "<<marks<<endl;
+            cout<<"Grade: "<<calculateGrade();
+        }
+    };
+    int main()
+    {
+        string name;
+        string standard;
+        int rollno;
+        double marks;
+        
+        cout<<"Enter name: ";
+        getline(cin,name);
+        cout<<"Enter class: ";
+        getline(cin,standard);
+        cout<<"Enter rollno: ";
+        cin>>rollno;
+        cout<<"Enter marks: ";
+        cin>>marks;
+        
+        student s1(name,standard,rollno,marks);
+        s1.displayDetails();
+       
+        return 0;
+    }
+```
 
