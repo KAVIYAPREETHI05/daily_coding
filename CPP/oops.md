@@ -130,7 +130,7 @@ int main()
     return 0;
 }
 ```
-### check valid triangle
+### check valid Triangle
 ```cpp
 #include <iostream>
 using namespace std;
@@ -175,5 +175,62 @@ int main()
     t1.checkTriangle();
     return 0;
 }
+```
+### check valid Date
+```cpp
+    #include <iostream>
+    using namespace std;
+    class Date{
+        private:
+        int date;
+        int month;
+        int year;
+        public:
+        Date(int d,int m,int y):date(d),month(m),year(y){}
+        bool validateDate(){
+            if(date<1 || date>31){
+                return false;
+            }
+            else if(month<1 || month>12){
+                return false;
+            }
+            else if((month==4 || month==6 || month==9 || month==11) && date>30){
+                return false;
+            }
+            else if(month==2){
+                if((year%4==0 && year%100!=0) || (year%400==0)){
+                    if(date>29){
+                        return false;
+                    }
+                }
+                else{
+                   if(date>28){
+                    return false;
+                }
+            }
+            }
+            return true;
+        }
+    };
+    int main()
+    {
+        int date;
+        int month;
+        int year;
+        cout<<"Enter date: ";
+        cin>>date;
+        cout<<"Enter month: ";
+        cin>>month;
+        cout<<"Enter Year: ";
+        cin>>year;
+        Date d1(date,month,year);
+        if(d1.validateDate()){
+            cout<<"It is a valid date!";
+        }
+        else{
+            cout<<"No it is not a valid date...";
+        }
+        return 0;
+    }
 ```
 
