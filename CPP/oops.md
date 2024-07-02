@@ -130,4 +130,50 @@ int main()
     return 0;
 }
 ```
+### check valid triangle
+```cpp
+#include <iostream>
+using namespace std;
+class Triangle{
+    private:
+    int side1;
+    int side2;
+    int side3;
+    public:
+    /*assignment in constructor body-less efficient
+    Triangle(int s1,int s2,int s3){
+        side1=s1;
+        side2=s2;
+        side3=s3;
+    }
+    instead of this use constructor initialization list for more efficient*/
+    Triangle(int s1,int s2,int s3) : side1(s1),side2(s2),side3(s3){}
+    void checkTriangle(){
+        if(isvalidTriangle()){
+             if(side1==side2 && side2==side3){
+            cout<<"All sides are equal thus it is equilateral triangle";
+        }
+        else if(side1==side2 || side2==side3 ||side1==side3){
+            cout<<"two sides of triangle are equal thus it is isosceles triangle";
+        }
+        else{
+            cout<<"no sides are equal thus it is scalene triangle";
+        }
+        }
+        else{
+            cout<<"it does not form a valid triangle";
+        }
+    }
+    private:
+    bool isvalidTriangle(){
+       return side1+side2>side3 && side1+side3>side2 && side2+side3>side1;
+    }
+};
+int main()
+{
+    Triangle t1(9,9,12);
+    t1.checkTriangle();
+    return 0;
+}
+```
 
