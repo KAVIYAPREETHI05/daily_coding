@@ -1,3 +1,23 @@
+### print subarray
+``time complexity=O(n3)``
+``space complexity=O(n)``
+```c
+#include <stdio.h>
+int main()
+{
+    int n=5;
+    int arr[]={1,2,3,4,5};
+    for(int i=0;i<n;i++){
+        for(int j=i;j<n;j++){
+           for(int k=i;k<=j;k++){
+                printf("%d ",arr[k]);
+           }
+            printf("\n");
+        }
+    }
+    return 0;
+}
+```
 ### split subarray into two equal sum subarray
 ``time complexity=O(n)``
 ``space complexity=O(1)``
