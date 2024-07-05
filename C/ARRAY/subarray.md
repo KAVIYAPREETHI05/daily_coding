@@ -93,4 +93,39 @@ int main()
 return 0;
 }
 ```
-
+### Subarray of size k with given sum
+``time complexity=O(n.k)``
+``space complexity=O(1)``
+```c
+#include <stdio.h>
+int checksum(int arr[],int n,int sum,int k,int *start,int *end){
+    for(int i=0;i<=n-k;i++){
+         int curr_sum=0;
+        for(int j=i;j<i+k;j++){
+                curr_sum+=arr[j];
+                if(curr_sum==sum){
+                    *start=i;
+                    *end=j;
+                return 1;
+                }
+            }
+    }
+    return 0;
+}
+int main()
+{
+    int n=5;
+    int sum=-6;
+    int k=3;
+    int arr[]={1,-2,3,-4,-5};
+    int start=0;int end=0;
+    if(checksum(arr,n,sum,k,&start,&end)){
+        printf("yes\n");
+        printf("starts from %dth index & ends at %dth index",start,end);
+        }
+    else{
+        printf("no");
+    }
+return 0;
+}
+```
