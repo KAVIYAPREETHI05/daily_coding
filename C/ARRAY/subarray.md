@@ -62,3 +62,35 @@ int main()
     return 0;
 }
 ```
+### Check if subarray with given product exists in an array
+``time complexity=O(n^2)``
+``space complexity=O(1)``
+```c
+#include <stdio.h>
+int checkproduct(int arr[],int n,int target){
+    for(int i=0;i<n;i++){
+         int product=1;
+        for(int j=i;j<n;j++){
+                product*=arr[j];
+                if(product==target){
+                return 1;
+                }
+            }
+    }
+    return 0;
+}
+int main()
+{
+    int n=5;
+    int target=12;
+    int arr[]={1,-2,3,-4,-5};
+    if(checkproduct(arr,n,target)){
+        printf("yes");
+        }
+    else{
+        printf("no");
+    }
+return 0;
+}
+```
+
