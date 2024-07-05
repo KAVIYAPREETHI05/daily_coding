@@ -1,5 +1,5 @@
 ### min_max
-##### []
+
 ```c
 #include <stdio.h>
  void min_max(int arr[],int n,int result[]){
@@ -58,6 +58,31 @@ int removeElement(int* nums, int numsSize, int val) {
     }
     return count;
     
+}
+```
+### sort an array
+``time complexity=O(n^2)``
+``space complexity=O(n)``
+```c
+#include<stdio.h>
+void swap(int *a,int *b){
+    int temp= *a;
+    *a=*b;
+    *b=temp;
+}
+int main(){
+    int n=5;
+    int arr[]={3,6,1,2,0};
+    for(int i=0;i<n-1;i++){
+       for(int j=i+1;j<n;j++){
+            if(arr[i]>arr[j]){
+           swap(&arr[i],&arr[j]);
+        }
+       }
+    }
+    for(int i=0;i<n;i++){
+        printf("%d",arr[i]);
+    }
 }
 ```
 
