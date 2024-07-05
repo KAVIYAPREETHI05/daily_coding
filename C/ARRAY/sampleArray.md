@@ -1,5 +1,6 @@
 ### min_max
-
+``time complexity=O(n)``
+``space complexity=O(1)``
 ```c
 #include <stdio.h>
  void min_max(int arr[],int n,int result[]){
@@ -27,7 +28,8 @@ int main()
 }
 ```
 ### removeDuplicate
-##### [https://leetcode.com/problems/remove-duplicates-from-sorted-array/?envType=study-plan-v2&envId=top-interview-150]
+``time complexity=O(n)``
+``space complexity=O(1)``
 ```c
 int removeDuplicates(int* arr, int numsSize) {
     if(numsSize==0){
@@ -45,7 +47,9 @@ int removeDuplicates(int* arr, int numsSize) {
 }
 ```
 ### removeElement
-##### [https://leetcode.com/problems/remove-element/?envType=study-plan-v2&envId=top-interview-150]
+``time complexity=O(n)``
+``space complexity=O(1)``
+
 ```c
 int removeElement(int* nums, int numsSize, int val) {
     int count=0;int k=0;
