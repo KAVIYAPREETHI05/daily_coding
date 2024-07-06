@@ -1,4 +1,4 @@
-### print subarray
+### 1.print subarray
 ``time complexity=O(n3)``
 ``space complexity=O(n)``
 ```c
@@ -18,7 +18,7 @@ int main()
     return 0;
 }
 ```
-### split subarray into two equal sum subarray
+### 2.split subarray into two equal sum subarray
 ``time complexity=O(n)``
 ``space complexity=O(1)``
 ```c
@@ -62,7 +62,7 @@ int main()
     return 0;
 }
 ```
-### Check if subarray with given product exists in an array
+### 3.Check if subarray with given product exists in an array
 ``time complexity=O(n^2)``
 ``space complexity=O(1)``
 ```c
@@ -93,7 +93,7 @@ int main()
 return 0;
 }
 ```
-### Subarray of size k with given sum
+### 4.Subarray of size k with given sum
 ``time complexity=O(n.k)``
 ``space complexity=O(1)``
 ```c
@@ -129,3 +129,106 @@ int main()
 return 0;
 }
 ```
+### 5.Count subarrays with all elements greater than K
+``time complexity=O(n)``
+``space complexity=O(1)``
+```c
+#include <stdio.h>
+int count(int arr[],int n,int value){
+    int count=0;
+    int number=0;
+    for(int i=0;i<n;i++){
+        if(arr[i]>value){
+            count+=1;
+        }
+        else{
+            number+= (count)*(count+1)/2;
+            count=0;
+        }
+    }
+    if(count){
+         number+= count*(count+1)/2;
+    }
+    return number;
+}
+int main()
+{
+    int arr[]={1,4,5,2,3,4};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int value=3;
+    printf("%d",count(arr,n,value));
+
+    return 0;
+}
+```
+### 6.Check whether an Array is Subarray of another Array
+``time complexity=O(n*m)``
+``space complexity=O(1)``
+```c
+#include <stdio.h>
+int count(int arr[],int n,int brr[],int m){
+    for(int i=0;i<=n-m;i++){
+        for(int j=0;j<m;j++){
+            if(arr[i+j]!=brr[j]){
+                 break;
+            }
+             if(j==m-1){
+        return 1;
+    }
+        }
+    }
+    return 0;
+    }
+int main()
+{
+    int arr[]={1,4,5,2,3,4};
+    int brr[]={5,3};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int m=sizeof(brr)/sizeof(brr[0]);
+    if(count(arr,n,brr,m)){
+        printf("yes");
+    }
+    else{
+        printf("no");
+    }
+    return 0;
+}
+```
+(or)
+``time complexity=O(n*n)``
+``space complexity=O(1)``
+```c
+#include <stdio.h>
+int count(int arr[],int n,int brr[],int m){
+    int i=0;int j=0;
+    while(i<n && j<m){
+        if(arr[i]==brr[j]){
+            i++;
+            j++;
+            if(j==m){
+                return 1;
+            }
+        }
+        else{
+            i=i-j+1;
+            j=0;
+        }
+    }
+    return 0;
+    }
+int main()
+{
+    int arr[]={1,4,5,2,3,4};
+    int brr[]={5,2,3};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int m=sizeof(brr)/sizeof(brr[0]);
+    if(count(arr,n,brr,m)){
+        printf("yes");
+    }
+    else{
+        printf("no");
+    }
+    return 0;
+}
+```
+
