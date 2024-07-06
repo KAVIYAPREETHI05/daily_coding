@@ -282,5 +282,34 @@ int main()
     return 0;
 }
 ```
+### 8.Count of subarrays with sum at least K
+``time complexity=O(n*n)``
+``space complexity=O(1)``
+
+```c
+#include <stdio.h>
+int sum(int arr[],int n,int k){
+    int count=0;
+    for(int i=0;i<n;i++){
+        int sum=0;
+        for(int j=i;j<n;j++){
+            sum+=arr[j];
+            if(sum>k){
+                count++;
+            }
+    }
+    }
+    return count;
+}
+int main()
+{
+    int arr[]={3,3,3};
+    int k=5;
+    int n=sizeof(arr)/sizeof(arr[0]);
+    printf("%d",sum(arr,n,k));
+
+    return 0;
+}
+```
 
 
