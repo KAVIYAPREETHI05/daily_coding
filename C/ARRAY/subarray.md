@@ -195,6 +195,7 @@ int main()
 }
 ```
 (or)
+
 ``time complexity=O(n*n)``
 ``space complexity=O(1)``
 ```c
@@ -231,4 +232,55 @@ int main()
     return 0;
 }
 ```
+### 7.Sum of all subarrays of size K
+``time complexity=O(n*k)``
+``space complexity=O(1)``
+
+```c
+#include <stdio.h>
+void sum(int arr[],int n,int k){
+    for(int i=0;i<=n-k;i++){
+        int sum=0;
+        for(int j=i;j<k+i;j++){
+            sum+=arr[j];
+        }
+        printf("%d\n",sum);
+    }
+    }
+int main()
+{
+    int arr[]={1,4,5,2,3,4};
+    int k=3;
+    int n=sizeof(arr)/sizeof(arr[0]);
+    sum(arr,n,k);
+    return 0;
+}
+```
+(or)
+
+``time complexity=O(n)``
+``space complexity=O(1)``
+```c
+#include <stdio.h>
+void sum(int arr[],int n,int k){
+    int sum=0;
+    for(int i=0;i<k;i++){
+            sum+=arr[i];
+    }
+     printf("%d\n",sum);
+    for(int i=k;i<n;i++){
+        sum=sum-arr[i-k]+arr[i];
+        printf("%d\n",sum);
+    }
+    }
+int main()
+{
+    int arr[]={1,4,5,2,3,4};
+    int k=3;
+    int n=sizeof(arr)/sizeof(arr[0]);
+    sum(arr,n,k);
+    return 0;
+}
+```
+
 
