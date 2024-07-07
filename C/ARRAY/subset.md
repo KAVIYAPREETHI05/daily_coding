@@ -31,3 +31,39 @@ int main(){
     subseq(arr,n);
 }
 ```
+### Find whether an array is subset of another array
+``time complexity-O(n*m)``
+``space complexity-O(1)``
+```c
+#include <stdio.h>
+int checkSubset(int arr[],int brr[],int n,int m){
+        for(int i=0;i<m;i++){
+            int found=0;
+        for(int j=0;j<n;j++){
+            if(brr[i]==arr[j]){
+                found=1;
+                break;
+            }
+        }
+        if(found==0){
+            return 0;
+        }
+        }
+        
+        return 1;
+}
+int main()
+{
+    int arr[]={3,4,11,2,9,21};
+    int brr[]={9,2,21};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int m=sizeof(brr)/sizeof(brr[0]);
+    if(checkSubset(arr,brr,n,m)){
+        printf("yes");
+    }
+    else{
+        printf("no");
+    }
+    return 0;
+}
+```
