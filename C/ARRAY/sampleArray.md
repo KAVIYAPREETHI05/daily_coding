@@ -89,4 +89,64 @@ int main(){
     }
 }
 ```
+### sort 0s, 1s and 2s
+``time complexity=O(n)``
+``space complexity=O(1)``
+```c
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
+
+void sort012(int a[], int n) {
+    int low = 0, mid = 0, high = n - 1;
+    
+    while (mid <= high) {
+        switch (a[mid]) {
+            case 0:
+                swap(&a[low], &a[mid]);
+                low++;
+                mid++;
+                break;
+            case 1:
+                mid++;
+                break;
+            case 2:
+                swap(&a[mid], &a[high]);
+                high--;
+                break;
+        }
+    }
+}
+```
+### Move all negative elements to end
+``time complexity=O(n)``
+``space complexity=O(1)``
+```c
+#include <stdio.h>
+void check(int arr[],int n){
+   int positiveIndex=0;
+   for(int i=0;i<n;i++){
+       if(arr[i]>0){
+           if(i!=positiveIndex){
+               int temp=arr[i];
+               arr[i]=arr[positiveIndex];
+               arr[positiveIndex]=temp;
+           }
+           positiveIndex++;
+       }
+   }
+}
+int main()
+{
+    int arr[]={1, -1, 3, 2, -7, -5, 11, 6 };
+    int n=sizeof(arr)/sizeof(arr[0]);
+    check(arr,n);
+    for(int i=0;i<n;i++){
+        printf("%d ",arr[i]);
+    }
+    return 0;
+}
+```
