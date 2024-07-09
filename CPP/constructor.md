@@ -291,4 +291,39 @@ int main()
     return 0;
 }
 ```
+```cpp
+#include <iostream>
+using namespace std;
+class constructor{
+    public:
+    int *Id;
+    double *salary;
+    constructor(int a,double s){
+        Id=new int;
+        salary=new double;
+        *Id=a;
+        *salary=s;
+    }
+    //move constructor
+    constructor(constructor&& obj) noexcept
+    {
+        Id=obj.Id;
+        obj.Id=nullptr;
+        salary=obj.salary;
+        obj.salary=nullptr;
+    }
+    ~constructor(){
+        delete Id;
+        delete salary;
+        
+    }
+};
+int main()
+{
+    constructor c1(10,1000.2);
+    constructor c2(move(c1));//move constructor called
+    cout<<*c2.Id<<" "<<*c2.salary;
+    return 0;
+}
+```
  
