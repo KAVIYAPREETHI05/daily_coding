@@ -89,3 +89,180 @@ class constructor{
     public:
     constructor(int n,int a):number(n),age(a){}
 ```
+### Types of Constructors
+- Default Constructors
+-  parameterized Constructors
+-  copy Constructors
+-  move Constructors
+
+ ## 1.Default constructor
+ It does not take any argument. It has no parameter. (zero-argument constructor).
+ ```cpp
+#include <iostream>
+using namespace std;
+class constructor{
+    public:
+    int a;
+    double b;
+    constructor(){
+        a=10;
+        b=2.3;
+    }
+};
+int main()
+{
+    constructor c1;
+    cout<<c1.a<<" "<<c1.b;
+    return 0;
+}
+```
+```cpp
+#include <iostream>
+using namespace std;
+class constructor{
+    public:
+    int a=10;
+    double b=2.3;
+    //implicit default constructor
+   
+};
+int main()
+{
+    constructor c1;
+    cout<<c1.a<<" "<<c1.b;
+    return 0;
+}
+```
+## 2.Parameterized Constructor
+It uses parameters to initialize the object.
+```cpp
+#include <iostream>
+using namespace std;
+class constructor{
+    private:
+    int Id;
+    double Salary;
+    public:
+    constructor(int a,double s ){
+        Id=a;
+        Salary=s;
+    }
+    int getId(){
+        return Id;
+    }
+    double getsalary(){
+        return Salary;
+    }
+};
+int main()
+{
+    constructor c1(10,10000.2);
+    cout<<c1.getId()<<" "<<c1.getsalary();
+    return 0;
+}
+```
+```cpp
+#include <iostream>
+using namespace std;
+class constructor{
+    private:
+    int Id;
+    double Salary;
+    public:
+    constructor(int a,double s);
+    int getId();
+    double getsalary();
+};
+//constructor outside class
+constructor :: constructor(int a,double s=1000.2 ){
+        Id=a;
+        Salary=s;
+    }
+ int constructor :: getId(){
+        return Id;
+    }
+  double constructor ::  getsalary(){
+        return Salary;
+    }
+int main()
+{
+    constructor c1(10);
+    cout<<c1.getId()<<" "<<c1.getsalary();
+    return 0;
+}
+```
+## 3.Copy constructor
+It is a member function that initializes an object using another object of the same class.
+```cpp
+#include <iostream>
+using namespace std;
+class constructor{
+    private:
+    int Id;
+    double Salary;
+    public:
+    constructor(int a,double s);
+    int getId();
+    double getsalary();
+};
+constructor :: constructor(int a,double s=1000.2 ){
+        Id=a;
+        Salary=s;
+    }
+ int constructor :: getId(){
+        return Id;
+    }
+  double constructor ::  getsalary(){
+        return Salary;
+    }
+int main()
+{
+    constructor c1(10);
+    cout<<c1.getId()<<" "<<c1.getsalary()<<endl;
+    constructor c2(c1); //c2=c1
+    cout<<c2.getId()<<" "<<c2.getsalary();
+    
+    return 0;
+}
+```
+```cpp
+#include <iostream>
+using namespace std;
+class constructor{
+    private:
+    int Id;
+    double Salary;
+    public:
+    constructor(int a,double s);
+    constructor(constructor&obj1);
+    int getId();
+    double getsalary();
+};
+constructor :: constructor(int a,double s=1000.2 ){
+        Id=a;
+        Salary=s;
+    }
+//copy constructor
+constructor :: constructor(constructor&obj1){
+    Id=obj1.Id;
+    Salary=obj1.Salary;
+}
+ int constructor :: getId(){
+        return Id;
+    }
+  double constructor ::  getsalary(){
+        return Salary;
+    }
+int main()
+{
+    constructor c1(10);
+    cout<<c1.getId()<<" "<<c1.getsalary()<<endl;
+    constructor c2(c1);//copy constructor called (passing obj of constructor)
+    cout<<c2.getId()<<" "<<c2.getsalary();
+    
+    return 0;
+}
+```
+## 4.Move constructor
+ It is like a copy constructor that constructs the object from the already existing objects., but instead of copying the object in the new memory, it makes use of move semantics to transfer the ownership of the already created object to the new object without creating extra copies.
+ 
