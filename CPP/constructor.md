@@ -265,4 +265,30 @@ int main()
 ```
 ## 4.Move constructor
  It is like a copy constructor that constructs the object from the already existing objects., but instead of copying the object in the new memory, it makes use of move semantics to transfer the ownership of the already created object to the new object without creating extra copies.
+ ```cpp
+#include <iostream>
+using namespace std;
+class constructor{
+    public:
+    int *a;
+    constructor(int value){
+        a=new int;
+        *a=value;
+    }
+    //move constructor
+    constructor(constructor&& obj) noexcept
+    {
+        a=obj.a;
+        obj.a=nullptr;
+    }
+    ~constructor(){delete a;}
+};
+int main()
+{
+    constructor c1(10);
+    constructor c2(move(c1));//move constructor called
+    cout<<*c2.a;
+    return 0;
+}
+```
  
