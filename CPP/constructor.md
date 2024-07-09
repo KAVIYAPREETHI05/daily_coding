@@ -194,6 +194,7 @@ int main()
 ## 3.Copy constructor
 It is a member function that initializes an object using another object of the same class.
 ```cpp
+//implicit constructor
 #include <iostream>
 using namespace std;
 class constructor{
@@ -226,6 +227,7 @@ int main()
 }
 ```
 ```cpp
+//explicit constructor
 #include <iostream>
 using namespace std;
 class constructor{
