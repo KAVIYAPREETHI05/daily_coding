@@ -328,3 +328,211 @@ int main()
     return 0;
 }
 ```
+### count the duplicates
+``time complexity=O(n)``
+``space complexity=O(1)``
+```c
+#include<stdio.h>
+int countDuplicate(int arr[],int n){
+    int temp[1000]={0};
+    for(int i=0;i<n;i++){
+        temp[arr[i]]++;
+            }
+    int dup=0;
+    for(int i=0;i<n;i++){
+        if(temp[i]>1){
+            dup++;
+        }
+    }
+    return dup;
+}
+int main(){
+    int arr[]={1,2,2,1,3,4,3,5};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    printf("%d",countDuplicate(arr,n));
+}
+```
+### find Occurence
+``time complexity=O(n^2)``
+``space complexity=O(n)``
+
+```c
+#include<stdio.h>
+void findOccurence(int arr[],int n){
+    for(int i=0;i<n;i++){
+        if(arr[i]!=-1){
+            int count=1;
+            for(int j=i+1;j<n;j++){
+                if(arr[i]==arr[j]){
+                    count++;
+                    arr[j]=-1;
+                    
+                }
+            }
+            printf("%d occurs %d times\n",arr[i],count);
+        }
+    }
+}
+int main(){
+    int n;
+    scanf("%d",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    scanf("%d",&arr[i]);
+    findOccurence(arr,n);
+}
+```
+### rotate array
+``time complexity=O(n)``
+``space complexity=O(1)``
+```c
+#include<stdio.h>
+void reverseArray(int arr[],int start,int end){
+   while(start<=end){
+       int temp=arr[end];
+       arr[end]=arr[start];
+       arr[start]=temp;
+       start++;
+       end--;
+   }
+}
+int main(){
+    int n;
+    scanf("%d",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    scanf("%d",&arr[i]);
+    int k;
+    scanf("%d",&k); 
+/*left rotate
+    reverseArray(arr,0,k-1);
+    reverseArray(arr,k,n-1);
+    reverseArray(arr,0,n-1);
+  */  
+  //right rotate
+   reverseArray(arr,0,n-1);
+    reverseArray(arr,k,n-1);
+    reverseArray(arr,0,k-1);
+    for(int i=0;i<n;i++){
+        printf("%d ",arr[i]);
+    }
+}
+```
+### Maximum and minimum
+``time complexity=O(n)``
+``space complexity=O(1)``
+```c
+#include<stdio.h>
+int main(){
+    int n;
+    scanf("%d",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    scanf("%d",&arr[i]);
+        int min=arr[0];
+    int max=arr[0];
+    for(int i=0;i<n;i++){
+        if(arr[i]<min){
+            min=arr[i];
+        }
+        else if(arr[i]>max){
+            max=arr[i];
+            
+        }
+    }
+    printf("Maximum element:%d Minimum element:%d",max,min);
+}
+```
+### move all 0's
+``time complexity=O(n)``
+``space complexity=O(n)``
+```c
+#include<stdio.h>
+int main(){
+    int n;
+    scanf("%d",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    scanf("%d",&arr[i]);
+        int j=0;
+    for(int i=0;i<n;i++){
+        if(arr[i]!=0){
+            int temp=arr[i];
+             arr[i]=arr[j];
+            arr[j]=temp;
+            j++;
+        }
+        }
+        for(int i=0;i<n;i++){
+            printf("%d ",arr[i]);
+        }
+}
+```
+### delete an element
+``time complexity=O(n)``
+``space complexity=O(n)``
+```c
+#include<stdio.h>
+int main(){
+    int n;
+    scanf("%d",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    scanf("%d",&arr[i]);
+    int index;
+    scanf("%d",&index);
+    if(index<0){
+        printf("Invalid input");
+        return 0;
+    }
+    else if(index>n){
+        printf("Position out of range");
+        return 0;
+    }
+    for(int i=index;i<n-1;i++){
+        
+            arr[i]=arr[i+1];
+    }
+    for(int i=0;i<n-1;i++){
+        printf("%d",arr[i]);
+    }
+}
+```
+### merge two array to third array
+```c
+#include<stdio.h>
+int main(){
+    int n;
+    scanf("%d",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    scanf("%d",&arr[i]);
+    int m;
+    scanf("%d",&m);
+    int brr[m];
+    for(int i=0;i<m;i++)
+    scanf("%d",&brr[i]);
+    int temp[n+m];
+    int k=0;
+    for(int i=0;i<n;i++){
+        temp[k++]=arr[i];
+    }
+    for(int j=0;j<m;j++){
+        temp[k++]=brr[j];
+    }
+    for(int i=0;i<k-1;i++){
+        for(int j=i+1;j<k;j++){
+            if(temp[i]>temp[j]){
+                int tempvalue=temp[i];
+                temp[i]=temp[j];
+                temp[j]=tempvalue;
+            }
+        }
+    }
+    for(int i=0;i<k;i++){
+        printf("%d ",temp[i]);
+    }
+}
+```
+
+
