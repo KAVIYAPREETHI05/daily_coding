@@ -534,5 +534,34 @@ int main(){
     }
 }
 ```
+### count pairs with given sum
+``time complexity=O(n^2);``
+``space complexity=O(1);``
+```c
+#include <stdio.h>
+int getPairsCount(int arr[],int n,int k){
+    int count=0;
+    for(int i=0;i<n-1;i++){
+        for(int j=i+1;j<n;j++){
+            if((arr[i]==arr[j])==k){
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+int main() {
+    int arr[] = {1, 1, 1, 1};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int k = 2;
+    
+    printf("Number of pairs with sum %d: %d\n", k, getPairsCount(arr, n, k));
+    
+    return 0;
+}
+```
+###
+
 
 
