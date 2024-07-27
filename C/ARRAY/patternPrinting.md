@@ -1,4 +1,4 @@
-### Right half pyramid
+### Right half pyramid 
 ``time complexity-O(rows*rows)``
 ``space complexity-O(1)``
 ```c
