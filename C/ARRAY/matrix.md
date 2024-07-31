@@ -134,6 +134,7 @@ for(int i=0;i<size;i++){
 7 8 9      9 8 7
 ```
 ### check symmetric 
+Symmetric matrix is a square matrix which is equal to its transpose. A symmetric matrix is always a square matrix. Symmetric matrix A is defined as – A = AT
 ```c
 #include<stdio.h>
 int main(){
@@ -164,6 +165,7 @@ int main(){
 symmetric
 ```
 ###  check identity
+Identity matrix is a special square matrix whose main diagonal elements is equal to 1 and other elements are 0. Identity matrix is also known as unit matrix.
 ```c
 #include<stdio.h>
 int main(){
@@ -192,6 +194,35 @@ int main(){
 ```
 ```
 identity
+```
+### check sparse
+```
+#include <stdio.h>
+int main()
+{
+int r1=3;
+int c1=3;
+int m[][3]={{1,6,0},{0,0,0},{4,0,5}};
+int count=0;
+for(int i=0;i<r1;i++){
+ for(int j=0;j<c1;j++){
+     if(m[i][j]==0){
+         count++;
+     }
+ }  
+}
+if(count>=((r1*c1)/2)){
+    printf("yes sparse matrix");
+}
+else{
+    printf("no, not sparse matrix");
+}
+
+    return 0;
+}
+```
+```
+yes sparse matrix
 ```
 ### sum of rows&cols
 ```c
@@ -255,3 +286,118 @@ int main(){
 1 3 2 
 1 1 1 3 
 ```
+### upper triangular matrix
+Upper triangular matrix is a special square matrix whose all elements below main diagonal is zero.
+
+
+```c
+#include <stdio.h>
+int main()
+{
+int r1=3;
+int c1=3;
+int m[][3]={{1,2,3},{4,5,6},{7,8,9}};
+for(int i=0;i<r1;i++){
+ for(int j=0;j<c1;j++){
+     if(j<i){
+         m[i][j]=0;
+     }
+ }  
+}
+for(int i=0;i<r1;i++){
+    for(int j=0;j<c1;j++){
+        printf("%d ",m[i][j]);
+    }
+    printf("\n");
+}
+
+    return 0;
+}
+```
+```
+1 2 3 
+0 5 6 
+0 0 9
+```
+### lower triangular matrix
+Lower triangular matrix is a special square matrix whose all elements above main diagonal is zero.
+
+
+```c
+#include <stdio.h>
+int main()
+{
+int r1=3;
+int c1=3;
+int m[][3]={{1,2,3},{4,5,6},{7,8,9}};
+for(int i=0;i<r1;i++){
+ for(int j=0;j<c1;j++){
+     if(j>i){
+         m[i][j]=0;
+     }
+ }  
+}
+for(int i=0;i<r1;i++){
+    for(int j=0;j<c1;j++){
+        printf("%d ",m[i][j]);
+    }
+    printf("\n");
+}
+
+    return 0;
+}
+```
+```
+1 0 0 
+4 5 0 
+7 8 9 
+```
+### sum of lower triangular matrix
+```c
+#include <stdio.h>
+int main()
+{
+int r1=3;
+int c1=3;
+int m[][3]={{1,2,3},{4,5,6},{7,8,9}};
+int sum=0;
+for(int i=0;i<r1;i++){
+ for(int j=0;j<c1;j++){
+     if(j<i){
+         sum+=m[i][j];
+     }
+ }  
+}
+
+
+printf("%d",sum);
+
+    return 0;
+}
+//19
+```
+### sum of upper triangular matrix
+```c
+#include <stdio.h>
+int main()
+{
+int r1=3;
+int c1=3;
+int m[][3]={{1,2,3},{4,5,6},{7,8,9}};
+int sum=0;
+for(int i=0;i<r1;i++){
+ for(int j=0;j<c1;j++){
+     if(j>i){
+         sum+=m[i][j];
+     }
+ }  
+}
+
+
+printf("%d",sum);
+
+    return 0;
+}
+// 11
+```
+
