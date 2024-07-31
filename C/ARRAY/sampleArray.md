@@ -47,6 +47,24 @@ int main(){
     printf("%d ",max);
 }
 ```
+### average of elements
+``time complexity=O(n)``
+``space complexity=O(n)``
+```c
+#include <stdio.h>
+int main(){
+    int n;
+    int arr[]={1,2,5,5};
+    n=sizeof(arr)/sizeof(arr[0]);
+    int sum=0;
+   for(int i=0;i<n;i++){
+    sum+=arr[i];
+}
+float avg=(float)sum/n;
+printf("%f",avg);
+    return 0;
+}
+```
 ### reverse an array
 ``time complexity=O(n)``
 ``space complexity=O(n)``
@@ -66,6 +84,84 @@ int main(){
     }
 }
 ```
+### Check if an array is sorted in ascending order
+``time complexity=O(n)``
+``space complexity=O(n)``
+```c
+#include <stdio.h>
+int main(){
+    int n;
+    int arr[]={1,2,5,5};
+    n=sizeof(arr)/sizeof(arr[0]);
+    int sorted=1;
+   for(int i=0;i<n-1;i++){
+    if(arr[i]>arr[i+1]){
+        sorted=0;
+        break;
+    }
+}
+if (sorted){
+    printf("given array is sorted");
+}
+else{
+    printf("given array is unsorted");
+}
+
+    return 0;
+}
+```
+### second max
+``time complexity=O(n)``
+``space complexity=O(n)``
+```c
+#include <stdio.h>
+int main(){
+    int n;
+    int arr[]={1,2,4,5};
+    n=sizeof(arr)/sizeof(arr[0]);
+    int max=arr[0];
+    int second_max;
+   for(int i=0;i<n;i++){
+    if(arr[i]>max){
+        second_max=max;
+        max=arr[i];
+        
+    }
+    else if(arr[i]<max && arr[i]!=max){
+        second_max=arr[i];
+    }
+}
+if(max==second_max){
+    printf("no second largest element");
+}
+else{
+printf("%d",second_max);    
+}
+return 0;
+}
+```
+### count of even and odd
+```c
+#include <stdio.h>
+int main(){
+    int n;
+    int arr[]={1,2,4,5,0};
+    n=sizeof(arr)/sizeof(arr[0]);
+    int odd=0;
+    int even=0;
+   for(int i=0;i<n;i++){
+    if(arr[i]%2==0){
+        even++;
+    }else{
+        odd++;
+    }
+}
+printf("%d even %d odd",even,odd);
+
+return 0;
+}
+```
+
 ### linear search
 ``time complexity=O(n)``
 ``space complexity=O(n)``
