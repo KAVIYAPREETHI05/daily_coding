@@ -97,8 +97,8 @@ int main(){
     int arr[3][3]={{1,2,3},{1,2,3},1,1,1};
     int sum=0;
     for(int i=0;i<size;i++){
-        sum+=arr[i][i];
-        sum+=arr[i][size-i-1];
+        sum+=arr[i][i]; //main diagonal
+        sum+=arr[i][size-i-1]; //minor diagonal    
         }
         if(size%2!=0){
             sum-=arr[size/2][size/2];
@@ -106,8 +106,32 @@ int main(){
         printf("%d",sum);
 }
 ```
+### interchange diagonals
+```c
+#include <stdio.h>
+int main()
+{
+int size=3;
+int m[][3]={{1,2,3},{4,5,6},{7,8,9}};
+for(int i=0;i<size;i++){
+    int temp=m[i][i];
+    m[i][i]=m[i][size-i-1];
+    m[i][size-i-1]=temp;
+}
+for(int i=0;i<size;i++){
+    for(int j=0;j<size;j++){
+        printf("%d ",m[i][j]);
+    }
+    printf("\n");
+}
+
+    return 0;
+}
 ```
-8
+```
+1 2 3      3 2 1
+4 5 6      4 5 6
+7 8 9      9 8 7
 ```
 ### check symmetric 
 ```c
