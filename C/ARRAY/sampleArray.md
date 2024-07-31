@@ -161,6 +161,62 @@ printf("%d even %d odd",even,odd);
 return 0;
 }
 ```
+### even and odd elements
+```c
+#include<stdio.h>
+
+int main(){
+    int m;
+    int arr[]={1,2,3,-1,-2,5,-3};
+    m=sizeof(arr)/sizeof(arr[0]);
+    printf("negative elements\n");
+    for(int i=0;i<m;i++){
+        if(arr[i]<0){
+            printf("%d ",arr[i]);
+        }
+    }
+    printf("\npositive elements\n");
+    for(int i=0;i<m;i++){
+        if(arr[i]>=0){
+            printf("%d ",arr[i]);
+        }
+    }
+
+    }
+```
+### frequency of each element
+```c
+#include<stdio.h>
+int main(){
+    int n;
+    int arr[]={-1,2,3,-4,-5,-4};
+    n=sizeof(arr)/sizeof(arr[0]);
+    int min=arr[0];
+    int max=arr[0];
+    for(int i=0;i<n;i++){
+        if(arr[i]>max){
+            max=arr[i];
+            
+        }
+        else if(arr[i]<min){
+            min=arr[i];
+        }
+    }
+    int range=max-min+1;
+    int freq[range];
+    
+    for(int i=0;i<range;i++){
+        freq[i]=0;
+    }
+    for(int i=0;i<n;i++){
+        freq[arr[i]-min]++;
+    }
+    for(int i=min;i<=max;i++){
+        printf("%d occurs %d times\n",i,freq[i-min]);
+    }
+}
+```
+
 
 ### linear search
 ``time complexity=O(n)``
@@ -429,24 +485,138 @@ int main()
 ``space complexity=O(1)``
 ```c
 #include<stdio.h>
-int countDuplicate(int arr[],int n){
-    int temp[1000]={0};
-    for(int i=0;i<n;i++){
-        temp[arr[i]]++;
-            }
-    int dup=0;
-    for(int i=0;i<n;i++){
-        if(temp[i]>1){
-            dup++;
+int main(){
+    int m;
+    int arr[]={1,2,3,4,5,4,5};
+    m=sizeof(arr)/sizeof(arr[0]);
+    int max=arr[0];
+    for(int i=0;i<m;i++){
+        if(arr[i]>max){
+            max=arr[i];
         }
     }
-    return dup;
-}
+    int freq[max+1];
+    for(int i=0;i<=max;i++){
+        freq[i]=0;
+    }
+    for(int i=0;i<m;i++){
+        freq[arr[i]]++;
+    }
+    int count=0;
+    for(int i=0;i<=max;i++){
+        if(freq[i]>1){
+            count++;
+        }
+    }
+    printf("%d",count);
+    
+    }
+```
+### deleting  duplicates
+Removing duplicates from an array means creating a new array (or modifying the original one) that contains only unique elements, with all duplicate occurrences removed.
+``arr = {1, 2, 3, 4, 5, 4, 5} ``
+``result = {1, 2, 3, 4, 5}``
+```c
+#include<stdio.h>
+#define MAX_SIZE 100
 int main(){
-    int arr[]={1,2,2,1,3,4,3,5};
-    int n=sizeof(arr)/sizeof(arr[0]);
-    printf("%d",countDuplicate(arr,n));
-}
+    int m;
+    int arr[]={1,2,3,4,5,4,5};
+    m=sizeof(arr)/sizeof(arr[0]);
+    int max=arr[0];
+    for(int i=0;i<m;i++){
+        if(arr[i]>max){
+            max=arr[i];
+        }
+    }
+    int freq[max+1];
+    for(int i=0;i<=max;i++){
+        freq[i]=0;
+    }
+    for(int i=0;i<m;i++){
+        freq[arr[i]]++;
+    }
+    
+   int result[MAX_SIZE];
+   int size;
+   for(int i=0;i<m;i++){
+       int visited=0;
+       for(int j=0;j<size;j++){
+           if(arr[i]==result[j]){
+               visited=1;
+               break;
+           }
+       }
+       if(!visited){
+           result[size++]=arr[i];
+       }
+   }
+   for(int i=0;i<size;i++){
+       printf("%d ",result[i]);
+   }
+    }
+```
+### print unique element
+Printing unique elements from an array means identifying and displaying elements that appear exactly once in the array, without modifying the array.
+``arr = {1, 2, 3, 4, 5, 4, 5} ``
+``1, 2, 3``
+```c
+#include<stdio.h>
+int main(){
+    int m;
+    int arr[]={1,2,3,4,5,4,5};
+    m=sizeof(arr)/sizeof(arr[0]);
+    int max=arr[0];
+    for(int i=0;i<m;i++){
+        if(arr[i]>max){
+            max=arr[i];
+        }
+    }
+    int freq[max+1];
+    for(int i=0;i<=max;i++){
+        freq[i]=0;
+    }
+    for(int i=0;i<m;i++){
+        freq[arr[i]]++;
+    }
+    
+    for(int i=0;i<m;i++){
+        if(freq[arr[i]]==1){
+            printf("%d",arr[i]);
+        }
+    }
+    }
+
+```
+### print duplicates
+```c
+#include<stdio.h>
+int main(){
+    int m;
+    int arr[]={1,2,3,4,5,4,5};
+    m=sizeof(arr)/sizeof(arr[0]);
+    int max=arr[0];
+    for(int i=0;i<m;i++){
+        if(arr[i]>max){
+            max=arr[i];
+        }
+    }
+    int freq[max+1];
+    for(int i=0;i<=max;i++){
+        freq[i]=0;
+    }
+    for(int i=0;i<m;i++){
+        freq[arr[i]]++;
+    }
+    
+    for(int i=0;i<m;i++){
+        if(freq[arr[i]]>1){
+            freq[arr[i]]=0;
+            printf("%d",arr[i]);
+            
+        }
+    }
+    }
 ```
 ### find Occurence
 ``time complexity=O(n^2)``
@@ -564,6 +734,24 @@ int main(){
         }
 }
 ```
+### insert an element
+```c
+#include<stdio.h>
+int main(){
+    int m;
+    int arr[]={1,2,3,4,5};
+    m=sizeof(arr)/sizeof(arr[0]);
+    int element=5;
+    int k=2;
+    for(int i=m;i>k;i--){
+        arr[i]=arr[i-1];
+    }
+    arr[k]=element;
+    for(int i=0;i<=m;i++){
+        printf("%d ",arr[i]);
+    }
+    }
+```
 ### delete an element
 ``time complexity=O(n)``
 ``space complexity=O(n)``
@@ -594,41 +782,72 @@ int main(){
     }
 }
 ```
-### merge two array to third array
+### merge array
+Merging two arrays combines them into a single array, retaining all elements from both arrays. The merge operation does not remove duplicates and preserves the order of elements as they appear in the original arrays.
 ```c
 #include<stdio.h>
 int main(){
-    int n;
-    scanf("%d",&n);
-    int arr[n];
-    for(int i=0;i<n;i++)
-    scanf("%d",&arr[i]);
-    int m;
-    scanf("%d",&m);
-    int brr[m];
-    for(int i=0;i<m;i++)
-    scanf("%d",&brr[i]);
-    int temp[n+m];
+    int n,m;
+    int arr[]={1,2,3};
+    int brr[]={4,3,5};
+    m=sizeof(arr)/sizeof(arr[0]);
+    n=sizeof(brr)/sizeof(brr[0]);
+    int merged[m+n];
     int k=0;
+    for(int i=0;i<m;i++){
+        merged[k++]=arr[i];
+    }
     for(int i=0;i<n;i++){
-        temp[k++]=arr[i];
-    }
-    for(int j=0;j<m;j++){
-        temp[k++]=brr[j];
-    }
-    for(int i=0;i<k-1;i++){
-        for(int j=i+1;j<k;j++){
-            if(temp[i]>temp[j]){
-                int tempvalue=temp[i];
-                temp[i]=temp[j];
-                temp[j]=tempvalue;
-            }
-        }
+        merged[k++]=brr[i];
     }
     for(int i=0;i<k;i++){
-        printf("%d ",temp[i]);
+        printf("%d ",merged[i]);
+    }
+    
+    }
+```
+### union array
+The union of two arrays combines all distinct elements from both arrays into a new array, without duplicates. This concept is commonly used in set theory where the union of two sets contains all the elements that are in either set.
+```c
+//unsorted
+#include<stdio.h>
+#define MAX_SIZE 100
+int ispresent(int value,int array[],int n){
+    for(int i=0;i<n;i++){
+        if(value==array[i]){
+            return 1;
+        }
+    }
+    return 0;
+}
+void unionArray(int arr[],int m,int brr[],int n,int result[],int *size){
+    *size=0;
+    for(int i=0;i<m;i++){
+        if(!ispresent(arr[i],result,*size)){
+            result[(*size)++]=arr[i];
+        }
+    }
+    for(int j=0;j<n;j++){
+        if(!ispresent(brr[j],arr,m) && !ispresent(brr[j],result,*size)){
+            result[(*size)++]=brr[j];
+        }
     }
 }
+int main(){
+    int n,m;
+    int arr[]={1,2,3};
+    int brr[]={3,5,4};
+    m=sizeof(arr)/sizeof(arr[0]);
+    n=sizeof(brr)/sizeof(brr[0]);
+    int result[MAX_SIZE];
+    int size;
+    unionArray(arr,m,brr,n,result,&size);
+    for(int i=0;i<size;i++){
+        printf("%d ",result[i]);
+    }
+    
+    }
+
 ```
 ### count pairs with given sum
 ``time complexity=O(n^2);``
