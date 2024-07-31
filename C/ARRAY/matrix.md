@@ -400,4 +400,29 @@ printf("%d",sum);
 }
 // 11
 ```
+### determinant of matrix
+```c
+#include <stdio.h>
+int main()
+{
+int r1=3;
+int c1=3;
+int m[][3]={{6,1,1},{4,-2,5},{2,8,7}};
+
+int a,b,c,d,e,f,g,h,i;
+a=m[0][0];
+b=m[0][1];
+c=m[0][2];
+d=m[1][0];
+e=m[1][1];
+f=m[1][2];
+g=m[2][0];
+h=m[2][1];
+i=m[2][2];
+long determinant=((a*(e*i - f*h)) - (b*(d*i - g*f)) + (c*(d*h - e*g)));
+printf("%ld",determinant);
+
+    return 0;
+}
+```
 
