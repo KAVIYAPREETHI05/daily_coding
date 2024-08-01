@@ -328,6 +328,33 @@ int main(){
      selectionSort(arr,n);
 }
 ```
+### insertion sort
+``time complexity=O(n^2)``
+``space complexity=O(1)``
+```c
+#include <stdio.h>
+int main() {
+    int n;
+    int arr[]={2,3,-1,-5,9,30,-23};
+    n=sizeof(arr)/sizeof(arr[0]);
+    int j,key;
+    for(int i=1;i<n;i++){
+         key=arr[i];
+        j=i-1;
+        while(j>=0 && arr[j]>key){
+            arr[j+1]=arr[j];
+            j=j-1;
+        }
+        arr[j+1]=key;
+    }
+    for(int i=0;i<n;i++){
+        printf("%d ",arr[i]);
+    }
+   
+    return 0;
+}
+```
+
 ### min_max
 ``time complexity=O(n)``
 ``space complexity=O(1)``
