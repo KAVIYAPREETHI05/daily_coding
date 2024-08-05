@@ -2016,8 +2016,98 @@ int main() {
 }
 
 ```
-### 79.
+### 79. count words
+```c
+#include <stdio.h>
+#include<ctype.h>
+int main() {
+   char str[100];
+   fgets(str,sizeof(str),stdin);
+   int count=0;char prev=' ';
+   for(int i=0;str[i]!='\0';i++){
+       if(str[i]==' ' || str[i]=='\n' || str[i]=='\0' || str[i]=='\t'){
+           
+       if(prev!=' ' && prev!='\t'&& prev!='\n' ){
+           count++;
+       }
+       
+   }
+   prev=str[i];
+   }
+   printf("%d ",count);
+    return 0;
+}
 
+```
+### 80.reverse string
+```
+#include <stdio.h>
+#include<string.h>
+int main() {
+   char str[100];
+   fgets(str,sizeof(str),stdin);
+   int n=strlen(str);
+   if(str[n-1]=='\n'){
+       str[n-1]='\0';
+       n--;
+   }
+   for(int i=n-1;i>=0;i--){
+printf("%c",str[i]);
+   }
+    return 0;
+}
+(or)
+#include <stdio.h>
+#include<string.h>
+int main() {
+   char str[100];
+   fgets(str,sizeof(str),stdin);
+   int n=strlen(str);
+   if(str[n-1]=='\n'){
+       str[n-1]='\0';
+       n--;
+   }
+   for(int i=0;i<n/2;i++){
+       int temp=str[i];
+       str[i]=str[n-1-i];
+       str[n-1-i]=temp;
+   }
+   
+  printf("%s",str);
+    return 0;
+}
+
+
+```
+### 81.check palindrome
+```c
+#include <stdio.h>
+#include<string.h>
+int main() {
+   char str[100];
+   fgets(str,sizeof(str),stdin);
+   int n=strlen(str);
+   if(str[n-1]=='\n'){
+       str[n-1]='\0';
+       n--;
+   }int found=1;
+   for(int i=0;i<n/2;i++){
+      if(str[i]!=str[n-1-i]){
+          found=0;
+      }
+   }
+   if(found){
+       printf("yes,palindrome");
+   }
+   else{
+       printf("no,not palindrome");
+   }
+   
+  
+    return 0;
+}
+
+```
 
 
 
