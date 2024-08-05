@@ -1,5 +1,6 @@
 ### 1.input a string and print it
 ```c
+//scanf-reads a string until the first whitespace character is encountered.
 #include<stdio.h>
 int main(){
     char s[100];
@@ -7,6 +8,16 @@ int main(){
     printf("%s",s);
 }
 (or)
+#include <stdio.h>
+int main() {
+    char str[100];
+    scanf("%[^\n]s",&str); //reads a string until new line is encountered.
+    printf("%s",str);
+    return 0;
+}
+
+(or)
+//reads a line of text, including spaces, until a newline character or the specified limit is reached.
 #include<stdio.h>
 int main(){
     char s[100];
@@ -24,7 +35,31 @@ int main(){
     int length=strlen(s);
     printf("%d",length);
 }
+(or)
+
+#include <stdio.h>
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+   // printf("%s",str);
+   int i=0;
+    while (str[i] != '\0') {
+        if (str[i] == '\n') {
+            str[i] = '\0';
+            break;
+        }
+        i++;
+    }
+i=0;int count=0;
+    while(str[i]!='\0'){
+        count++;
+        i++;
+    }
+    printf("%d",count);
+    return 0;
+}
 ```
+
 ### 3. separate individual characters
 ```c
 #include<stdio.h>
@@ -1653,8 +1688,304 @@ char* reverseWord(char* str) {
     return str;
 }
 ```
+### 71.copy one string to another
+```c
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    char temp[100];
+    fgets(str,sizeof(str),stdin);
+    strcpy(temp,str);
+    printf("%s",temp);
+    return 0;
+}
+(or)
+
+#include <stdio.h>
+int main() {
+    char str[100];
+    char temp[100];
+    fgets(str,sizeof(str),stdin);
+   // printf("%s",str);
+   int i=0;
+   for(int i=0;str[i]!='\0';i++){
+       temp[i]=str[i];
+   }
+    printf("%s",temp);
+    return 0;
+}
+```
+### 72.concatenate two strings
+```c
+
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    char temp[100];
+    fgets(str,sizeof(str),stdin);
+    fgets(temp,sizeof(temp),stdin);
+    int i=0;
+    while(str[i]!='\0'){
+        if(str[i]=='\n'){
+            str[i]='\0';
+        }
+        i++;
+    }
+    strcat(str," ");
+    strcat(str, temp);
+    printf("%s",str);
+    return 0;
+}
+(or)
 
 
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    char temp[100];
+    fgets(str,sizeof(str),stdin);
+    fgets(temp,sizeof(temp),stdin);
+    int i=0;
+    while(str[i]!='\0'){
+        if(str[i]=='\n'){
+            str[i]='\0';
+            break;
+        }
+        i++;
+    }
+    str[i++]=' ';
+    int j=0;
+    while(temp[j]!='\0'){
+        str[i++]=temp[j++];
+            }
+    printf("%s",str);
+    return 0;
+}
+```
+### 73.compare two strings
+```c
+
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    char temp[100];
+    fgets(str,sizeof(str),stdin);
+    fgets(temp,sizeof(temp),stdin);
+    int res;
+    res=strcmp(str,temp);
+    if(res==0){
+        printf("both string are equal");
+    }
+    else if(res<0){
+        printf("str is lexicographically smaller than the temp");
+    }
+    else{
+        printf("temp is lexicographically smaller than str");
+    }
+   
+    return 0;
+}
+(or)
+
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    char temp[100];
+    fgets(str,sizeof(str),stdin);
+    fgets(temp,sizeof(temp),stdin);
+    int i=0;int found=0;
+    while(str[i]!='\0' && temp[i]!='\0'){
+        if(str[i]!=temp[i]){
+            found=1;
+            break;
+        }
+        i++;
+    }
+    if(found){
+        if(str[i]>temp[i]){
+                    printf("str is larger than temp");
+
+        }
+        else{
+        printf("temp is larger than str");
+            
+        }
+    }
+    else{
+         printf("both strings are equal");
+       
+    }
+   
+    return 0;
+}
+```
+### 74.convert string to lower
+```c
+
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char str[100];
+   fgets(str,sizeof(str),stdin);
+   for(int i=0;str[i]!='\0';i++){
+       str[i]=tolower(str[i]);
+   }
+   printf("%s",str);
+   
+    return 0;
+}
+(or)
+
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char str[100];
+   fgets(str,sizeof(str),stdin);
+   for(int i=0;str[i]!='\0';i++){
+      if(str[i]>='A' && str[i]<='Z'){
+          str[i]=str[i]+('a'-'A');
+      }
+   }
+   printf("%s",str);
+   
+    return 0;
+}
+```
+### 75.convert string to upper
+```c
+
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char str[100];
+   fgets(str,sizeof(str),stdin);
+   for(int i=0;str[i]!='\0';i++){
+       str[i]=toupper(str[i]);
+   }
+   printf("%s",str);
+   
+    return 0;
+}
+(or)
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char str[100];
+   fgets(str,sizeof(str),stdin);
+   for(int i=0;str[i]!='\0';i++){
+      if(str[i]>='a' && str[i]<='z'){
+          str[i]=str[i]-('a'-'A');
+      }
+   }
+   printf("%s",str);
+   
+    return 0;
+}
+```
+### 76.convert string to toggle
+```c
+
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char str[100];
+   fgets(str,sizeof(str),stdin);
+   for(int i=0;str[i]!='\0';i++){
+      if(islower(str[i])){
+          str[i]=toupper(str[i]);
+      }
+      else if(isupper(str[i])){
+          str[i]=tolower(str[i]);
+      }
+   }
+   printf("%s",str);
+   
+    return 0;
+}
+(or)
+
+
+
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char str[100];
+   fgets(str,sizeof(str),stdin);
+   for(int i=0;str[i]!='\0';i++){
+      if(str[i]>='a' && str[i]<='z'){
+          str[i]=str[i]-('a'-'A');
+      }
+      else if(str[i]>='A' && str[i]<='Z'){
+            str[i]=str[i]+('a'-'A');
+      }
+   }
+   printf("%s",str);
+   
+    return 0;
+}
+```
+### 77.count alph,num,spl
+```c
+
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char str[100];
+   fgets(str,sizeof(str),stdin);
+   int alph=0;int num=0;int spl=0;
+   for(int i=0;str[i]!='\0';i++){
+      if(isalpha(str[i])){
+          alph++;
+      }
+      else if(isdigit(str[i])){
+            num++;
+      }
+      else if(!isspace(str[i])){
+          spl++;
+      }
+   }
+   printf("%d alph %d num %d spl ",alph,num,spl);
+   
+    return 0;
+}
+(or)
+
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char str[100];
+   fgets(str,sizeof(str),stdin);
+   int alph=0;int num=0;int spl=0;
+   for(int i=0;str[i]!='\0';i++){
+      if((str[i]>='a' && str[i]<='z') || (str[i]>='A' && str[i]<='Z')){
+          alph++;
+      }
+      else if(str[i]>='0' && str[i]<='9'){
+            num++;
+      }
+      else{
+          spl++;
+      }
+   }
+   printf("%d alph %d num %d spl ",alph,num,spl);
+   
+    return 0;
+}
+```
+### 78.
 
 
 
