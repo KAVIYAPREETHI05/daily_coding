@@ -1985,7 +1985,38 @@ int main() {
     return 0;
 }
 ```
-### 78.
+### 78. count vowel and consonant
+```c
+#include <stdio.h>
+#include<ctype.h>
+int main() {
+   char str[100];
+   fgets(str,sizeof(str),stdin);
+   int vowel=0;int consonant=0;
+   int i=0;
+   while(str[i]!='\0'){
+       if(str[i]=='\n'){
+           str[i]='\0';
+       }
+       i++;
+   }
+   for(int i=0;str[i]!='\0';i++){
+       str[i]=tolower(str[i]);
+       if(isalpha(str[i])){
+           if(str[i]=='a' || str[i]=='e' || str[i]=='i' || str[i]=='o' || str[i]=='u'){
+           vowel++;
+       }
+       else{
+           consonant++;
+       }
+       }
+   }
+   printf("%d vowel %d consonant",vowel, consonant);
+    return 0;
+}
+
+```
+### 79.
 
 
 
