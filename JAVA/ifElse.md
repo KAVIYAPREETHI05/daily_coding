@@ -1,3 +1,15 @@
+
+**if** -It is used to decide whether a certain statement or block of statements will be executed or not
+**if-else**-if statement alone tells us that if a condition is true it will execute a block of statements and if the condition is false it won’t.
+**nested if**-Nested if statements mean an if statement inside an if statement.
+**if-else-if**-There can be as many as ‘else if’ blocks associated with one ‘if’ block but only one ‘else’ block is allowed with one ‘if’ block.
+**switch**-The switch statement is a multiway branch statement. It provides an easy way to dispatch execution to different parts of code based on the value of the expression. 
+**jump**
+- break- to exit switch,loop,goto.
+- continue-it stop processing the remainder of the code in its body for this particular iteration.
+- return-The return statement is used to explicitly return from a method.
+
+if-else-
 ### get input and print output
 ```java
 import java.util.Scanner;
