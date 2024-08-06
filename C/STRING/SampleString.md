@@ -2108,6 +2108,345 @@ int main() {
 }
 
 ```
+### 82.reverse word
+```c
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    char reverse[100]={0};
+    int n=strlen(str);
+    if(n>0&& str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+   int size=0;
+    int end=n-1;
+    char prev=' ';
+    for(int i=end;i>=0;i--){
+        if(str[i]==' ' || str[i]=='\n' ||str[i]=='\t'){
+             if(prev!=' ' && prev!='\n' && prev!='\t'){
+               int start=i+1;
+               while(start<=end){
+                   reverse[size++]=str[start++];
+               }
+               reverse[size++]=' ';
+               end=i-1;
+            }
+        }
+        prev=str[i];
+            }
+    if(end>=0){
+        int start=0;
+        while(start<=end){
+            reverse[size++]=str[start++];
+        }
+            }
+    reverse[size]='\0';
+    printf("%s",reverse);
+    return 0;
+}
+```
+### 83.first occurrence in string
+```c
+#include <stdio.h>
+
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    char ch;
+    scanf("%c",&ch);
+    for(int i=0;str[i]!='\0';i++){
+        if(str[i]==ch){
+            printf("%d",i);
+            break;
+        }
+    }
+    return 0;
+}
+```
+### 84.last occurrence in string
+```c
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    char ch;
+    scanf("%c",&ch);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+    for(int i=n-1;i>=0;i--){
+        if(str[i]==ch){
+            printf("%d",i);
+            break;
+        }
+    }
+    return 0;
+}
+```
+### 85. all occurrence of char in string
+```c
+#include <stdio.h>
+
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    char ch;
+    scanf("%c",&ch);
+    for(int i=0;str[i]!='\0';i++){
+        if(str[i]==ch){
+            printf("%d ",i);
+            }
+    }
+    return 0;
+}
+```
+### 86.count all occurrence
+```c
+#include <stdio.h>
+
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    char ch;
+    scanf("%c",&ch);
+    int count=0;
+    for(int i=0;str[i]!='\0';i++){
+        if(str[i]==ch){
+            count++;
+            }
+    }
+    printf("%d",count);
+    return 0;
+}
+```
+### 87.maximum occurrence char
+```c
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+     char temp[256]={0};
+    for(int i=0;str[i]!='\0';i++){
+        temp[str[i]]++;
+    }
+    int maxcount=0;
+    char maxchar='\0';
+    for(int i=0;i<256;i++){
+        if(temp[i]>maxcount){
+            maxcount=temp[i];
+            maxchar=(char)i;
+        }
+    }
+    printf("%c",maxchar);
+    
+    return 0;
+}
+```
+### 88.minimum occurrence
+```c
+#include <stdio.h>
+#include<string.h>
+#include<limits.h>
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+     char temp[256]={0};
+    for(int i=0;str[i]!='\0';i++){
+        temp[str[i]]++;
+    }
+    int mincount=INT_MAX;
+    char minchar='\0';
+    for(int i=0;i<256;i++){
+        if(temp[i]>0 && temp[i]<mincount && i!='\n'){
+            mincount=temp[i];
+            minchar=(char)i;
+        }
+    }
+    printf("%c",minchar);
+    
+    return 0;
+}
+```
+### 89.freq of each char
+```c
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+     int temp[256]={0};
+    for(int i=0;str[i]!='\0';i++){
+        temp[(unsigned char)str[i]]++;
+    }
+    int maxcount=0;
+    char maxchar='\0';
+    for(int i=0;i<256;i++){
+       if(temp[i]>0){
+            printf("%c occurs %d times\n",i,temp[i]);
+       }
+    }
+    
+    
+    return 0;
+}
+```
+### 90.remove first occurrence
+```c
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    char ch;
+    scanf("%c",&ch);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }int index;
+    for(int i=0;str[i]!='\0';i++){
+        if(str[i]==ch){
+            index=i;
+            break;
+        }
+    }
+    int i=0;
+    while(i<n && i!=index){
+        i++;
+    }
+    while(i<n){
+        str[i]=str[i+1];
+        i++;
+    }
+    printf("%s",str);
+    return 0;
+}
+```
+### 91. remove last occurrence
+```c
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    char ch;
+    scanf("%c",&ch);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }int index;
+    for(int i=n-1;i>=0;i--){
+        if(str[i]==ch){
+            index=i;
+            break;
+        }
+    }
+    int i=0;
+    while(i<n && i!=index){
+        i++;
+    }
+    while(i<n){
+        str[i]=str[i+1];
+        i++;
+    }
+    printf("%s",str);
+    return 0;
+}
+```
+### 92.remove all occurrence
+```c
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    char ch;
+    scanf("%c",&ch);
+    char temp[100];
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }int size=0;
+    for(int i=0;str[i]!='\0';i++){
+        if(str[i]!=ch){
+            temp[size++]=str[i];
+        }
+    }
+    temp[size]='\0';
+    printf("%s",temp);
+   
+    return 0;
+}
+```
+### 93.remove all repeated char
+```c
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    char result[100];
+    fgets(str,sizeof(str),stdin);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+     int seen[256]={0};
+     int j=0;
+     for(int i=0;str[i]!='\0';i++){
+         unsigned char index=(unsigned char)str[i];
+         if(!seen[index]){
+             seen[index]=1;
+             result[j++]=str[i];
+         }
+     }
+     result[j]='\0';
+     printf("%s",result);
+    
+    
+    
+    return 0;
+}
+```
+### 93.replace all occurrence of char with another
+```c
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+   
+    char replace;    char replacewith;
+    scanf(" %c",&replace);
+    scanf(" %c",&replacewith);
+    for(int i=0;str[i]!='\0';i++){
+        if(str[i]==replace){
+            str[i]=replacewith;
+        }
+    }
+    
+    printf("%s",str);
+   
+    return 0;
+}
+```
+
+
 
 
 
