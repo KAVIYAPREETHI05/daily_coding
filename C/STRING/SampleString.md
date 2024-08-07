@@ -2445,7 +2445,59 @@ int main() {
     return 0;
 }
 ```
+### 93.replace first occurrence of char with another
+```c
 
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+   
+    int n=strlen(str);
+            if(str[n-1]=='\n'){
+            str[n-1]='\0';
+            n--;
+        }
+         char present;char changeto;
+    scanf("%c",&present);
+    scanf(" %c",&changeto);
+    for(int i=0;i<n;i++){
+        if(str[i]==present){
+            str[i]=changeto;
+            break;
+        }
+    }       printf("%s",str);
+    return 0;
+}
+```
+### 93.replace last occurrence of char with another
+```c
+
+#include <stdio.h>
+#include<string.h>
+int main() {
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+   
+    int n=strlen(str);
+            if(str[n-1]=='\n'){
+            str[n-1]='\0';
+            n--;
+        }
+         char present;char changeto;
+    scanf("%c",&present);
+    scanf(" %c",&changeto);
+    for(int i=n-1;i>=0;i--){
+        if(str[i]==present){
+            str[i]=changeto;
+            break;
+        }
+    }       printf("%s",str);
+    return 0;
+}
+```
+###
 
 
 
