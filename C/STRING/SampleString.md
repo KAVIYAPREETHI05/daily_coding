@@ -2497,8 +2497,294 @@ int main() {
     return 0;
 }
 ```
-###
-
+### find first occurrence of word from string
+```c
+#include <stdio.h>
+#include<string.h>
+#define MAX_SIZE 255
+int main() {
+    char str[MAX_SIZE];
+    fgets(str,sizeof(str),stdin);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+    char word[MAX_SIZE];
+    fgets(word,sizeof(word),stdin);
+    int m=strlen(word);
+    if(word[m-1]=='\n'){
+        word[m-1]='\0';
+        m--;
+    }
+    int i=0;int found=1;
+    while(str[i]!='\0'){
+        if(str[i]==word[0]){
+            int j=0;found=0;
+            while(word[j]!='\0'){
+                if(str[i+j]!=word[j]){
+                    found=1;
+                    break;
+                }
+                j++;
+            }
+            if(!found){
+                break;
+            }
+        }
+        i++;
+    }
+    if(!found){
+        printf("%d",i);
+    }
+    else{
+        printf("no word found");
+    }
+    return 0;
+}
+```
+### find last occurrence of word from string
+```c
+#include <stdio.h>
+#include<string.h>
+#define MAX_SIZE 255
+int main() {
+    char str[MAX_SIZE];
+    fgets(str,sizeof(str),stdin);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+    char word[MAX_SIZE];
+    fgets(word,sizeof(word),stdin);
+    int m=strlen(word);
+    if(word[m-1]=='\n'){
+        word[m-1]='\0';
+        m--;
+    }
+    int i=n-1;int found=1;
+    while(i>=0){
+        if(str[i]==word[m-1]){
+            int j=m-1;found=0;
+            while(j>=m){
+                if(str[i-(m-1-j)]!=word[j]){
+                    found=1;
+                    break;
+                }
+                j--;
+            }
+            if(!found){
+                break;
+            }
+        }
+        i--;
+    }
+    if(!found){
+        printf("%d",i-(m-1));
+    }
+    else{
+        printf("no word found");
+    }
+    return 0;
+}
+```
+###  search all occurrence of word from string
+```c
+#include <stdio.h>
+#include<string.h>
+#define MAX_SIZE 255
+int main() {
+    char str[MAX_SIZE];
+    fgets(str,sizeof(str),stdin);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+    char word[MAX_SIZE];
+    fgets(word,sizeof(word),stdin);
+    int m=strlen(word);
+    if(word[m-1]=='\n'){
+        word[m-1]='\0';
+        m--;
+    }
+    int i=0;int found=1;
+    while(str[i]!='\0'){
+        if(str[i]==word[0]){
+            int j=0;found=0;
+            while(word[j]!='\0'){
+                if(str[i+j]!=word[j]){
+                    found=1;
+                    break;
+                }
+                j++;
+            }
+            if(!found){
+                printf("%d ",i);
+            }
+        }
+        i++;
+    }
+   
+    if(found){
+        printf("no word found");
+    }
+    return 0;
+}
+```
+### remove all occurrence of word in string
+```c
+#include <stdio.h>
+#include<string.h>
+#define MAX_SIZE 255
+int main() {
+    char str[MAX_SIZE];
+    fgets(str,sizeof(str),stdin);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+    char word[MAX_SIZE];
+    fgets(word,sizeof(word),stdin);
+    int m=strlen(word);
+    if(word[m-1]=='\n'){
+        word[m-1]='\0';
+        m--;
+    }
+    int i=0;int found=1;
+    while(str[i]!='\0'){
+        if(str[i]==word[0]){
+            int j=0;found=0;
+            while(word[j]!='\0'){
+                if(str[i+j]!=word[j]){
+                    found=1;
+                    break;
+                }
+                j++;
+            }
+            if(!found){
+                int k=i;
+                    while(str[k+m]!='\0'){
+                        str[k]=str[k+m+1];
+                        k++;
+                    }
+                    str[k]='\0';
+                    n-=m;
+                    
+                                }
+        }
+        i++;
+    }
+   printf("%s",str);
+    return 0;
+}
+```
+### remove first occurrence of a word in given string 
+```c
+#include <stdio.h>
+#include<string.h>
+#define MAX_SIZE 255
+int main() {
+    char str[MAX_SIZE];
+    fgets(str,sizeof(str),stdin);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+    char word[MAX_SIZE];
+    fgets(word,sizeof(word),stdin);
+    int m=strlen(word);
+    if(word[m-1]=='\n'){
+        word[m-1]='\0';
+        m--;
+    }
+    int i=0;int found=1;
+    while(str[i]!='\0'){
+        if(str[i]==word[0]){
+            int j=0;found=0;
+            while(word[j]!='\0'){
+                if(str[i+j]!=word[j]){
+                    found=1;
+                    break;
+                }
+                j++;
+            }
+            if(!found){
+                break;
+            }
+        }
+        i++;
+    }
+    if(!found){
+                int k=i;
+                    while(str[k+m]!='\0'){
+                        str[k]=str[k+m+1];
+                        k++;
+                    }
+                    str[k]='\0';
+                    n-=m;
+                    
+                                }
+   printf("%s",str);
+    return 0;
+}
+```
+### remove last occurrence of a word in given string 
+```c
+#include <stdio.h>
+#include<string.h>
+#define MAX_SIZE 255
+int main() {
+    char str[MAX_SIZE];
+    fgets(str,sizeof(str),stdin);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+    char word[MAX_SIZE];
+    fgets(word,sizeof(word),stdin);
+    int m=strlen(word);
+    if(word[m-1]=='\n'){
+        word[m-1]='\0';
+        m--;
+    }
+    int i=n-1;int found=1;
+    while(i>=0){
+        if(str[i]==word[m-1]){
+            int j=m-1;found=0;
+            while(j>=0){
+                if(str[i-(m-1-j)]!=word[j]){
+                    found=1;
+                    break;
+                }
+                j--;
+            }
+            if(!found){
+                break;
+            }
+        }
+        i--;
+    }
+    if(!found){
+        int k=i-m+1;
+       while(str[k+m]!='\0'){
+           str[k]=str[k+m+1];
+           k++;
+       }
+       str[k]='\0';
+       n-=m;
+    }
+    else{
+        printf("no word found");
+    }
+    printf("%s",str);
+    return 0;
+}
+```
 
 
 
