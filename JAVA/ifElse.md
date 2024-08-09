@@ -275,4 +275,41 @@ class HelloWorld {
     }
 }
 ```
+### check leap year
+```java
+import java.util.Scanner;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner input=new Scanner(System.in);
+        int year=input.nextInt();
+        if((year%4==0 && year%100!=0) || year%400==0){
+            System.out.println("leap year");
+        }
+        else{
+            System.out.println("non-leap year");
+        }
+    }
+}
+```
+### print natural num + their sum + average
+```java
+import java.util.Scanner;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner input=new Scanner(System.in);
+        int num=input.nextInt();
+        int sum=0;
+        for(int i=1;i<=num;i++){
+            System.out.println(i);
+            sum+=i;
+        }
+        float avg=sum/num;
+        System.out.println(sum);
+        System.out.println(avg);
+    }
+}
+```
+###
 
