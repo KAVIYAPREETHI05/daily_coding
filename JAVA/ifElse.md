@@ -252,5 +252,27 @@ public class Main{
         
 
 ```
+### check vowel
+```java
 
+import java.util.Scanner;
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner hello=new Scanner(System.in);
+        char a=hello.next().charAt(0);
+        if(Character.isLetter(a)){
+            if(a=='a' || a=='e' ||a=='i' ||a=='o' ||a=='u' ||a=='A' || a=='E' ||a=='I' ||a=='O' ||a=='U'){
+                System.out.println("vowels");
+            }
+            else{
+                System.out.println("consonants");
+            }
+        }
+        else{
+            System.out.println("not alpha");
+        }
+        
+    }
+}
+```
 
