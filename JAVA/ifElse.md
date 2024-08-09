@@ -117,5 +117,140 @@ public class Main{
     }
 }
 ```
+### 
+```java
+import java.util.Scanner;
+import static java.lang.Math.sqrt;
+public class Main{
+    public static void main(String[] args){
+        Scanner num1=new Scanner(System.in);
+       
+        double value=num1.nextDouble();
+        if(value<0){
+            if(Math.abs(value)<1){
+                    System.out.println("negative and small");
+                }
+                else if(Math.abs(value)>1000000){
+                    System.out.println("negative and greater");
+                }
+                else
+            System.out.println("negative");
+            
+        }
+        else if(value>0){
+                if(value<1){
+                    System.out.println("positive and small");
+                }
+                else if(value>1000000){
+                    System.out.println("positive and greater");
+                }
+                else
+            System.out.println("positive");
+            }
+        else{
+            System.out.println("zero");
+        }
+        }
+}
+```
+### weeks
+```java
+import java.util.Scanner;
+import static java.lang.Math.sqrt;
+public class Main{
+    public static void main(String[] args){
+        Scanner num1=new Scanner(System.in);
+       
+        int value=num1.nextInt();
+        switch(value){
+            case 1:
+                System.out.println("Monday");
+                break;
+            case 2:
+                System.out.println("Tuesay");
+                break;
+            case 3:
+                System.out.println("Wednesday");
+                break;
+            case 4:
+                System.out.println("Thursday");
+                break;
+            case 5:
+                System.out.println("Friday");
+                break;
+            case 6:
+                System.out.println("Saturday");
+                break;
+            case 7:
+                System.out.println("Sunday");
+                break;
+            default:
+            System.out.println("not valid");
+                
+        }
+        }
+}
+```
+### same up to three decimal places.
+```java
+import java.util.Scanner;
+import static java.lang.Math.sqrt;
+public class Main{
+    public static void main(String[] args){
+        Scanner num1=new Scanner(System.in);
+       
+        float value=num1.nextFloat();
+        float value2=num1.nextFloat();
+        value=Math.round(value*1000);
+        value=value/1000;
+        value2=Math.round(value2*1000);
+        value2=value2/1000;
+        if(value==value2){
+            System.out.println("Ther are same");
+        }
+        else{
+            System.out.println("They are not same");
+        }
+        
+        }
+}
+```
+### 
+```java
+import java.util.Scanner;
+import static java.lang.Math.sqrt;
+public class Main{
+    public static void main(String[] args){
+        Scanner num1=new Scanner(System.in);
+       
+        int m=num1.nextInt();
+        int y=num1.nextInt();
+       if(m>0 && m<=12){
+           if(m==1 || m==3 || m==5 ||m==7 ||m==8 ||m==10 ||m==12){
+               System.out.println(m + "has 31 days");
+           }
+           else if(m==4 || m==6 ||m==9 ||m==11){
+               System.out.println(m + "has 30 days");
+           }
+           else if(m==2){
+               if((( y%4==0) && (y%100!=0)) || y%400==0){
+                   System.out.println(m+"has 29 days");
+                   
+               }
+               else{
+                   System.out.println(m+"has 28 days");
+               }
+           }
+       }
+       else{
+           System.out.println("invalid");
+       }
+        num1.close();
+        
+        }
+}
+        
+
+```
 
 
