@@ -311,5 +311,53 @@ class HelloWorld {
     }
 }
 ```
+### cube of number
+```java
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] arg){
+        Scanner input=new Scanner(System.in);
+        int num=input.nextInt();
+        for(int i=1;i<=num;i++){
+            int value=i*i*i;
+            System.out.println(value);
+        }
+    }
+}
+```
+### multiplication table
+```java
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] arg){
+        Scanner input=new Scanner(System.in);
+        int num=input.nextInt();
+        for(int i=1;i<=10;i++){
+            int value=num*i;
+            System.out.println(num + "*" +i +"=" + value);
+        }
+    }
+}
+```
+### odd numbers til num
+```java
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] arg){
+        Scanner input=new Scanner(System.in);
+        int num=input.nextInt();
+      int i=1;int count=0;
+      while(num!=0){
+          if(i%2!=0){
+              System.out.println(i);
+              num--;
+          }
+          i++;
+          
+      }
+    }
+}
+```
 ###
+
 
