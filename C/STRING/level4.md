@@ -158,5 +158,43 @@ printf("%d index of longest word",max_len);
     return 0;
 }
 ```
+### second longest word
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    int elements;
+    scanf("%d", &elements);
+    getchar();  
+    char str[elements][100];
+    for (int i = 0; i < elements; i++) {
+        fgets(str[i], sizeof(str[i]), stdin);
+        int n = strlen(str[i]);
+        if (str[i][n-1] == '\n') {
+            str[i][n-1] = '\0';
+        }
+    }
+    int max = 0;
+    int sec_max = -1;
+    for (int i = 1; i < elements; i++) {
+        if (strlen(str[i]) > strlen(str[max])) {
+            sec_max = max;
+            max = i;
+        } else if (strlen(str[i]) <= strlen(str[max]) && (sec_max == -1 || strlen(str[i]) > strlen(str[sec_max]))) {
+            sec_max = i;
+        }
+    }
+    printf("%s\n", str[max]);
+    if (sec_max != -1) {
+        printf("Second Longest: %s\n", str[sec_max]);
+    } else {
+        printf("No second longest string exists.\n");
+    }
+    return 0;
+}
+
+```
+
 
 
