@@ -195,6 +195,238 @@ int main() {
 }
 
 ```
+### remove leading zeros and check whether both string are equal
+```c
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#define MAX 256
+char* removeLeadingZeros(char* str){
+    while(*str=='0' && *(str+1)!='\0'){
+        str++;
+    }
+    return str;
+}
+int main(){
+    char str1[MAX];
+    char str2[MAX];
+    scanf("%s",str1);
+    scanf("%s",str2);
+    char* num1=removeLeadingZeros(str1);
+    char* num2=removeLeadingZeros(str2);
+    if(strcmp(num1,num2)==0){
+        printf("they are equal %s and %s",num1,num2);
+    }
+    else{
+       printf("they are not equal %s and %s",num1,num2); 
+    }
+    
+}
+```
+### remove duplicate 
+```c
+#include<stdio.h>
+#include<string.h>
+#define MAX 256
+int main(){
+    char str[MAX];
+    fgets(str,sizeof(str),stdin);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+    int temp[MAX]={0};char unique[MAX];int j=0;
+    for(int i=0;i<n;i++){
+        if(temp[(unsigned char)str[i]]==0){
+            temp[(unsigned char)str[i]]=1;
+            unique[j++]=str[i];
+        }
+    }
+    unique[j]='\0';
+    printf("%s",unique);
+    
+}
+```
+### remove vowel and print
+```c
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#define MAX 256
+int main(){
+    char str[MAX];
+    fgets(str,sizeof(str),stdin);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+    char unique[MAX];int j=0;
+    for(int i=0;i<n;i++){
+        char s=tolower((unsigned char)str[i]);
+        if(s!='a' && s!='e' && s!='i' && s!='o' && s!='u'){
+            unique[j++]=s;
+        }
+    }
+    unique[j]='\0';
+    printf("%s",unique);
+    
+}
+```
+### print consecutive repeated characters
+```c
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#define MAX 256
+int main(){
+    char str[MAX];
+    fgets(str,sizeof(str),stdin);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+    char unique[MAX];int j=0;
+    for(int i=0;i<n;i++){
+       
+        if(str[i]==str[i+1]){
+            unique[j++]=str[i];
+            while(str[i]==str[i+1]){
+                i++;
+            }
+        }
+    }
+    unique[j]='\0';
+    printf("%s",unique);
+    
+}
+```
+### check isomorphic
+```c
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#define MAX 256
+int areIsomorphic(char* str1,char* str2){
+    int m1[MAX]={0};
+    int m2[MAX]={0};
+    int len1=strlen(str1);
+    int len2=strlen(str2);
+    if(len1!=len2){
+        return 0;
+    }
+    for(int i=0;i<len1;i++){
+        int c1=(unsigned char)str1[i];
+        int c2=(unsigned char)str2[i];
+        if(m1[c1]==0 && m2[c2]==0){
+            m1[c1]=c2;
+            m2[c2]=c1;
+        }
+        else{
+            if(m1[c1]!=c2 || m2[c2]!=c1){
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+int main(){
+    char str1[MAX];char str2[MAX];
+    fgets(str1,sizeof(str1),stdin);
+    fgets(str2,sizeof(str2),stdin);
+    
+   str1[strcspn(str1,"\n")]='\0';
+   str2[strcspn(str2,"\n")]='\0';
+    
+    if(areIsomorphic(str1,str2)){
+        printf("%s and  %s are isomorphic",str1,str2);
+    }
+    else{
+        printf(" %s and  %s are not isomorphic",str1,str2);
+    }
+}
+```
+### anagrams
+```c
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#define MAX 256
+int areAnagrams(char* str1,char* str2){
+    int count[MAX]={0};
+    int len1=strlen(str1);
+    int len2=strlen(str2);
+    if(len1!=len2){
+        return 0;
+    }
+    for(int i=0;i<len1;i++){
+        count[(unsigned char)str1[i]]++;
+        count[(unsigned char)str2[i]]--;
+            }
+            for(int i=0;i<MAX;i++){
+                if(count[i]!=0){
+                    return 0;
+                }
+            }
+            
+    return 1;
+}
+int main(){
+    char str1[MAX];char str2[MAX];
+    fgets(str1,sizeof(str1),stdin);
+    fgets(str2,sizeof(str2),stdin);
+    
+   str1[strcspn(str1,"\n")]='\0';
+   str2[strcspn(str2,"\n")]='\0';
+    
+    if(areAnagrams(str1,str2)){
+        printf("%s and  %s are anagrams",str1,str2);
+    }
+    else{
+        printf(" %s and  %s are not anagrams",str1,str2);
+    }
+}
+```
+### check pangram
+```c
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#define MAX 26
+int isPangram(char* str){
+    int count[MAX]={0};
+    int len1=strlen(str);
+    int i=0;
+    while(str[i]!='\0'){
+          char s=tolower((unsigned char)str[i]);
+          if(s>='a' && s<='z'){
+             int  index= s - 'a';
+              count[index]=1;
+          }
+          i++;
+    }
+     for(int i=0;i<MAX;i++){
+         if(count[i]==0){
+             return 0;
+         }
+     }
+    return 1;
+}
+int main(){
+    char str1[MAX];char str2[MAX];
+    fgets(str1,sizeof(str1),stdin);
+     str1[strcspn(str1,"\n")]='\0';
+  
+    if(!isPangram(str1)){
+        printf("string is pangram");
+    }
+    else{
+        printf(" string is not pangram");
+    }
+}
+```
 
 
 
