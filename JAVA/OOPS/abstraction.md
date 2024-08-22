@@ -8,6 +8,8 @@ By using **abstract classes** and **interfaces** we can achieve abstration.
 
 **Modularity** and **Maintainability** of the application.
 
+We cannot create object in abstract class if we do so compilation error will occur.
+
 ### abstract class
 ```java
 abstract class Shape{
