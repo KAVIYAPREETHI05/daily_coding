@@ -427,6 +427,96 @@ int main(){
     }
 }
 ```
+### FREQUENCY OF THE FIRST REPEATING CHARACTER
+```c
+#include<stdio.h>
+#include<string.h>
+#define MAX 256
+int freqRepeating(char *str){
+    char temp[MAX]={0};
+    for(int i=0;str[i]!='\0';i++){
+        temp[(unsigned char)str[i]]++;
+    }
+    for(int i=0;str[i]!='\0';i++){
+        if(temp[(unsigned char)str[i]]>1){
+            printf("%c\n",str[i]);
+            return temp[(unsigned char)str[i]];
+        }
+    }
+    return 0;
+}
+int main(){
+    char str[MAX];
+    fgets(str,sizeof(str),stdin);
+    str[strcspn(str,"\n")]='\0';
+    int n=strlen(str);
+        int count=freqRepeating(str);
+    if(count){
+        printf("frequency of first repeating char is %d",count);
+    }
+    else{
+        printf("no repeating");
+    }
+    
+}
+```
+### age greater than 60 in given string
+```c
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#define MAX 256
+int freqRepeating(char *str){
+    char *token;
+    token=strtok(str," ");
+    int count=0;
+    while(token!=NULL){
+        int age=atoi(token);
+        if(age>60){
+            count++;
+        }
+        token=strtok(NULL," ");
+    }
+    return count;
+}
+int main(){
+    char str[MAX];
+    fgets(str,sizeof(str),stdin);
+    str[strcspn(str,"\n")]='\0';
+    int n=strlen(str);
+        int count=freqRepeating(str);
+    if(count){
+        printf("age greater than 60 is  %d",count);
+    }
+    else{
+        printf("no one");
+    }
+    
+}
+```
+### Print the given string without alphabets
+```c
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#define MAX 256
+
+int main(){
+    char str[MAX];char temp[MAX];
+    fgets(str,sizeof(str),stdin);
+    str[strcspn(str,"\n")]='\0';
+    int n=strlen(str);int i=0;int j=0;
+        while(str[i]!='\0'){
+            if(!isalpha(str[i])){
+                temp[j++]=str[i];
+            }
+            i++;
+        }
+        temp[j]='\0';
+        printf("%s",temp);
+}
+```
+
 
 
 
