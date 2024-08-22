@@ -6,6 +6,8 @@ By using **extends** we will derive inheriance.
 
 Advantage- Code Reusability
 
+We can use parent reference to represent child object but by using this reference we can invoke only parent method and cannot invoke child specific methods.
+
 ```java
  class BankAccount{
 	 private String accNumber;
