@@ -162,35 +162,36 @@ printf("%d index of longest word",max_len);
 ```c
 #include <stdio.h>
 #include <string.h>
+#define MAX_STRINGS 100
+#define MAX_LENGTH 100
 
-int main() {
-    int elements;
-    scanf("%d", &elements);
-    getchar();  
-    char str[elements][100];
-    for (int i = 0; i < elements; i++) {
-        fgets(str[i], sizeof(str[i]), stdin);
-        int n = strlen(str[i]);
-        if (str[i][n-1] == '\n') {
-            str[i][n-1] = '\0';
+int main(){
+    int num_strings;
+    char str[MAX_STRINGS][MAX_LENGTH];
+    int max_len=0;int sec_max=0;
+    int longest_index=0; int sec_long=-1;
+    scanf("%d",&num_strings);
+    getchar();
+    for(int i=0;i<num_strings;i++){
+        fgets(str[i],MAX_LENGTH,stdin);
+        int len=strlen(str[i]);
+        if(len>0 && str[i][len-1]=='\n'){
+            str[i][len-1]='\0';
+            len--;
+        }
+        if(len>max_len){
+            sec_max=max_len;
+            sec_long=longest_index;
+            max_len=len;
+            longest_index=i;
+        }
+        else if(len>sec_max && len<max_len){
+            sec_max=len;
+            sec_long=i;
         }
     }
-    int max = 0;
-    int sec_max = -1;
-    for (int i = 1; i < elements; i++) {
-        if (strlen(str[i]) > strlen(str[max])) {
-            sec_max = max;
-            max = i;
-        } else if (strlen(str[i]) <= strlen(str[max]) && (sec_max == -1 || strlen(str[i]) > strlen(str[sec_max]))) {
-            sec_max = i;
-        }
-    }
-    printf("%s\n", str[max]);
-    if (sec_max != -1) {
-        printf("Second Longest: %s\n", str[sec_max]);
-    } else {
-        printf("No second longest string exists.\n");
-    }
+printf("%s\n longest word",str[sec_long]);
+printf("%d index of longest word",sec_max);
     return 0;
 }
 
@@ -516,7 +517,149 @@ int main(){
         printf("%s",temp);
 }
 ```
-### Minimum length between two words of a string.
+### Replace character with input character
+```c
+#include<stdio.h>
+#include<string.h>
+#define MAX 256
+int main(){
+    char str[MAX]; char letter;char replace;
+    fgets(str,sizeof(str),stdin);
+    int n=strlen(str);n=n-1;
+    scanf(" %c",&letter);
+    scanf(" %c",&replace);
+    for(int i=0;i<n;i++){
+        if(str[i]==letter){
+            str[i]=replace;
+        }
+    }
+    printf("%s",str);
+    
+}
+```
+### reverse the word
+```c
+#include<stdio.h>
+#include<string.h>
+#define MAX 256
+int main(){
+    char str[MAX]; char reverse[MAX];
+    fgets(str,sizeof(str),stdin);
+    int n=strlen(str);
+    if(str[n-1]=='\n'){
+        str[n-1]='\0';
+        n--;
+    }
+    int end=n-1;int j=0;
+    for(int i=end;i>=0;i--){
+        if(str[i]==' ' && str[i+1]!=' '){
+            int start=i+1;
+            while(start<=end){
+                reverse[j++]=str[start];
+                start++;
+            }
+            reverse[j++]=' ';
+            end=i-1;
+        }
+    }
+    for(int i=0;i<=end;i++){
+        reverse[j++]=str[i];
+    }
+    reverse[j]='\0';
+    
+    printf("%s",reverse);
+    
+}
+```
+### unique char
+```c
+#include <stdio.h>
+#include <string.h>
+#define MAX_LENGTH 256
+int main(){
+char str[MAX_LENGTH];char reverse[MAX_LENGTH];
+fgets(str,sizeof(str),stdin);
+int n=strlen(str);
+if(str[n-1]=='\n'){
+    str[n-1]='\0';
+    n--;
+}int j=0;
+int count[MAX_LENGTH]={0};
+for(int i=0;i<n;i++){
+    count[(unsigned char)str[i]]++;
+    if(count[(unsigned char)str[i]]==1){
+        reverse[j++]=str[i];
+    }
+}
+reverse[j]='\0';
+printf("%s",reverse);
+
+
+    return 0;
+}
+```
+### reverse string and print odd index char
+```c
+#include <stdio.h>
+#include <string.h>
+#define MAX_LENGTH 256
+int main(){
+char str[MAX_LENGTH];char reverse[MAX_LENGTH];
+fgets(str,sizeof(str),stdin);
+int n=strlen(str);
+if(str[n-1]=='\n'){
+    str[n-1]='\0';
+    n--;
+}int j=0;
+for(int i=n-1;i>=0;i--){
+    reverse[j++]=str[i];
+}
+reverse[j]='\0';
+for(int i=0;reverse[i]!='\0';i++){
+    if(i%2!=0){
+        printf("%c",reverse[i]);
+    }
+}
+    
+    return 0;
+}
+```
+### remove word and print sentence
+```c
+#include <stdio.h>
+#include <string.h>
+#define MAX_LENGTH 256
+void removeWord(char *sentence, const char *word) {
+
+    char result[MAX_LENGTH]="";
+    char *token;
+    token=strtok(sentence," ");
+    while(token!=NULL){
+        if(strcmp(token,word)!=0){
+            if(strlen(result)>0){
+                strcat(result," ");
+            }
+            strcat(result,token);
+        }
+        token=strtok(NULL," ");
+    }
+    strcpy(sentence,result);
+    
+}
+int main() {
+    char sentence[256];
+    char word[50];
+
+     fgets(sentence, sizeof(sentence), stdin);
+    sentence[strcspn(sentence, "\n")] = '\0'; 
+    fgets(word, sizeof(word), stdin);
+    word[strcspn(word, "\n")] = '\0'; 
+    removeWord(sentence, word);
+    printf("Modified sentence: %s\n", sentence);
+
+    return 0;
+}
+```
 
 
 
