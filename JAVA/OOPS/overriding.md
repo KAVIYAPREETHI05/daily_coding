@@ -8,6 +8,15 @@ In overriding method resolution will be taken care by JVM based on runtime objec
 
 It is called as **dynamic polymorphism** or **runtime polymorphism** or **late binding**.
 
+abstract or interface cannot create objects.
+
+
+- Method signature must be same.
+- For primitives, return type must be same. But for object types co-varient return types are allowed.
+- child method return type must be same as parent method return type or its child type.
+- overriding concept is not applicable for private methods.
+  
+
 ```java
 class person{
 	public void method(){
