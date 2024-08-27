@@ -660,6 +660,140 @@ int main() {
     return 0;
 }
 ```
+### find the first non repeating character
+```c
+#include <stdio.h>
+#include <string.h>
+#define MAX_LENGTH 256
+
+int main() {
+    char sentence[256];
+    char word[50];
+     fgets(sentence, sizeof(sentence), stdin);
+    sentence[strcspn(sentence, "\n")] = '\0'; 
+    int result[MAX_LENGTH]={0};
+    for(int i=0;sentence[i]!='\0';i++){
+        result[(unsigned char) sentence[i]]++;
+    }
+    for(int i=0;sentence[i]!='\0';i++){
+        if(result[(unsigned char) sentence[i]]==1){
+            printf("%c",sentence[i]);
+            break;
+        }
+    }
+    return 0;
+}
+```
+### Count the number of alphabets in the string. Then find the count is prime number or even or odd 
+```c
+#include <stdio.h>
+#include <string.h>
+#include<ctype.h>
+#define MAX_LENGTH 256
+int isprime(int n){
+    if(n<=1){
+        return 0;
+    }
+    else{
+        for(int i=2;i<n/2;i++){
+            if(n%i==0){
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+int main() {
+    char sentence[256];
+    char word[50];
+     fgets(sentence, sizeof(sentence), stdin);
+    sentence[strcspn(sentence, "\n")] = '\0'; 
+    int result[MAX_LENGTH]={0};
+    int count=0;
+    for(int i=0;sentence[i]!='\0';i++){
+        if(isalpha(sentence[i])){
+            count++;
+        }
+    }
+    printf("%d",count);
+    if(isprime(count)){
+        printf("prime number");
+    }
+   else if(count%2==0){
+       printf("even number");
+   }
+   else if(count%2!=0){
+       printf("odd number");
+       
+   }
+   
+    return 0;
+}
+```
+### GET A STRING AS INPUT AND SUM THE NUMBERS PRESENT IN STRING. REVERSE THE SUM.
+```c
+#include <stdio.h>
+#include <string.h>
+#include<ctype.h>
+#define MAX_LENGTH 256
+void reverse(int n){
+    int reversed=0;
+    while(n!=0){
+        int digit=n%10;
+        reversed= reversed*10+digit;
+        n/=10;
+    }
+    printf("%d",reversed);
+}
+
+int main() {
+    char sentence[256];
+    char word[50];
+     fgets(sentence, sizeof(sentence), stdin);
+    sentence[strcspn(sentence, "\n")] = '\0'; 
+    int sum=0;
+    for(int i=0;sentence[i]!='\0';i++){
+        if(isdigit(sentence[i])){
+            sum+=sentence[i] -'0';
+        }
+    }
+    printf("%d\n",sum);
+    reverse(sum);
+   
+    return 0;
+}
+```
+### check time
+```c
+#include <stdio.h>
+#include <string.h>
+#include<ctype.h>
+#define MAX_LENGTH 256
+void checkTime(char * str){
+    int mins;int hrs;int sec;
+    if(sscanf(str,"%d:%d:%d",&hrs,&mins,&sec)!=3){
+       printf("Invalid time format");
+    }
+    if(hrs>=0 && hrs<=23 && mins>=0 && mins<=59 && sec>=0 && sec<=59){
+          printf("%dHours:%dMinutes:%dSeconds",hrs,mins,sec);
+    }
+    else {
+        printf("Invalid time");
+    }
+}
+
+int main() {
+    char sentence[256];
+    char word[50];
+     fgets(sentence, sizeof(sentence), stdin);
+    sentence[strcspn(sentence, "\n")] = '\0'; 
+  
+checkTime(sentence);
+   
+    return 0;
+}
+```
 
 
 
