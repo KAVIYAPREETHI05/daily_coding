@@ -396,6 +396,7 @@ int main(){
 #include<string.h>
 #include<ctype.h>
 #define MAX 26
+#define NUM 256
 int isPangram(char* str){
     int count[MAX]={0};
     int len1=strlen(str);
@@ -416,11 +417,11 @@ int isPangram(char* str){
     return 1;
 }
 int main(){
-    char str1[MAX];char str2[MAX];
+    char str1[NUM];
     fgets(str1,sizeof(str1),stdin);
      str1[strcspn(str1,"\n")]='\0';
   
-    if(!isPangram(str1)){
+    if(isPangram(str1)){
         printf("string is pangram");
     }
     else{
@@ -794,6 +795,74 @@ checkTime(sentence);
     return 0;
 }
 ```
+### int to roman
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+void inttoroman(int num,char*roman){
+    int values[]={1000,900,500,400,100,90,50,40,10,9,5,4,1};
+    char *symbols[]={"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
+    int i=0;
+    while(num>0){
+        while(num>=values[i]){
+            num-=values[i];
+            strcat(roman,symbols[i]);
+        }
+        i++;
+    }
+}
+int main() {
+   int num;
+   char roman[100];
+   scanf("%d",&num);
+   inttoroman(num,roman);
+   printf("%s",roman);
+}
+```
+### roman to int
+```c
+#include <stdio.h>
+#include <string.h>
 
+int romanToInt(char *roman) {
+    int values[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+    char *symbols[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+    
+    int i=0,num=0;
+    while(*roman){
+        int found=0;
+        for(int i=0;i<13;i++){
+            if(strncmp(roman,symbols[i],strlen(symbols[i]))==0){
+            
+                num+=values[i];
+                roman+=strlen(symbols[i]);
+                found=1;
+                break;
+            }
+        }
+         if(found==0){
+        return -1;
+    }
+    }
+   
+    return num;
+}
+
+int main() {
+    char roman[100];
+    scanf("%s", roman);
+    int result = romanToInt(roman);
+    
+    if (result != -1) {
+        printf("%d\n", result);
+    } else {
+        printf("Invalid Roman numeral\n");
+    }
+    
+    return 0;
+}
+
+```
 
 
