@@ -1,4 +1,10 @@
 ### Find the largest three distinct elements in an array
+The idea is to keep track of the largest three distinct element while traversing the array. If an element is greater than the first largest element, we update the first largest as well as the second largest and also third.
+
+Else if an element is larger than second largest but smaller than first largest, then we update the second largest as well as third largest. 
+
+Else if an element is larger than third largest but smaller than first smaller than second largest then we update third only.
+
 ```java
 import java.util.*;
 class Sample
@@ -69,6 +75,114 @@ class Sample
 			System.out.println( second );
 		}
 		
+	}
+}
+```
+### move all zero's to end
+Traverse through the array if the element is not equal to 0, add them along in the track of array of j(non-element).
+
+It moves all non-zero elements to the beginning of the array and pushes the zeros to the end.
+
+```java
+import java.util.*;
+class Sample
+{
+	public static void main(String[] args){
+		Scanner s=new Scanner(System.in);
+		int n=s.nextInt();
+		
+		if(n<2){
+			return;
+		}
+		int arr[]=new int[n];
+		for(int i=0;i<n;i++){
+			 arr[i]=s.nextInt();
+		}int j=0;
+		for(int i=0;i<n;i++){
+			if(arr[i]!=0){
+				int temp=arr[i];
+				arr[i]=arr[j];
+				arr[j]=temp;
+				j++;
+			}
+		}
+		for(int i=0;i<n;i++){
+			System.out.println(arr[i]);
+		}
+		
+		
+	}
+}
+```
+### Rearrange array such that even positioned are greater than odd
+```java
+import java.util.*;
+class Sample
+{
+	public static void main(String[] args){
+		Scanner s=new Scanner(System.in);
+		int n=s.nextInt();
+		
+		if(n<2){
+			return;
+		}
+		int arr[]=new int[n];
+		for(int i=0;i<n;i++){
+			 arr[i]=s.nextInt();
+		}
+		for(int i=1;i<n;i+=2){
+			if(arr[i]<arr[i-1]){
+				int temp=arr[i];
+				arr[i]=arr[i-1];
+				arr[i-1]=temp;
+				
+			}
+			else if(i+1<n && arr[i]<arr[i+1]){
+				int temp=arr[i];
+				arr[i]=arr[i+1];
+				arr[i+1]=temp;
+			}
+		}
+		for(int i=0;i<n;i++){
+			System.out.println(arr[i]);
+		}
+		
+		
+	}
+}
+```
+### segregate even and odd elements
+```java
+import java.util.*;
+class Sample
+{
+	public static void main(String[] args){
+		Scanner s=new Scanner(System.in);
+		int n=s.nextInt();
+		
+		if(n<2){
+			return;
+		}
+		int arr[]=new int[n];
+		int result[]=new int[n];
+		for(int i=0;i<n;i++){
+			 arr[i]=s.nextInt();
+		}int j=0;
+		for(int i=0;i<n;i++){
+			if(arr[i]%2==0){
+				result[j++]=arr[i];
+			}
+		}
+		for(int i=0;i<n;i++){
+			if(arr[i]%2!=0){
+				result[j++]=arr[i];
+			}
+		}
+		for(j=0;j<n	;j++){
+			System.out.println(result[j]);
+		}
+		
+		s.close();
 	}
 }
 ```
