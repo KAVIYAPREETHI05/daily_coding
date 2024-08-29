@@ -44,28 +44,29 @@ printf("%s\n",seat);
 ```
 ### most occurrence char
 ```c
-#include <stdio.h>
+#include<stdio.h>
 #include<string.h>
 #include<ctype.h>
-int main() {
-   char str[100];
-   char temp[26];
-   fgets(str,sizeof(str),stdin);
-  for(int i=0;str[i]!='\0';i++){
-      char letter=tolower(str[i]);
-     if(letter>='a' && letter<='z'){
-          temp[letter-'a']++;
-     }
-      }int max=0;
-  char maxchar=' ';
-   for(int i=0;i<26;i++){
-      if(temp[i]>max){
-          max=str[i];
-          maxchar=i+'a';
-      }
-  }
-  printf("%c occurs mostly",maxchar);
-        return 0;
+#define MAX 256
+#define num 26
+int main(){
+    char str[MAX];
+    fgets(str,sizeof(str),stdin);
+    str[strcspn(str,"\n")]='\0';
+    char temp[num]={0};
+    for(int i=0;str[i]!='\0';i++){
+        char letter=tolower((unsigned char)str[i]);
+        temp[letter-'a']++;
+    }
+    int maxInt=0; int maxcount=0; ;
+    for(int i=0;i<26;i++){
+        if(temp[i]>maxcount){
+            maxcount=temp[i];
+            maxInt=i;
+        }
+    }
+    printf("%c",'a'+maxInt);
+    
 }
 ```
 ### first non-repeating
