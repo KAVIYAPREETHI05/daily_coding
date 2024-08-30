@@ -1,0 +1,17 @@
+### reverse linked list
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+         ListNode dummy=null;
+        
+        while(head!=null){
+        ListNode Next=head.next;
+        head.next=dummy;
+        dummy=head;
+        head=Next;        
+    } 
+    return dummy;      
+    }
+     
+     }
+```
