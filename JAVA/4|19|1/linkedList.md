@@ -44,3 +44,31 @@ class Solution {
     }
 }
 ```
+### middle of linked list
+##### [https://leetcode.com/problems/middle-of-the-linked-list/submissions/1193391779/]
+
+```java
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        int count=0;
+        ListNode temp=head;
+
+        while(temp!=null){
+            count++;
+            temp=temp.next;
+        }
+
+        int MidIndex=count/2 + 1;
+        temp=head;
+        while(temp!=null){
+            MidIndex--;
+            if(MidIndex==0){
+                break;
+            }
+            temp=temp.next;
+        }
+
+        return temp;
+    }
+}
+```
