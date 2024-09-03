@@ -117,3 +117,132 @@ else:
 print(result,o_convertion)
 
 ```
+### positive or negative
+```py
+num=float(input())
+if num>0:
+    print(f"{num} is positive")
+elif num<0:
+    print(f"{num} is negative")
+else:
+    print(f"{num} is zero")
+```
+### even or odd
+```py
+num=float(input())
+if num%2==0:
+    print(f"{num} is even")
+else:
+    print(f"{num} is odd")
+```
+### largest of three nums
+```py
+a=int(input())
+b=int(input())
+c=int(input())
+if a>=b and a>=c:
+  print(f"{a} is largest")
+elif b>=a and b>=c:
+  print(f"{b} is largest")
+else:
+    print(f"{c} is largest")
+```
+### leap year or not
+```py
+a=int(input())
+
+if (a%4==0 and a%100!=0) or a%400==0:
+  print(f"{a} is leap year")
+else:
+    print(f"{a} is not leap year")
+```
+### char is vow or consonant
+```py
+a=input()
+if len(a)!=1:
+  print("enter only one char")
+elif a in 'aeiouAEIOU':
+  print(f"{a} is vowel")
+else:
+  print(f"{a} is consonant")
+```
+### num is multiple of another
+```py
+num1=int(input())
+num2=int(input())
+if num1%num2==0:
+  print(f"{num1} is multiple of num2")
+else:
+  print(f"{num1} is not multiple of num2")
+```
+### alpha or digit or spl char
+```py
+a=input()
+if a.isalpha():
+  print(f"{a} is alpha")
+elif a.isdigit():
+  print(f"{a} is number")
+else:
+  print(f"{a} is spl char")
+```
+### check triangle
+```py
+a=int(input())
+b=int(input())
+c=int(input())
+if a+b>c and b+c>a and a+c>b:
+  print("the sides form triangle")
+else:
+  print("the sides doesn't form triangle")
+```
+### categorize age
+```py
+a=int(input())
+
+if a<0:
+  print("invalid age")
+elif a<=12:
+  print("child age")
+elif a<=19:
+  print("teen age")
+elif a<=60:
+  print("adult age")
+else:
+  print("senior")
+```
+###  check prime 
+```py
+a=int(input())
+
+if a>1:
+  for i in range(2,int(a*0.5)):
+    if a%i==0:
+      print("not prime")
+      break
+    
+  else:
+    print("prime number")
+else:
+  print("senior")
+```
+### check palindrome
+```py
+a=input()
+
+if a==a[::-1]:
+  print("it is palindrome")
+else:
+  print("it is not a palindrome")
+```
+### type of triangle
+```py
+a=int(input())
+b=int(input())
+c=int(input())
+if a==b==c:
+  print("triangle is equilateral")
+elif a==b or b==c or a==c:
+  print("triangle is isosceles")
+else:
+  print("it is scalene3")
+```
