@@ -100,4 +100,20 @@ else:
         print("it is divisible by 5 only")
 
 ```
-###
+### F to C and C to F
+```py
+temp=input()
+degree=int(temp[:-1])
+i_convertion=temp[-1]
+if i_convertion.upper()=="C":
+    result=int(round((9*degree)/5 +32))
+    o_convertion="F"
+elif i_convertion.upper()=="F":
+    result=int(round((degree-32) *5/9))
+    o_convertion="C"
+else:
+    print("invalid input")
+    quit()
+print(result,o_convertion)
+
+```
