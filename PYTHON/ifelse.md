@@ -244,5 +244,95 @@ if a==b==c:
 elif a==b or b==c or a==c:
   print("triangle is isosceles")
 else:
-  print("it is scalene3")
+  print("it is scalene")
+```
+### calculate wages
+```py
+age=int(input())
+days=int(input())
+base=50
+if age<18:
+  multiplier=0.8
+elif age>=18 and age<=65:
+  multiplier=1.0
+else:
+  multiplier=0.6
+
+wages=days*multiplier*base
+print(wages)
+```
+### hot or cold based on temp
+```py
+temp=int(input())
+if temp>=30:
+  print("hot")
+else:
+  print("cold")
+
+
+```
+### type of triangle
+```py
+ang1=int(input())
+ang2=int(input())
+ang3=int(input())
+if ang1+ang2+ang3!=180:
+  print("not a triangle")
+elif ang1==90 or ang2==90 or ang3==90:
+  print("right triangle")
+elif a>90 or b>90 or c>90:
+  print("obtuse triangle")
+else:
+  print("acute triangle4")
+
+
+```
+### n+nn+nnn series
+```py
+n=int(input())
+nn=2*n
+nnn=3*n
+print(n+nn+nnn)
+```
+### simple interest
+```py
+principal=float(input())
+rate=float(input())
+time=float(input())
+
+simple_interest=(principal*rate*time)/100
+print(f"simple interest is {simple_interest:.2f}")
+```
+### compound interest
+```py
+principal=float(input())
+rate=float(input())
+time=float(input())
+freq=int(input())
+
+compound_interest=principal*(1+rate/(100*freq))**(freq*time) -principal
+print(f"compund interest is {compound_interest:.2f}")
+```
+### calculate velocity
+```py
+distance=float(input())
+time=float(input())
+velocity=distance/time
+print(velocity)
+```
+### discount
+```py
+age=int(input())
+if age<=12:
+  discount=0.50
+elif 13<=age<=19:
+  discount=0.30
+elif 20<=age<=65:
+  discount=0.1
+else:
+  discount=0.0
+
+ticket_price=50
+total_price=ticket_price*(1-discount)
+print(total_price)
 ```
