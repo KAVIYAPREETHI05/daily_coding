@@ -53,6 +53,14 @@ for i in range(1,n+1):
   prev=curr
   curr=next
 ```
+```py
+num=int(input())
+fib=[0,1]
+for i in range(2,num+1):
+  fib.append(fib[-1]+fib[-2])
+print(fib)
+
+```
  ```java
 import java.util.*;
 
@@ -148,5 +156,91 @@ class HelloWorld {
     }
 }
 ```
+### reverse num
+```py
+lst=[1,2,3,4,5]
+reverse_list=[]
+for i in range(len(lst)-1,-1,-1):
+  reverse_list.append(lst[i])
+print(reverse_list)
+```
+```java
+
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        int n=scan.nextInt();
+ n=Math.abs(n);
+        int reversed=0;
+        while(n>0){
+            int digit=n%10;
+            reversed=reversed*10+digit;
+            n/=10;
+        }
+        System.out.println(reversed);
+    }
+}
+```
+```py
+num=int(input())
+num=abs(num)
+reversed=0
+while(num>0):
+  digit=num%10
+  reversed=reversed*10+digit
+  num//=10
+print(reversed)
+
+```
+### check prime
+```py
+num=int(input())
+found=0
+if(num<2):
+  found=1
+for i in range(2,int(num ** 0.5)+1):
+  if num%i==0:
+    found=1
+    break
+if found==0:
+  print("prime")
+else:
+  print("not prime")
+```
+```java
+
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        int n=scan.nextInt();
+        int found=0;
+        if(n<2){
+           found=1;
+        }
+       for(int i=2;i<=n/2;i++){
+           if(n%i==0){
+               found=1;
+           }
+       }
+       if(found==0){
+           System.out.println("prime");
+       }
+       else{
+           System.out.println("not prime");
+       }
+    }
+}
+```
+### even num
+```py
+n=int(input())
+for i in range(2,n+1):
+  if(i%2==0):
+    print(i,end=' ')
+```
+
+
 
 
