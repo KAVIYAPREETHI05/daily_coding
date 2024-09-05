@@ -435,6 +435,26 @@ class HelloWorld {
 
 ```
 ### interchange first and last digit
+```py
+def last_first(n):
+    s = str(n)
+    length = len(s)
+    if length <= 1:
+        return n
+    digits=list(s)
+    first=digits[0]
+    last=digits[length-1]
+    digits[length-1]=first
+    digits[0]=last
+    return int(''.join(digits))
+
+
+a = int(input())
+print(a)
+print(last_first(a))
+
+
+```
 ```java
 import java.util.*;
 
@@ -463,6 +483,25 @@ class HelloWorld {
 }
 
 ```
+### int to roman
+```py
+def roman_(num):
+  value_map = [
+        (1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'),
+        (100, 'C'), (90, 'XC'), (50, 'L'), (40, 'XL'),
+        (10, 'X'), (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I')
+    ]
+  roman=''
+  for value,symbol in value_map:
+    while num>=value:
+      roman+=symbol
+      num-=value
+  return roman
+
+n=int(input())
+print(roman_(n))
+```
+
 
 
 
