@@ -218,7 +218,7 @@ for i in range(1,n+1):
   print()
 
 ```
-``java
+```java
 import java.util.*;
 
 class HelloWorld {
