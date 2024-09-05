@@ -240,6 +240,229 @@ for i in range(2,n+1):
   if(i%2==0):
     print(i,end=' ')
 ```
+### check num is even or odd if even print even num else print odd numbers
+```py
+n=int(input())
+if n%2==0:
+  for i in range(0,n+1):
+    if i%2==0:
+      print(i,end=' ')
+else:
+  for i in range(0,n+1):
+    if i%2!=0:
+      print(i,end=' ')
+  
+
+```
+```java
+import java.util.*;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        int n=scan.nextInt();
+        if(n%2==0){
+            for(int i=0;i<=n;i++){
+                if(i%2==0){
+                    System.out.print(i+" ");
+                }
+            }
+        }
+        else{
+            for(int i=0;i<=n;i++){
+                if(i%2!=0){
+                    System.out.print(i+" ");
+                }
+            }
+        }
+        }
+    }
+```
+### sum of digits until single digit
+```py
+
+def find_sum(n):
+  sum=0
+  while n>0:
+    digit=n%10
+    sum+=digit
+    n//=10
+  return sum
+n=int(input())
+while n>=10:
+  n=find_sum(n)
+  
+print(n)
+
+```
+```java
+import java.util.*;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        int n=scan.nextInt();
+          while(n>=10){
+               n=find(n);
+          }
+     System.out.println(n);
+        }
+        public static int find(int n){
+            int sum=0;
+             while(n>0){
+                   int digit=n%10;
+                   sum+=digit;
+                   n/=10;
+           }
+           return sum;
+        }
+    }
+
+```
+### lcm and gcd
+```py
+def gcd(a,b):
+  while b!=0:
+    temp=b
+    b=a%b
+    a=temp
+  return a
+a=int(input())
+b=int(input())
+lcm=abs(a*b)//gcd(a,b)
+gcdd=gcd(a,b)
+print(lcm)
+print(gcdd)
+```
+```java
+  import java.util.*;
+
+class HelloWorld {
+    public static int gcd(int a ,int b){
+        while(b!=0){
+            int temp=b;
+            b=a%b;
+            a=temp;
+        }
+        return a;
+    }
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        int a=scan.nextInt();
+        int b=scan.nextInt();
+        int lcm=Math.abs(a*b)/gcd(a,b);
+        int gcdd=gcd(a,b);
+        System.out.println(lcm+" "+gcdd);
+        }
+    }
+
+```
+### armstrong number
+```py
+n=int(input())
+temp=n
+numdigit=len(str(n))
+sum=0
+while(n>0):
+  digit=n%10
+  sum=sum+pow(digit,numdigit)
+  n//=10
+if temp==sum:
+  print("yess")
+else:
+  print(no)
+```
+```java
+import java.util.*;
+
+class HelloWorld {
+   
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        int a=scan.nextInt();
+        int temp=a;
+        int sum=0;
+        int numdigit=Integer.toString(a).length();
+        while(a>0){
+            int digit=a%10;
+            sum+=Math.pow(digit,numdigit);
+            a/=10;
+        }
+        if(sum==temp){
+            System.out.println("yes NarcissisticNumber");
+        }
+        else{
+            System.out.println("not NarcissisticNumber");
+        }
+       
+    }
+}
+
+```
+### ugly number
+```java
+import java.util.*;
+
+class HelloWorld {
+    public static boolean uglyno(int n){
+        if(n<=0) return false;
+        while(n%2==0){
+            n/=2;
+        }
+        while(n%3==0){
+            n/=3;
+        }
+        while(n%5==0){
+            n/=5;
+        }
+        if(n==1){
+            return true;
+        }
+        return false;
+    }
+   
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        int a=scan.nextInt();
+       if(uglyno(a)){
+           System.out.println("yes");
+       }
+       else{
+           System.out.print("no");
+       }
+    }
+}
+
+```
+### interchange first and last digit
+```java
+import java.util.*;
+
+class HelloWorld {
+    public static int lastFirst(int n){
+        String s=Integer.toString(n);
+        int length=s.length();
+        if(length<=1){
+            return n;
+        }
+        char digits[]=s.toCharArray();
+        char first=digits[0];
+        char last=digits[length-1];
+        digits[0]=last;
+        digits[length-1]=first;
+        return Integer.parseInt(new String(digits));
+        
+    }
+   
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        int a=scan.nextInt();
+       System.out.println(a);
+        System.out.println(lastFirst(a));
+    }
+}
+
+```
 
 
 
