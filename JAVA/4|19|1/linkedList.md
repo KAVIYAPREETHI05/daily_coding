@@ -519,3 +519,34 @@ lass Solution {
 }
 
 ```
+```java
+ 
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head==null){
+            return null;
+        }
+        
+        
+        ListNode temp=head;
+        int count=0;
+        while(temp!=null){
+            count++;
+            temp=temp.next;
+        }
+        if(count==n){
+            return head.next;
+        }
+        int index=count-n-1;
+        temp=head;
+
+        for(int i=0;i<index;i++){
+            temp=temp.next;
+        }
+      
+         temp.next=temp.next.next;;
+       
+     return head;   
+    }
+}
+```
