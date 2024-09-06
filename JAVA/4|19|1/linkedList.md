@@ -349,3 +349,139 @@ class Solution {
     }
 }
 ```
+### 21.merge two sorted linked list
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode dummy=new ListNode(-1);
+        ListNode current=dummy;
+        if(l1==null) return l2;
+        if(l2==null) return l1;
+        while(l1!=null && l2!=null){
+            if(l1.val<=l2.val){
+                current.next=l1;
+                l1=l1.next;
+            }
+            else{
+                current.next=l2;
+                l2=l2.next;
+            }
+            current=current.next;
+        }
+        if(l1!=null){
+            current.next=l1;
+        }
+        else{
+            current.next=l2;
+        }
+        return dummy.next;
+    }
+}
+```
+### 160. Intersection of Two Linked Lists
+
+```java
+set approach
+time complexity=O(m+n)
+space complexity=O(n)
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode A, ListNode B) {
+        Set<ListNode>s=new HashSet<>();
+        ListNode l1=A;
+        ListNode l2=B;
+        while(l1!=null){
+            s.add(l1);
+            l1=l1.next;
+            
+        }
+        while(l2!=null){
+            if(s.contains(l2)==true){
+                return l2;
+            }
+            s.add(l2);
+            l2=l2.next;
+            
+        }
+        return null;
+    }
+}
+```
+```java
+//time complexity=O(m+n)
+//space complexity=O(1)
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    private int getLength(ListNode head){
+        int length=0;
+        while(head!=null){
+            length++;
+            head=head.next;
+        }
+        return length;
+    }
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int l1=getLength(headA);
+        int l2=getLength(headB);
+        while(l1>l2){
+            headA=headA.next;
+            l1--;
+        }
+        while(l2>l1){
+            headB=headB.next;
+            l2--;
+        }
+        while(headA!=headB){
+            headA=headA.next;
+             headB=headB.next;
+            
+        }
+        return headA;
+        
+    }
+}
+```
+```java
+time complexity=O(m+n)
+space complexity=O(1)
+public class Solution {
+    public ListNode getIntersectionNode(ListNode A, ListNode B) {
+      ListNode l1=A;ListNode l2=B;
+      while(l1!=l2){
+        l1=l1==null?B:l1.next;
+        l2=l2==null?A:l2.next;
+      }
+      return l1;
+    }
+}
+```
