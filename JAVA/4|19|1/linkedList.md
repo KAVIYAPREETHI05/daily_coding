@@ -485,3 +485,37 @@ public class Solution {
     }
 }
 ```
+### 19. Remove Nth Node From End of List
+
+```java
+lass Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+     
+        if (head == null) {
+            return null;
+        }
+
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        ListNode temp = head;
+        int count = 0;
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+
+        int index = count - n;
+        temp = dummy; 
+
+        for (int i = 0; i < index; i++) {
+            temp = temp.next;
+        }
+
+        temp.next = temp.next.next;
+
+        return dummy.next;
+    }
+}
+
+```
