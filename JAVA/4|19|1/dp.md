@@ -394,3 +394,79 @@ class Solution {
     }
 }
 ```
+### Edit distance
+top down approach
+time limit exceeded
+```java
+class Solution {
+    String s1,s2;
+    int dp[][];
+    public int minDistance(String word1, String word2) {
+        
+        this.s1=word1;
+        this.s2=word2;
+        int i=s1.length();
+        int j=s2.length();
+
+        dp=new int[i+1][j+1];
+        for(int []k:dp){
+            Arrays.fill(k,-1);
+        }
+        return mD(i,j);
+    }
+    int mD(int i,int j){
+        if(i==0) return j;
+        if(j==0) return i;
+        if(s1.charAt(i-1)==s2.charAt(j-1)){
+            return dp[i][j]=mD(i-1,j-1);
+        }
+        else{
+            int iop=mD(i,j-1);
+            int dop=mD(i-1,j);
+            int rop=mD(i-1,j-1);
+            return dp[i][j]=Math.min(iop,Math.min(dop,rop))+1;
+        }
+    }
+}
+```
+bottom down approach or tortoise and hare approach
+```java
+class Solution {
+    String s1, s2;
+    int[][] dp;
+    
+    public int minDistance(String word1, String word2) {
+        s1 = word1;
+        s2 = word2;
+        int m = s1.length();
+        int n = s2.length();
+        
+        dp = new int[m + 1][n + 1];
+        
+        // Initialize base cases
+        for (int i = 0; i <= m; i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j <= n; j++) {
+            dp[0][j] = j;
+        }
+        
+        // Fill the dp table
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    int insertOp = dp[i][j - 1];
+                    int deleteOp = dp[i - 1][j];
+                    int replaceOp = dp[i - 1][j - 1];
+                    dp[i][j] = Math.min(insertOp, Math.min(deleteOp, replaceOp)) + 1;
+                }
+            }
+        }
+        
+        return dp[m][n];
+    }
+}
+
+```
