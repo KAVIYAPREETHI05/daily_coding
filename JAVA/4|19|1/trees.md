@@ -316,5 +316,131 @@ class Tree
     }
 }
 ```
+### count non-leaf nodes
+```java
+class Solution
+{
+	int countNonLeafNodes(Node root) {
+	    if(root==null || root.left==null && root.right==null) return 0;
+	    
+	    return 1+countNonLeafNodes(root.left)+countNonLeafNodes(root.right);
+	}
+}
+```
+### 100.Same tree
+```java
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p==null && q==null) return true;
+        if(p==null || q==null) return false;
+        if(p.val!=q.val){
+            return false;
+        }
+        return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+        
+    }
+}
+```
+### mirror tree
+```java
+
+class Solution {
+    // Function to convert a binary tree into its mirror tree.
+    void mirror(Node node) {
+        // Your code here
+         if (node == null) {
+            return;
+        }
+        mirror(node.right);
+        mirror(node.left);
+        Node temp=node.left;
+        node.left=node.right;
+        node.right=temp;
+    }
+}
+```
+### 101. Symmetric Tree
+
+```java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if(root==null){
+            return true;
+        }
+        return aremirror(root.left,root.right);           
+        
+    }
+    boolean aremirror(TreeNode t1,TreeNode t2){
+        if(t1==null && t2==null){
+            return true;
+        }
+        if(t1==null || t2==null){
+            return false;
+        }
+        if(t1.val!=t2.val){
+            return false;
+        }
+        return aremirror(t1.left,t2.right)&& aremirror(t1.right,t2.left);
+    }
+}
+
+```
+### 226. Invert Binary Tree
+```java
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if(root==null){
+            return root;
+        }
+        invertTree(root.left);
+        invertTree(root.right);
+        TreeNode temp=root.left;
+        root.left=root.right;
+        root.right=temp;
+        return root;
+        
+    }
+}
+```
+### 104. Maximum Depth of Binary Tree
+```java
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        if(root.left==null && root.right==null){
+            return 1;
+        }
+        int lst=maxDepth(root.left);
+        int rst=maxDepth(root.right);
+        return Math.max(lst,rst) +1;
+        
+    }
+}
+```
+### 872. Leaf-Similar Trees
+```java
+class Solution {
+   
+    void dfs(TreeNode root,List<Integer>q){
+       if(root==null) return;
+        if(root.left==null && root.right==null){
+            q.add(root.val);
+        }
+        dfs(root.left,q);
+        dfs(root.right,q);
+            }
+        public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+         List<Integer>q1=new ArrayList<>();
+    List<Integer>q2=new ArrayList<>();
+       dfs(root1,q1);
+      dfs(root2,q2);
+        return q1.equals(q2);
+        
+    }
+}
+```
+
 
 
