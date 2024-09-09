@@ -82,3 +82,78 @@ class Solution {
 }
 
 ```
+### job sequencing
+```java
+class Solution
+{
+    class compInt implements Comparator<Job>{
+        public int compare(Job a,Job b){
+            return b.profit-a.profit;
+        }
+    }
+    int[] JobScheduling(Job arr[], int n)
+    {
+        
+        Arrays.sort(arr,new compInt());
+        int maxdeadline=0;
+        for(Job i:arr){
+            maxdeadline=Math.max(maxdeadline,i.deadline);
+        }
+        int []temp=new int[maxdeadline];
+        int total=0;int count=0;
+        for(int i=0;i<n;i++){
+            int j=Math.min(maxdeadline,arr[i].deadline)-1;
+            while(j>=0){
+                if(temp[j]==0){
+                    temp[j]=arr[i].profit;
+                    total+=arr[i].profit;
+                    count++;
+                    break;
+                }
+                j--;
+            }
+        }
+        int []result=new int[2];
+        result[0]=count;
+        result[1]=total;
+        return result;
+    }
+}
+
+/*
+class Job {
+    int id, profit, deadline;
+    Job(int x, int y, int z){
+        this.id = x;
+        this.deadline = y;
+        this.profit = z; 
+    }
+}
+*/
+```
+### minimum platforms
+```java
+class Solution {
+    
+    static int findPlatform(int arr[], int dep[]) {
+        int n=arr.length;
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+        int platform=1,maxplat=1, i=1,j =0;
+        while(i<n && j<n){
+            if(arr[i]<=dep[j]){
+                platform++;
+                i++;
+            }
+            else{
+                    platform--;
+                    j++;
+                }
+                maxplat=Math.max(maxplat,platform);
+            
+        }
+        return maxplat;
+    }
+}
+
+```
