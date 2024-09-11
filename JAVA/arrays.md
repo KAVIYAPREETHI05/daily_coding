@@ -74,6 +74,26 @@ class Solution {
     }
 }
 ```
+### 503. Next Greater Element II
+```java
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int n=nums.length;
+        int[] res=new int[n];
+        Arrays.fill(res,-1);
+       Stack <Integer> s=new Stack<>();
+       for(int i=0;i<2*n;i++){
+        if(!s.isEmpty() && nums[s.peek()]<nums[i%n]){
+            res[s.pop()]=nums[i%n];
+        }
+        if(i<n){
+            s.push(i);
+        }
+       }
+       return res;
+    }
+}
+```
 ### 739. Daily Temperatures
 ```java
 //time limit exceeded
