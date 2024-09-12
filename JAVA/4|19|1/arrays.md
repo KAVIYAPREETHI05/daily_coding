@@ -1,83 +1,4 @@
-### Find the largest three distinct elements in an array
-The idea is to keep track of the largest three distinct element while traversing the array. If an element is greater than the first largest element, we update the first largest as well as the second largest and also third.
 
-Else if an element is larger than second largest but smaller than first largest, then we update the second largest as well as third largest. 
-
-Else if an element is larger than third largest but smaller than first smaller than second largest then we update third only.
-
-```java
-import java.util.*;
-class Sample
-{
-	public static void main(String[] args){
-		Scanner s=new Scanner(System.in);
-		int n=s.nextInt();
-		int arr[]=new int[n];
-		
-		for(int i=0;i<n;i++){
-			 arr[i]=s.nextInt();
-		}
-		int first=arr[0]; int second =Integer.MIN_VALUE; int third =Integer.MIN_VALUE;
-		for(int i=1;i<n;i++){
-			if(arr[i]>first){
-				third=second;
-				second=first;
-				first=arr[i];
-			}
-			else if(arr[i]>second && arr[i]<first ){
-				third=second;
-				second=arr[i];
-			}
-			else if(arr[i]>third && arr[i]<second){
-				third=arr[i];
-			}
-			
-		}
-		System.out.println(first + ".." + second +".." + third);
-	}
-}
-```
-### second largest
-The idea is to keep track of the largest and second largest element while traversing the array. If an element is greater than the largest element, we update the largest as well as the second largest.
-Else if an element is smaller than largest but greater than second largest, then we update the second largest only.
-
-```java
-import java.util.*;
-class Sample
-{
-	public static void main(String[] args){
-		Scanner s=new Scanner(System.in);
-		int n=s.nextInt();
-		
-		if(n<2){
-			return;
-		}
-		int arr[]=new int[n];
-		for(int i=0;i<n;i++){
-			 arr[i]=s.nextInt();
-		}
-		int first=arr[0]; int second =Integer.MIN_VALUE; 
-		for(int i=1;i<n;i++){
-			if(arr[i]>first){
-				second=first;
-				first=arr[i];
-			}
-			else if(arr[i]>second && arr[i]<first ){
-				second=arr[i];
-			}
-			
-			
-		}
-		if(second==Integer.MIN_VALUE){
-			System.out.println("second element does not exit");
-		}
-		else {
-			System.out.println( second );
-		}
-		
-	}
-}
-```
 ### move all zero's to end
 Traverse through the array if the element is not equal to 0, add them along in the track of array of j(non-element).
 
@@ -186,3 +107,103 @@ class Sample
 	}
 }
 ```
+### array leaders
+```java
+
+class Solution {
+   
+    static ArrayList<Integer> leaders(int n, int arr[]) {
+        
+        ArrayList<Integer>temp=new ArrayList<>();
+        int last=arr[n-1];
+        temp.add(arr[n-1]);
+        for(int i=n-2;i>=0;i--){
+            if(arr[i]>=last){
+                last=arr[i];
+                temp.add(arr[i]);
+            }
+        }
+        Collections.reverse(temp);
+        return temp;
+    }
+}
+```
+### Equilibrium Point
+```java
+class Solution {
+    public static int equilibriumPoint(long arr[]) {
+        int n=arr.length;
+        if(n==1){
+            return 1;
+        }
+        int total=0;
+       for(int i=0;i<n;i++){
+           total+=arr[i];
+       }
+       int leftsum=0;
+       for(int i=0;i<n;i++){
+           if(leftsum==total-leftsum-arr[i]){
+               return i+1;
+           }
+           leftsum+=arr[i];
+           
+       }
+       return -1;
+    }
+}
+```
+### Sort 0s, 1s and 2s or Dutch National Flag
+```java
+//User function template for Java
+
+    class Solution
+    {
+        public static void sort012(int a[], int n)
+        {
+            // code here 
+            Arrays.sort(a);
+        }
+    }
+```
+or
+```java
+// using arraylist
+import java.util.ArrayList;
+import java.util.Collections;
+
+class Solution {
+
+    // Function to swap elements in the ArrayList
+    public void swap(ArrayList<Integer> arr, int i, int j) {
+        int temp = arr.get(i);
+        arr.set(i, arr.get(j));
+        arr.set(j, temp);
+    }
+
+    // Function to sort the array of 0, 1, and 2
+    public void sort012(ArrayList<Integer> arr) {
+        int low = 0, mid = 0, high = arr.size() - 1;
+
+        // Dutch National Flag algorithm
+        while (mid <= high) {
+            switch (arr.get(mid)) {
+                case 0:
+                    swap(arr, low, mid);
+                    low++;
+                    mid++;
+                    break;
+                case 1:
+                    mid++;
+                    break;
+                case 2:
+                    swap(arr, mid, high);
+                    high--;
+                    break;
+            }
+        }
+    }
+}
+
+```
+
+
