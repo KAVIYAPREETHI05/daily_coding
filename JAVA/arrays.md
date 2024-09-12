@@ -150,3 +150,85 @@ class Solution {
 }
 
 ```
+### move zeros
+```java
+class Solution {
+    void swap(int[] nums,int i,int start){
+        int temp=nums[i];
+        nums[i]=nums[start];
+        nums[start]=temp;
+    }
+    public void moveZeroes(int[] nums) {
+        int n=nums.length;
+        int start=0;
+        for(int i=0;i<n;i++){
+            if(nums[i]!=0){
+                swap(nums,i,start);
+                 start++;
+
+            }
+           
+        }
+     
+    }
+}
+```
+### valid parenthesis
+```java
+class Solution {
+    public boolean checkValidString(String s) {
+        int low = 0; 
+        int high = 0; 
+
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                low++;
+                high++;
+            } else if (c == ')') {
+                low = Math.max(low - 1, 0); 
+                high--;
+            } else if (c == '*') {
+                // '*' can be '(', ')' or empty
+                low = Math.max(low - 1, 0); // Treat '*' as ')' or empty
+                high++; // Treat '*' as '('
+            }
+
+            if (high < 0) {
+                return false;
+            }
+        }
+
+        return low == 0;
+    }
+}
+
+```
+### 482. license key formatting
+```java
+class Solution {
+    public String licenseKeyFormatting(String s, int k) {
+        StringBuilder cleaned = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (c != '-') {
+                cleaned.append(Character.toUpperCase(c));
+            }
+        }
+        
+        if (cleaned.length() == 0) {
+            return "";
+        }
+
+        StringBuilder result = new StringBuilder();
+        int length = cleaned.length();
+        
+        int firstGroupLength = length % k == 0 ? k : length % k;
+        result.append(cleaned.substring(0, firstGroupLength));
+        
+        for (int i = firstGroupLength; i < length; i += k) {
+            result.append("-").append(cleaned.substring(i, Math.min(i + k, length)));
+        }
+        
+        return result.toString();
+    }
+}
+```
