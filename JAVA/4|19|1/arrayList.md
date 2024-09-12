@@ -1,4 +1,8 @@
-### Sort 0s, 1s and 2s or Dutch National Flag
+## 1. Dutch National Flag
+- `0` → Red
+- `1` → White
+- `2` → Blue
+### Sort 0s, 1s and 2s 
 ```java
 class Solution {
   
@@ -24,4 +28,44 @@ class Solution {
     }
     }
 }
+//reversing image section
 ```
+### reverse array in groups
+```java
+class Solution {
+
+    void reverseInGroups(ArrayList<Long> arr, int k) {
+        int n=arr.size();
+            for (int i = 0; i < n; i += k) {
+            int start = i;
+            int end = Math.min(i + k - 1, n - 1);
+            Collections.reverse(arr.subList(start, end + 1));
+        }
+    }
+}
+
+```
+```java
+class Solution {
+    private void reverseRange(ArrayList<Long>arr,int start,int end){
+        while(start<end){
+            Long temp=arr.get(start);
+            arr.set(start,arr.get(end));
+            arr.set(end,temp);
+            start++;
+            end--;
+        }
+    }
+
+    void reverseInGroups(ArrayList<Long> arr, int k) {
+        int n=arr.size();
+            for (int i = 0; i < n; i += k) {
+            int start = i;
+            int end = Math.min(i + k - 1, n - 1);
+            reverseRange(arr,start,end);
+        }
+    }
+}
+//encryption
+```
+
