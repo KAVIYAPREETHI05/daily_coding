@@ -1,46 +1,81 @@
-### array leaders
-```java
+### Find the largest three distinct elements in an array
+The idea is to keep track of the largest three distinct element while traversing the array. If an element is greater than the first largest element, we update the first largest as well as the second largest and also third.
 
-class Solution {
-   
-    static ArrayList<Integer> leaders(int n, int arr[]) {
-        
-        ArrayList<Integer>temp=new ArrayList<>();
-        int last=arr[n-1];
-        temp.add(arr[n-1]);
-        for(int i=n-2;i>=0;i--){
-            if(arr[i]>=last){
-                last=arr[i];
-                temp.add(arr[i]);
-            }
-        }
-        Collections.reverse(temp);
-        return temp;
-    }
+Else if an element is larger than second largest but smaller than first largest, then we update the second largest as well as third largest. 
+
+Else if an element is larger than third largest but smaller than first smaller than second largest then we update third only.
+
+```java
+import java.util.*;
+class Sample
+{
+	public static void main(String[] args){
+		Scanner s=new Scanner(System.in);
+		int n=s.nextInt();
+		int arr[]=new int[n];
+		
+		for(int i=0;i<n;i++){
+			 arr[i]=s.nextInt();
+		}
+		int first=arr[0]; int second =Integer.MIN_VALUE; int third =Integer.MIN_VALUE;
+		for(int i=1;i<n;i++){
+			if(arr[i]>first){
+				third=second;
+				second=first;
+				first=arr[i];
+			}
+			else if(arr[i]>second && arr[i]<first ){
+				third=second;
+				second=arr[i];
+			}
+			else if(arr[i]>third && arr[i]<second){
+				third=arr[i];
+			}
+			
+		}
+		System.out.println(first + ".." + second +".." + third);
+	}
 }
 ```
-### Equilibrium Point
+### second largest
+The idea is to keep track of the largest and second largest element while traversing the array. If an element is greater than the largest element, we update the largest as well as the second largest.
+Else if an element is smaller than largest but greater than second largest, then we update the second largest only.
+
 ```java
-class Solution {
-    public static int equilibriumPoint(long arr[]) {
-        int n=arr.length;
-        if(n==1){
-            return 1;
-        }
-        int total=0;
-       for(int i=0;i<n;i++){
-           total+=arr[i];
-       }
-       int leftsum=0;
-       for(int i=0;i<n;i++){
-           if(leftsum==total-leftsum-arr[i]){
-               return i+1;
-           }
-           leftsum+=arr[i];
-           
-       }
-       return -1;
-    }
+import java.util.*;
+class Sample
+{
+	public static void main(String[] args){
+		Scanner s=new Scanner(System.in);
+		int n=s.nextInt();
+		
+		if(n<2){
+			return;
+		}
+		int arr[]=new int[n];
+		for(int i=0;i<n;i++){
+			 arr[i]=s.nextInt();
+		}
+		int first=arr[0]; int second =Integer.MIN_VALUE; 
+		for(int i=1;i<n;i++){
+			if(arr[i]>first){
+				second=first;
+				first=arr[i];
+			}
+			else if(arr[i]>second && arr[i]<first ){
+				second=arr[i];
+			}
+			
+			
+		}
+		if(second==Integer.MIN_VALUE){
+			System.out.println("second element does not exit");
+		}
+		else {
+			System.out.println( second );
+		}
+		
+	}
 }
 ```
 ### 496. Next Greater Element I
