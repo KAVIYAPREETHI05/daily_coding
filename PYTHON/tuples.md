@@ -31,6 +31,9 @@ print(type1_tuple)#(1, 2, 3, 'h', 'hello')
 
 type2_tuple=1,2,3,'k',"sky"
 print(type2_tuple)#(1, 2, 3, 'h', 'hello')
+
+l = (1,2,3)
+print('this is tuple{0}'.format(l))
 ```
 ### pack and unpack
 ```py
@@ -126,10 +129,51 @@ res_dict=dict((y,x) for  x,y in tupleA)
 print(res_dict)
 ```
 ###  Unzip a list of tuples into individual lists
+```py
 l=[(2,3),(5,6),(9,8)]
 
 result=list(zip(*l))
 print(result)
 #[(1, 3, 8), (2, 4, 9)] 
+```
+### reverse tuple
+```py
+t=(1,2,3,4)
+r=reversed(t)
+print(tuple(r))
+```
+```py
+t=(1,2,3,4)
+r=t[::-1]
+print(r)
+```
+### Converting a list of tuples into a dictionary
+```py
+l = [("x", 1), ("x", 2), ("x", 3), ("y", 1), ("y", 2), ("z", 1)]
+d={}
+for a,b in l:
+    d.setdefault(a,[]).append(b)
+print(d)
+```
+### Replace last value of tuples in a list
+```py
+l =  [(10, 20, 40), (40, 50, 60), (70, 80, 90)]
+
+print([t[:-1]+(1000,) for t in l])
+```
+### Remove an empty tuple(s) from a list of tuples
+
+In Python, the following are considered falsy:
+- None
+- False
+- 0 (or 0.0)
+- Empty sequences: [], (), '', {}
+  
+```py
+l = [(), (), ('',), ('a', 'b'), ('a', 'b', 'c'), ('d')]
+
+l=[x for x in l if x]
+print(l)
+#[('',), ('a', 'b'), ('a', 'b', 'c'), 'd']
 ```
 
