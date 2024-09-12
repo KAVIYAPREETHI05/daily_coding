@@ -205,5 +205,61 @@ class Solution {
 }
 
 ```
+### Convert array into Zig-Zag fashion
+- For even indices: The element should be less than the next element.
+- For odd indices: The element should be greater than the next element.
 
+```java
+class Solution {
+    static void swap(int[]arr,int num1,int num2){
+        int temp=arr[num1];
+        arr[num2]=arr[num1];
+        arr[num1]=temp;
+    }
+    public static void zigZag(int n, int[] arr) {
+        // code here
+        for(int i=0;i<n-1;i++){
+            if(i%2==0){
+                if(arr[i]>arr[i+1]){
+                    swap(arr,i,i+1);
+                }
+                
+            }
+            if(i%2!=0){
+                if(arr[i]<arr[i+1]){
+                    swap(arr,i,i+1);
+                }
+                
+            }
+        }
+    }
+}
+//pattern generating
+```
+### Rearrange Array Alternately
+```java
+// data shuffling,tabluar col ui
+public static void rearrange(long arr[], int n){
+        
+       long[]temp=new long[n];
+       int evenidx=0;int oddidx=1;
+       int start=0;int end=n-1;
+       while(start<=end){
+           if(evenidx<n){
+               temp[evenidx]=arr[end--];
+               evenidx+=2;
+               }
+           if(oddidx<n){
+               temp[oddidx]=arr[start++];
+               oddidx+=2;
+                }
+      
+    }
+    for(int i=0;i<n;i++){
+        arr[i]=temp[i];
+    }
+    
+}
+}
+```
 
