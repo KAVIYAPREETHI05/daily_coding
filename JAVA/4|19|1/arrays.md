@@ -262,4 +262,19 @@ public static void rearrange(long arr[], int n){
 }
 }
 ```
+### Missing in Array
+```java
+class Solution {
 
+    // Note that the size of the array is n-1
+    int missingNumber(int n, int arr[]) {
+int arr_total=0;
+int len=arr.length;
+        for(int i=0;i<len;i++){
+            arr_total+=arr[i];
+        }
+        int actual_sum=n*(n+1)/2;
+        return actual_sum-arr_total;
+    }
+}
+```
