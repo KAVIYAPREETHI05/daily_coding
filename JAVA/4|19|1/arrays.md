@@ -484,4 +484,195 @@ return totalwater;
 }
 }
 ```
+### Minimum Platforms
+```java
 
+class Solution {
+    
+    static int findPlatform(int arr[], int dep[]) {
+        int n=arr.length;
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+        int platform=1,maxplat=1, i=1,j =0;
+        while(i<n && j<n){
+            if(arr[i]<=dep[j]){
+                platform++;
+                i++;
+            }
+               
+                else{
+                    platform--;
+                    j++;
+                }
+                maxplat=Math.max(maxplat,platform);
+            
+        }
+        return maxplat;
+    }
+}
+```
+### Best time to buy and sell
+```java
+
+class Solution {
+    // Function to find the days of buying and selling stock for max profit.
+    ArrayList<ArrayList<Integer>> stockBuySell(int arr[], int n) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        
+        int i = 0;
+        while (i < n - 1) {
+            while ((i < n - 1) && (arr[i + 1] <= arr[i])) {
+                i++;
+            }
+            
+            if (i == n - 1) {
+                break;
+            }
+            
+            int buy = i++;
+            
+            while ((i < n) && (arr[i] >= arr[i - 1])) {
+                i++;
+            }
+            
+            int sell = i - 1;
+            ArrayList<Integer> transaction = new ArrayList<>();
+            transaction.add(buy);
+            transaction.add(sell);
+            result.add(transaction);
+        }
+        
+        return result;
+    }
+}
+```
+### Largest Number formed from an Array
+```java
+
+class Solution {
+    String printLargest(int n, String[] arr) {
+        StringBuilder temp=new StringBuilder();
+        Arrays.sort(arr,new Comparator<String>(){
+            public int compare(String a,String b){
+                String order1=a+b;
+                String order2=b+a;
+                return order2.compareTo(order1);
+            }
+        });
+        if(arr[0].equals("0")){
+            return "0";
+        }
+        for(int i=0;i<arr.length;i++){
+            temp.append(arr[i]);
+        }
+        return temp.toString();
+        
+    }
+}
+```
+###
+```java
+// time limit exceeded
+class GfG {
+    int maxLen(int arr[], int n) {
+        int maxLen = 0; // Initialize the maximum length of subarray
+        
+        // Loop to traverse all subarrays
+        for (int i = 0; i < n; i++) {
+            int sum = 0; // Initialize sum for current subarray
+            
+            // Check every subarray starting from i
+            for (int j = i; j < n; j++) {
+                sum += arr[j]; // Add current element to sum
+                
+                // If the sum is zero, update maxLen
+                if (sum == 0) {
+                    maxLen = Math.max(maxLen, j - i + 1);
+                }
+            }
+        }
+        
+        return maxLen; // Return the maximum length found
+    }
+}
+
+```
+or
+```java
+class GfG {
+    int maxLen(int arr[], int n) {
+        // HashMap to store sum of elements so far
+        HashMap<Integer, Integer> sumMap = new HashMap<>();
+        
+        int sum = 0; // Initialize the sum of elements
+        int maxLen = 0; // Initialize the max length of subarray
+        
+        // Traverse through the given array
+        for (int i = 0; i < n; i++) {
+            sum += arr[i]; // Add current element to sum
+            
+            // If the sum is zero, update maxLen to i + 1
+            if (sum == 0) {
+                maxLen = i + 1;
+            }
+            
+            // If this sum has been seen before, a subarray with zero sum exists
+            if (sumMap.containsKey(sum)) {
+                // Update maxLen if we find a longer subarray
+                maxLen = Math.max(maxLen, i - sumMap.get(sum));
+            } else {
+                // Store sum with the index if it's not already present
+                sumMap.put(sum, i);
+            }
+        }
+        
+        return maxLen; // Return the maximum length found
+    }
+}
+```
+### Swapping pairs make sum equal
+
+```java
+import java.util.HashSet;
+
+class Solution {
+    long findSwapValues(long a[], int n, long b[], int m) {
+        long sumA = 0, sumB = 0;
+        
+        // Calculate the sum of elements in array a[] and b[]
+        for (int i = 0; i < n; i++) {
+            sumA += a[i];
+        }
+        for (int i = 0; i < m; i++) {
+            sumB += b[i];
+        }
+        
+        // If the difference between the sums is odd, return -1
+        long diff = sumB - sumA;
+        if (diff % 2 != 0) {
+            return -1;
+        }
+        
+        // Calculate the target difference
+        long target = diff / 2;
+        
+        // Store elements of array b[] in a set for fast lookup
+        HashSet<Long> setB = new HashSet<>();
+        for (int i = 0; i < m; i++) {
+            setB.add(b[i]);
+        }
+        
+        // Try to find a pair (x, y) such that y - x = target
+        for (int i = 0; i < n; i++) {
+            long x = a[i];
+            long y = x + target;
+            if (setB.contains(y)) {
+                return 1; // Pair found
+            }
+        }
+        
+        return -1; // No pair found
+    }
+}
+
+```
