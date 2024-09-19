@@ -394,3 +394,94 @@ class Solution {
 }
 
 ```
+### Kadane's Algorithm
+```java
+class Solution {
+ int maxSubarraySum(int[] arr) {
+        int n=arr.length;
+        int max_sum=Integer.MIN_VALUE;
+         int  curr_sum=0;
+        for(int i=0;i<n;i++){
+          
+                curr_sum+=arr[i];
+                if(curr_sum>max_sum){
+                    max_sum=curr_sum;
+                }
+                 if (curr_sum < 0) {
+                curr_sum = 0;
+            }//-79 -68 -18 -58 25 52 -68 -30 6 10
+            
+            
+        }
+        return max_sum;
+    }
+}
+//stock price and temperature analysis
+```
+### Indexes of Subarray Sum(sliding window approach)
+```java
+class Solution {
+    public static ArrayList<Integer> subarraySum(int[] arr, int n, int s) {
+        ArrayList<Integer>temp=new ArrayList<>();
+        int arr_sum=0;int start=0;int i;
+        for( i=0;i<n;i++){
+            arr_sum+=arr[i];
+            while(arr_sum>s && start<i){
+            arr_sum-=arr[start];
+            start++;
+          
+        }
+        if(arr_sum==s){
+            temp.add(start+1);
+            temp.add(i+1);
+            return temp;
+        }
+       
+        }
+        
+         
+            temp.add(-1);
+        
+        
+        return temp;
+    }
+//transaction fraud detection
+```
+### Trapping Rain Water
+```java
+class Solution {
+
+    
+    static long trappingWater(int arr[]) {
+        int n = arr.length;
+        if (n <= 2) {
+            return 0;  
+        }
+int left=0;int right=n-1;
+int left_max=0;int right_max=0;
+long totalwater=0;
+while(left<=right){
+    if(arr[left]<=arr[right]){
+        if(arr[left]>=left_max){
+            left_max=arr[left];
+        }
+        else{
+            totalwater+=left_max-arr[left];
+        }
+        left++;
+    }
+    else{
+        if(arr[right]>=right_max){
+            right_max=arr[right];
+        }
+        else{
+            totalwater+=right_max-arr[right];
+        }
+        right--;
+    }
+}
+return totalwater;
+}
+}
+```
+
