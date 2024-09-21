@@ -267,3 +267,36 @@ class Solution {
     }
 }
 ```
+### most occurrence
+```java
+import java.util.*;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        String str=scan.nextLine();
+        int n=str.length();
+        int []temp=new int[26];
+        
+        for(int i=0;i<n;i++){
+            char letter=Character.toLowerCase(str.charAt(i));
+            if(letter>='a' && letter<='z'){
+                int idx=letter-'a';
+                temp[idx]++;
+            }
+        
+            
+        }
+        int max=0;char maxChar=' ';
+        for(int i=0;i<26;i++){
+            if(temp[i]>max){
+                max=temp[i];
+                maxChar=(char)(i+'a');
+            }
+        }
+        
+        System.out.println(maxChar);
+        
+    }
+}
+```
