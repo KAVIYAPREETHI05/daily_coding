@@ -300,3 +300,80 @@ class HelloWorld {
     }
 }
 ```
+### valid time or not
+```java
+import java.util.Scanner;
+
+public class TimeValidator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter time (HH:mm:ss): ");
+        String time = scanner.nextLine();
+        
+        if (isValidTime(time)) {
+            System.out.println("Valid time");
+        } else {
+            System.out.println("Invalid time");
+        }
+    }
+
+    public static boolean isValidTime(String time) {
+        if (!time.matches("\\d{2}:\\d{2}:\\d{2}")) {
+            return false;
+        }
+        
+        String[] parts = time.split(":");
+        int hours = Integer.parseInt(parts[0]);
+        int minutes = Integer.parseInt(parts[1]);
+        int seconds = Integer.parseInt(parts[2]);
+
+        return (hours >= 0 && hours < 24) && 
+               (minutes >= 0 && minutes < 60) && 
+               (seconds >= 0 && seconds < 60);
+    }
+}
+
+```
+### verion check
+```java
+import java.util.Scanner;
+
+public class VersionCompare {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter version 1: ");
+        String v1 = scanner.nextLine();
+        
+        System.out.print("Enter version 2: ");
+        String v2 = scanner.nextLine();
+        
+        int result = compare(v1, v2);
+        if (result == 0) {
+            System.out.println("Both are equal");
+        } else if (result > 0) {
+            System.out.println("v1 is greater than v2");
+        } else {
+            System.out.println("v1 is less than v2");
+        }
+    }
+
+    public static int compare(String v1, String v2) {
+        String[] parts1 = v1.split("\\.");
+        String[] parts2 = v2.split("\\.");
+        
+        int length = Math.max(parts1.length, parts2.length);
+        
+        for (int i = 0; i < length; i++) {
+            int num1 = i < parts1.length ? Integer.parseInt(parts1[i]) : 0;
+            int num2 = i < parts2.length ? Integer.parseInt(parts2[i]) : 0;
+            
+            if (num1 > num2) return 1;
+            if (num1 < num2) return -1;
+        }
+        
+        return 0;
+    }
+}
+
+```
