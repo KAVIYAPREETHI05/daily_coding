@@ -198,3 +198,160 @@ class Solution {
 }
 
 ```
+### Implement Atoi
+```java
+class Solution {
+    public int atoi(String input) {
+       
+        try {
+            int output = Integer.parseInt(input);
+            return output;  // Output will be -123
+        } catch (NumberFormatException e) {
+            return-1; // Handle invalid input
+        }
+    }
+}
+```
+### Implement strstr
+```java
+class GfG
+{
+    //Function to locate the occurrence of the string x in the string s.
+    int strstr(String s, String x)
+    {
+        int index=s.indexOf(x);
+       if(index!=-1)
+       return index;
+       return -1;
+    }
+}
+```
+### Search Pattern (Rabin-Karp Algorithm)
+```java
+class Solution
+{
+    
+    ArrayList<Integer> search(String pattern, String text)
+    {
+        int n=text.length();
+        int m=pattern.length();
+         ArrayList<Integer>temp=new ArrayList<>();
+    
+    for(int i=0;i<=n-m;i++){
+        if(text.substring(i,i+m).equals(pattern)){
+            temp.add(i+1);
+        }
+    }
+    
+         return temp;
+    }
+}
+```
+### Longest Prefix Suffix   KMP (Knuth-Morris-Pratt)
+```java
+//time limit exceeded
+class Solution {
+    int lps(String str) {
+        int n=str.length();
+        
+        for(int i=n-1;i>=0;i--){
+            String prefix=str.substring(0,i);
+            String suffix=str.substring(n-i);
+            if(prefix.equals(suffix)){
+                return prefix.length();
+            }
+            
+        }
+        
+        return 0;
+        
+    }
+}
+```
+```java
+class Solution {
+    int lps(String str) {
+        int n = str.length();
+        int[] lps = new int[n];
+        
+        int len = 0; 
+        int i = 1;
+
+        while (i < n) {
+            if (str.charAt(i) == str.charAt(len)) {
+                len++;
+                lps[i] = len;
+                i++;
+            } else {
+                if (len != 0) {
+                    len = lps[len - 1]; 
+                } else {
+                    lps[i] = 0;
+                    i++;
+                }
+            }
+        }
+
+        return lps[n - 1];
+    }
+}
+```
+### Longest Common Prefix of Strings
+```java
+class Solution {
+    public String longestCommonPrefix(String arr[]) {
+        // code here
+        if(arr==null || arr.length==0){
+            return "-1";
+        }
+        String prefix=arr[0];
+        for(int i=1;i<arr.length;i++){
+            while(arr[i].indexOf(prefix)!=0){
+                prefix=prefix.substring(0,prefix.length()-1);
+                
+                if(prefix.isEmpty()){
+                    return "-1";
+                }
+                
+            }
+        }
+        return prefix;
+    }
+}
+```
+### uncommon characters
+```java
+class Solution
+{
+    String UncommonChars(String A, String B)
+    {int n=A.length();
+    int m=B.length();
+        int []temp=new int[26];
+        for(int i=0;i<n;i++){
+                temp[A.charAt(i)-'a']=1;
+            
+            
+        }
+        for(int i=0;i<m;i++){
+            if(temp[B.charAt(i)-'a']==0){
+                temp[B.charAt(i)-'a']=2;
+            }
+            else if(temp[B.charAt(i)-'a']==1){
+                temp[B.charAt(i)-'a']=-1;
+            }
+            
+        }
+        StringBuilder newstr=new StringBuilder();
+        for(int i=0;i<26;i++){
+            if(temp[i]==1 || temp[i]==2 ){
+                newstr.append((char)(i+'a'));
+            }
+        }
+        if(newstr.length()==0){
+            return "-1";
+        }
+        return newstr.toString();
+        
+    }
+}
+```
