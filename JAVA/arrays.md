@@ -377,3 +377,92 @@ public class VersionCompare {
 }
 
 ```
+### count words in string
+```java
+import java.util.Scanner;
+
+public class WordCount {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+        
+        int wordCount = countWords(input);
+        System.out.println("Number of words: " + wordCount);
+    }
+
+    public static int countWords(String str) {
+        // Trim the string to remove leading and trailing spaces
+        str = str.trim();
+        
+        // Check for empty string
+        if (str.isEmpty()) {
+            return 0;
+        }
+        
+        // Split the string based on one or more spaces
+        String[] words = str.split("\\s+");
+        return words.length;
+    }
+}
+
+```
+### count alpha,num,spl char
+```java
+import java.util.Scanner;
+
+public class CharacterCount {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+        
+        int alphaCount = 0;
+        int digitCount = 0;
+        int specialCount = 0;
+
+        for (char c : input.toCharArray()) {
+            if (Character.isLetter(c)) {
+                alphaCount++;
+            } else if (Character.isDigit(c)) {
+                digitCount++;
+            } else if (!Character.isWhitespace(c)) { // Exclude whitespace
+                specialCount++;
+            }
+        }
+
+        System.out.println("Number of alphabetic characters: " + alphaCount);
+        System.out.println("Number of digits: " + digitCount);
+        System.out.println("Number of special characters: " + specialCount);
+    }
+}
+
+```
+### sorting string
+```java
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class SortString {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+        
+        String sortedString = sortString(input);
+        System.out.println("Sorted string: " + sortedString);
+    }
+
+    public static String sortString(String str) {
+        // Convert string to character array
+        char[] charArray = str.toCharArray();
+        
+        // Sort the character array
+        Arrays.sort(charArray);
+        
+        // Convert sorted character array back to string
+        return new String(charArray);
+    }
+}
+
+```
