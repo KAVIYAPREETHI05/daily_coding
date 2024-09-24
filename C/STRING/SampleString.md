@@ -1,6 +1,7 @@
 ### 1.input a string and print it
 ```c
 //scanf-reads a string until the first whitespace character is encountered.
+
 #include<stdio.h>
 int main(){
     char s[100];
