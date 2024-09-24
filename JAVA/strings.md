@@ -724,7 +724,55 @@ class HelloWorld {
 }
 ```
 ### 33.Remove duplicate characters in a string input engineering output engir
-```c
+```java
+import java.util.*;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        String s=scan.nextLine();
+        String t=s.toLowerCase();
+        int n=s.length();
+        StringBuilder stb=new StringBuilder();
+        char[] charArray=t.toCharArray();
+        for(int i=0;i<n-1;i++){
+            if(charArray[i]!='0'){
+            stb.append(charArray[i]);
+                for(int j=i+1;j<n;j++){
+                if(charArray[i]==charArray[j]){
+                    charArray[j]='0';
+                }
+            }
+            }
+        }
+        System.out.println(stb.toString());
+            
+    }
+}
+(or)
+import java.util.*;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        String s=scan.nextLine();
+        String t=s.toLowerCase();
+        int n=s.length();
+        StringBuilder stb=new StringBuilder();
+        int [] temp=new int[26];
+        char[] charArray=t.toCharArray();
+        for(int i=0;i<n-1;i++){
+            char letter=charArray[i];
+            if(temp[letter-'a']==0){
+                stb.append(letter);
+              
+            }
+               temp[letter-'a']++;
+        }
+        System.out.println(stb.toString());
+        
+    }
+}
 ```
 ### 34.unique elements 
 ```c
@@ -756,23 +804,19 @@ int main(){
 }
 ```
 ### 35.Print the string replacing the space with given character -- input : string - "Hello World" replace :- "$" -- output : "Hello$World"
-```c
-#include<stdio.h>
-#include<string.h>
-#define MAX_LENGTH 100
+```java
+import java.util.*;
 
-int main(){
-   char s[MAX_LENGTH];
-   fgets(s,sizeof(s),stdin);
-   int i=0;
-  
-   while(s[i]!='\0'){
-      if(s[i]=='s' || s[i]=='S'){
-          s[i]='$';
-      }
-       i++;
-   }
-   printf("%s",s);
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        String s=scan.nextLine();
+        char o=scan.next().charAt(0);
+        char n=scan.next().charAt(0);
+       s=s.replace(o,n);
+        System.out.println(s);
+        
+    }
 }
 ```
 ### 36.Get number of words from user and get the words and print even positions words   
@@ -799,27 +843,7 @@ int main()
     return 0;
 }
 ```
-### 37.Remove the punctuations 
-```c
-#include <stdio.h>
-#include<string.h>
-#include<ctype.h>
 
-int main()
-{
-    char s[100];
-    fgets(s,sizeof(s),stdin);
-    int i=0;
-    while(s[i]!='\0'){
-        if(!ispunct(s[i])){
-            printf("%c",s[i]);
-        }
-        i++;
-    }
-
-    return 0;
-}
-```
 ### 38.Count the no of vowels
 ```c
 #include <stdio.h>
