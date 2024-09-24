@@ -1,94 +1,7 @@
-### count invertions
-```java
-//time limit exceeded
-class Solution {
-   
-    static long inversionCount(long arr[]) {
-        int n=arr.length;
-        long count=0;
-        for(int i=0;i<n-1;i++){
-            for(int j=i+1;j<n;j++){
-                if(arr[i]>arr[j] && i<j){
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
-}
-//tracking changes in rank,stock market
-```
-### Search in Rotated Sorted Array
-```java
-class Solution {
-    public int search(int[] arr, int target) {
-        int left = 0, right = arr.length - 1;
-        
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            
-           if(arr[mid]==target){
-               return mid;
-           }
-           if(arr[left]<=arr[mid]){
-               if(arr[left]<=target && target<arr[mid]){
-                   right=mid-1;
-               }
-               else{
-                   left=mid+1;
-               }
-               
-           }
-           else{
-               if(arr[mid]<target && target<=arr[right]){
-                   left=mid+1;
-               }
-               else{
-                   right=mid-1;
-               }
-               
-           }
-        }
-        return -1;
-    }
-}
-```
-### Kth Smallest
-```java
-class Solution {
-    public static int kthSmallest(int[] arr, int k) {
-        // Your code here
-        Arrays.sort(arr);
-        return arr[k-1];
-    }
-}
-```
-### binary search
-```java
-class Solution {
-    public int search(int[] nums, int target) {
-        if(nums==null || nums.length==0){
-            return 0;
-        }
-        int left=0;int right=nums.length-1;
-        while(left<=right){
-                    int mid=left+(right-left)/2;
 
-            if(nums[mid]==target){
-                return mid;
-            }
-            if(target<nums[mid]){
-                right=mid-1;
-            }
-            else if(target>nums[mid]){
-                left=mid+1;
-            }
-        }
-        return -1;
-        
-    }
-}
-```
+
+
+
 ### peak element
 ```java
 class Solution {
@@ -192,6 +105,191 @@ class Solution {
            }
         }
         return false;
+    }
+}
+```
+### binary search
+```java
+class Solution {
+    public int search(int[] nums, int target) {
+        if(nums==null || nums.length==0){
+            return 0;
+        }
+        int left=0;int right=nums.length-1;
+        while(left<=right){
+                    int mid=left+(right-left)/2;
+
+            if(nums[mid]==target){
+                return mid;
+            }
+            if(target<nums[mid]){
+                right=mid-1;
+            }
+            else if(target>nums[mid]){
+                left=mid+1;
+            }
+        }
+        return -1;
+        
+    }
+}
+```
+### quick sort
+```java
+class Solution
+{
+    //Function to sort an array using quick sort algorithm.
+    static void quickSort(int arr[], int low, int high)
+    {
+       if(low<high){
+        int pi=partition(arr,low,high);
+        quickSort(arr,low,pi-1);
+        quickSort(arr,pi+1,high);
+       }
+        
+    }
+    static int partition(int arr[], int low, int high)
+    {
+    int pivot=arr[high];
+    int pi=low-1;
+    for(int i=low;i<high;i++){
+        if(arr[i]<pivot){
+            swap(arr,i,++pi);
+        }
+    }
+    swap(arr,++pi,high);
+     return pi;
+    } 
+    static void swap(int [] arr,int a,int b){
+        int temp=arr[a];
+        arr[a]=arr[b];
+        arr[b]=temp;
+    }
+   
+}
+```
+### merge sort
+```java
+class Solution
+{
+    void merge(int nums[], int left, int mid, int right)
+    {
+        List<Integer>temp=new ArrayList<>();
+        
+         int l=left;int r=mid+1;
+         while(l<=mid && r<=right){
+             if(nums[l]<nums[r]){
+                 temp.add(nums[l++]);
+                 
+             }
+             else{
+                 temp.add(nums[r++]);
+             }
+         }
+         while(l<=mid){
+             temp.add(nums[l++]);
+         }
+         while(r<=right){
+             temp.add(nums[r++]);
+         }
+         for(int i=left;i<=right;i++){
+             nums[i]=temp.get(i-left);
+         }
+    }
+    void mergeSort(int arr[], int left, int right)
+    {
+        if(left<right){
+            int mid=(left+right)/2;
+            mergeSort(arr,left,mid);
+            mergeSort(arr,mid+1,right);
+            merge(arr,left,mid,right);
+        }
+    }
+}
+```
+### Merge Without Extra Space
+```java
+class Solution
+{
+    //Function to merge the arrays.
+    public static void merge(long arr1[], long arr2[], int n, int m) 
+    {
+        int i=n-1;int j=0;
+        while(i>=0 && j<m){
+            if(arr1[i]>arr2[j]){
+                long temp=arr1[i];
+                arr1[i]=arr2[j];
+                arr2[j]=temp;
+            }
+            i--;j++;
+        }
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+    }
+}
+```
+### count invertions
+```java
+//time limit exceeded
+class Solution {
+   
+    static long inversionCount(long arr[]) {
+        int n=arr.length;
+        long count=0;
+        for(int i=0;i<n-1;i++){
+            for(int j=i+1;j<n;j++){
+                if(arr[i]>arr[j] && i<j){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
+//tracking changes in rank,stock market
+```
+### Search in Rotated Sorted Array
+```java
+class Solution {
+    public int search(int[] arr, int target) {
+        int left = 0, right = arr.length - 1;
+        
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            
+           if(arr[mid]==target){
+               return mid;
+           }
+           if(arr[left]<=arr[mid]){
+               if(arr[left]<=target && target<arr[mid]){
+                   right=mid-1;
+               }
+               else{
+                   left=mid+1;
+               }
+               
+           }
+           else{
+               if(arr[mid]<target && target<=arr[right]){
+                   left=mid+1;
+               }
+               else{
+                   right=mid-1;
+               }
+               
+           }
+        }
+        return -1;
+    }
+}
+```
+### Kth Smallest
+```java
+class Solution {
+    public static int kthSmallest(int[] arr, int k) {
+        // Your code here
+        Arrays.sort(arr);
+        return arr[k-1];
     }
 }
 ```
