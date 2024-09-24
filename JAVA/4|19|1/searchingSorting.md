@@ -118,3 +118,81 @@ class Solution {
 }
 
 ```
+### 378. Kth Smallest Element in a Sorted Matrix
+```java
+class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int [] arr=new int[n*m];
+        int l=0;
+        arr= Arrays.stream(matrix).flatMapToInt(Arrays::stream).toArray();
+        Arrays.sort(arr);
+        return arr[k-1];
+
+}
+}
+```
+### 153. Find Minimum in Rotated Sorted Array
+```java
+class Solution {
+    public int findMin(int[] nums) {
+        int n=nums.length;
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<n;i++){
+            if(nums[i]<min){
+                min=nums[i];
+            }
+        }
+        return min;
+    }
+
+}
+```
+### 278. First Bad Version
+
+```java
+/* The isBadVersion API is defined in the parent class VersionControl.
+      boolean isBadVersion(int version); */
+
+public class Solution extends VersionControl {
+    public int firstBadVersion(int n) {
+        int left=1;int right=n;
+        while(left<right){
+            int mid=left+(right-left)/2;
+            if(isBadVersion(mid)){
+                right=mid;
+            }
+            else {
+                left=mid+1;
+
+            }
+           
+        }
+        return left;
+    }
+}
+```
+### 74. Search a 2D Matrix
+```java
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        for(int i=0;i<n;i++){
+           if(target<=matrix[i][m-1]){
+             for(int j=0;j<m;j++){
+                if(target==matrix[i][j]){
+                    return true;
+                }
+                
+
+            }
+
+           }
+        }
+        return false;
+    }
+}
+```
+
