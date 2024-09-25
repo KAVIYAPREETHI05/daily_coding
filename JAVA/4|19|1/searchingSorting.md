@@ -377,4 +377,97 @@ class Solution {
     }
 }
 ```
+### sort colors
+```java
+class Solution {
+     void swap(int nums[],int a,int b){
+        int temp=nums[a];
+        nums[a]=nums[b];
+        nums[b]=temp;
+    }
+    public void sortColors(int[] nums) {
+        int n=nums.length;
+        int left=0;int mid=0;int right=n-1;
+        while(mid<=right){
+            if(nums[mid]==0){
+                swap(nums,mid,left);
+                mid++;
+                left++;
+            }
+            else if(nums[mid]==1){
+                mid++;
+            }
+            else{
+                swap(nums,mid,right);
+                right--;
+            }
+        }
+        
+    }
+   
+}
+```
+### merge intervals
+```java
+class compInt implements Comparator<int[]>{
+    public int compare(int a[],int b[]){
+        return a[0]-b[0];
+    }
+}
+class Solution {
+    public int[][] merge(int[][] intervals) {
+       Arrays.sort(intervals,new compInt());
+       ArrayList<int[]>temp=new ArrayList<>();
+       int n=intervals.length;
+       for(int i=0;i<n;i++){
+        if(temp.isEmpty() || intervals[i][0]>temp.get(temp.size()-1)[1]){
+            temp.add(intervals[i]);
+        }
+        else{
+            temp.get(temp.size()-1)[1]=Math.max(intervals[i][1],temp.get(temp.size()-1)[1]);
+        }
 
+       }
+       return temp.toArray(new int[temp.size()][]);
+    }
+}
+  ```
+### largest number
+```java
+class Solution {
+    public String largestNumber(int[] nums) {
+        String[] str=new String[nums.length];
+        for(int i=0;i<nums.length;i++){
+            str[i]=String.valueOf(nums[i]);
+        }
+        Arrays.sort(str,new Comparator<String>(){
+            public int compare(String a,String b){
+                String str1=a+b;
+                String str2=b+a;
+                return str2.compareTo(str1);
+            }
+        });
+        if(str[0].equals("0")){
+            return "0";
+        }
+        StringBuilder stb=new StringBuilder();
+        for(int i=0;i<str.length;i++){
+            stb.append(str[i]);
+        }
+
+        return stb.toString();        
+    }
+}
+```
+### 215. Kth Largest Element in an Array
+
+```java
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        int n=nums.length;
+        Arrays.sort(nums);
+        return nums[n-k];
+        
+    }
+}
+```
