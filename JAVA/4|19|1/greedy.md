@@ -312,3 +312,20 @@ class Solution{
    
 }
 ```
+### Minimize the sum of product
+
+```java
+class Solution {
+    public long minValue(List<Integer> arr1, List<Integer> arr2) {
+        int n=arr1.size();
+        long sum=0;
+        Collections.sort(arr1,Collections.reverseOrder());
+        Collections.sort(arr2);
+        for(int i=0;i<n;i++){
+           int product=arr1.get(i)*arr2.get(i);
+            sum+=product;
+        }
+        return sum;
+    }
+}
+```
