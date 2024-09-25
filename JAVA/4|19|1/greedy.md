@@ -157,3 +157,158 @@ class Solution {
 }
 
 ```
+### activity selection
+```java
+class Solution
+{
+    //greedy about end
+    public static int activitySelection(int start[], int end[], int n)
+    {
+        int[][] temp=new int[n][2];
+        for(int i=0;i<n;i++){
+            temp[i][0]=start[i];
+            temp[i][1]=end[i];
+        }
+        
+        Arrays.sort(temp,new Comparator<int[]>(){
+            public int compare(int[]a,int[]b){
+                return Integer.compare(a[1], b[1]);
+            }
+        });
+        int count=1; int endnum=temp[0][1];
+        for(int i=1;i<n;i++){
+            if(temp[i][0]>endnum){
+                endnum=temp[i][1];
+                count++;
+            }
+        }
+        return count;
+    }
+}
+```
+### N meetings in one room
+```java
+class Solution {
+    // greedy about end time
+    public int maxMeetings(int n, int start[], int end[]) {
+        int[][] temp=new int[n][2];
+        for(int i=0;i<n;i++){
+            temp[i][0]=start[i];
+            temp[i][1]=end[i];
+        }
+        
+        Arrays.sort(temp,new Comparator<int[]>(){
+            public int compare(int[]a,int[]b){
+                return Integer.compare(a[1],b[1]);
+            }
+        });
+        int count=1;
+        int endTime=temp[0][1];
+        for(int i=1;i<n;i++){
+            if(temp[i][0]>endTime){
+                endTime=temp[i][1];
+                count++;
+            }
+        }
+        return count;
+    }
+}
+```
+### Maximize Toys
+```java
+class Solution{
+    static int toyCount(int n, int k, int arr[])
+    {
+        Arrays.sort(arr);
+        long sum=0;int count=0;
+        for(int i=0;i<n;i++){
+            sum+=arr[i];
+            if(sum<=k){
+                count++;
+            }
+        }
+        return count;
+    }
+}
+```
+### Page Faults in LRU
+```java
+class Solution{
+    static int pageFaults(int n, int c, int pages[]){
+        // code here
+        ArrayList<Integer>temp=new ArrayList<>();
+        //Set <Integer> pageSet=new HashSet<>();
+        int pageFaults=0;
+        for(int i=0;i<n;i++){
+            if(!temp.contains(pages[i])){
+                if(temp.size()==c){
+                   temp.remove(0);
+                   // pageSet.remove(lru);
+                    
+                }
+                temp.add(pages[i]);
+               // pageSet.add(pages[i]);
+                pageFaults++;
+            }
+            else{
+                temp.remove((Integer)pages[i]);
+                temp.add(pages[i]);
+            }
+            
+            
+        }
+        return pageFaults;
+    }
+}
+```
+### Largest number possible
+
+```java
+class Solution{
+    static String findLargest(int N, int S){
+       if(S==0)
+       return (N==1)?"0":"-1";
+       
+       if(S>N*9){
+           return "-1";
+       }
+       StringBuilder stb=new StringBuilder();
+       for(int i=0;i<N;i++){
+           int digit=Math.min(S,9);
+           stb.append(digit);
+           S-=digit;
+       }
+       return stb.toString();
+        
+        
+    }
+}
+```
+### Minimize the Heights II
+```java
+class Solution{
+    public static int getMinDiff(int[] arr,int k) {
+        int n=arr.length;
+        if (n == 1) {
+            return 0;
+        }
+        Arrays.sort(arr);
+        int ans = arr[n - 1] - arr[0];
+
+        int smallest = arr[0] + k;
+        int largest = arr[n - 1] - k;
+
+        for (int i = 0; i < n - 1; i++) {
+            int minHeight = Math.min(smallest, arr[i + 1] - k);
+            int maxHeight = Math.max(largest, arr[i] + k);
+            if (minHeight < 0) {
+                continue;
+            }
+            ans = Math.min(ans, maxHeight - minHeight);
+        }
+        return ans;
+    }
+
+   
+}
+```
