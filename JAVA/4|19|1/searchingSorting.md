@@ -1,7 +1,5 @@
 
-
-
-
+## searching
 ### peak element
 ```java
 class Solution {
@@ -134,6 +132,8 @@ class Solution {
     }
 }
 ```
+
+## sorting
 ### quick sort
 ```java
 class Solution
@@ -280,6 +280,90 @@ class Solution {
            }
         }
         return -1;
+    }
+}
+```
+### Sorting Elements of an Array by Frequency
+```java
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+   static void findFreq(int n,int[]arr){
+       Map<Integer,Integer>temp=new HashMap<>();
+       for(int i=0;i<n;i++){
+           temp.put(arr[i],temp.getOrDefault(arr[i],0)+1);
+       }
+       List<Integer> nums=new ArrayList<>();
+       for(int i=0;i<n;i++){
+           nums.add(arr[i]);
+       }
+       
+       Comparator<Integer> comp=new Comparator<Integer>(){
+           public int compare(Integer a,Integer b){
+               int freqA=temp.get(a);
+               int freqB=temp.get(b);
+               if(freqA==freqB){
+                   return Integer.compare(a,b);
+               }
+               else{
+                   return Integer.compare(freqB,freqA);
+               }
+           }
+       };
+       Collections.sort(nums,comp);
+       for(int i=0;i<n;i++){
+           System.out.print(nums.get(i)+" ");
+       }
+       System.out.println();
+    }
+	public static void main (String[] args) {
+	    Scanner scan=new Scanner(System.in);
+	    int t=scan.nextInt();
+	    while(t-->0){
+	        int n=scan.nextInt();
+	        int []arr=new int[n];
+	        for(int i=0;i<n;i++){
+	            arr[i]=scan.nextInt();
+	        }
+	        findFreq(n,arr);
+	    }
+		
+	}
+}
+```
+### Sum of Middle elements of two sorted arrays
+```java
+class Solution {
+    public int SumofMiddleElements(int[] arr1, int[] arr2) {
+        // code here
+        int i=0;int j=0;
+        int n=arr1.length;int m=arr2.length;
+        ArrayList<Integer>temp=new ArrayList<>();
+        while(i<n && j<m){
+            if(arr1[i]<arr2[j]){
+                temp.add(arr1[i]);
+                i++;
+            }
+            else{
+                temp.add(arr2[j]);
+                j++;
+            }
+            
+        }
+        while(i<n){
+            temp.add(arr1[i]);
+            i++;
+        }
+        while(j<m){
+            temp.add(arr2[j]);
+            j++;
+        }
+        int left=0;int right=temp.size()-1;
+        int mid=(left+right)/2;
+        
+        return temp.get(mid)+temp.get(mid+1);
     }
 }
 ```
