@@ -471,3 +471,100 @@ class Solution {
     }
 }
 ```
+### insert interval
+```java
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newIntervals) {
+        ArrayList<int[]> temp=new ArrayList<>();
+        int i=0;int n=intervals.length;
+        while(i<n && intervals[i][1]<newIntervals[0]){
+            temp.add(intervals[i]);
+            i++;
+        }
+        while(i<n && intervals[i][0]<=newIntervals[1] ){
+            newIntervals[0]=Math.min(intervals[i][0],newIntervals[0]);
+            newIntervals[1]=Math.max(intervals[i][1],newIntervals[1]);
+            i++;
+        }
+        temp.add(newIntervals);
+        while(i<n){
+            temp.add(intervals[i]);
+            i++;
+        }
+        return temp.toArray(new int[temp.size()][]);
+        
+    }
+}
+```
+### 912. Sort an Array
+```java
+class Solution {
+    public int[] sortArray(int[] nums) {
+        Arrays.sort(nums);
+        return nums;
+        
+    }
+}
+```
+### 658. Find K Closest Elements
+
+```java
+class Solution {
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        ArrayList<Integer> temp=new ArrayList<>();       
+        int n=arr.length;
+        for(int i=0;i<n;i++){
+            temp.add(arr[i]);
+        }
+
+        Collections.sort(temp,new Comparator<Integer>(){
+            public int compare(Integer a,Integer b){
+                int num1=Math.abs(a-x);
+                int num2=Math.abs(b-x);
+                if(num1==num2){
+                    return Integer.compare(a,b);
+
+                }
+                return Integer.compare(num1,num2);
+            }
+        });
+                ArrayList<Integer> result=new ArrayList<>(temp.subList(0,k));  
+                Collections.sort(result);
+                return result;     
+
+
+    }
+}
+```
+### 347. Top K Frequent Elements
+
+```java
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer,Integer> temp=new HashMap<>();
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            
+                temp.put(nums[i],temp.getOrDefault(nums[i],0)+1);            
+        }
+         PriorityQueue<int[]> minHeap = new PriorityQueue<>((a, b) -> a[1] - b[1]); // Min-heap based on frequency
+
+        // Add all entries in the frequency map to the heap
+        for (int key : temp.keySet()) {
+            minHeap.offer(new int[]{key, temp.get(key)}); // Store key and its frequency
+            if (minHeap.size() > k) {
+                minHeap.poll(); // Remove the least frequent element
+            }
+        }
+
+        // Prepare the result array
+        int[] result = new int[k];
+        for (int i = k - 1; i >= 0; i--) {
+            result[i] = minHeap.poll()[0]; // Get the keys from the min-heap
+        }
+
+        return result; 
+    }
+}
+```
+
