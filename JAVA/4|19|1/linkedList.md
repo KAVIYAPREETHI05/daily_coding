@@ -550,3 +550,51 @@ class Solution {
     }
 }
 ```
+### Middle of a Linked List
+```java
+class Solution {
+    int getMiddle(Node head) {
+        // Your code here.
+        if(head==null){
+            return -1;
+        }
+        Node current=head;
+        int count=0;
+        
+        while(current!=null){
+            count++;
+            current=current.next;
+           
+        }
+        int middle=count/2;
+        current=head;
+        int index=0;
+        while(current!=null){
+            if(index==middle){
+                return current.data;
+            }
+            index++;
+            current=current.next;
+            
+        }
+        return -1;
+    }
+}
+```
+### reverse linked list
+```java
+class Solution {
+    Node reverseList(Node head) {
+        Node curr=head;
+        Node temp=null;
+        while(curr!=null){
+            curr=head.next;
+            head.next=temp;
+            temp=head;
+            head=curr;
+        }
+        return temp;
+    }
+}
+```
+### 
