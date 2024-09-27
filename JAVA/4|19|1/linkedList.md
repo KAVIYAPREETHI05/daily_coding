@@ -597,4 +597,48 @@ class Solution {
     }
 }
 ```
-### 
+### rotate linkedlist
+```java
+class Solution {
+    public Node rotate(Node head, int k) {
+    
+        if (head == null || head.next == null || k == 0) {
+            return head;
+        }
+
+        Node current = head;
+        int length = 1;
+        while (current.next != null) {
+            current = current.next;
+            length++;
+        }
+
+        k = k % length;
+        if (k == 0) {
+            return head;
+        }
+
+        current.next = head;
+
+        Node newTail = head;
+        for (int i = 0; i < k - 1; i++) {
+            newTail = newTail.next;
+        }
+
+        Node newHead = newTail.next;
+        
+        newTail.next = null;
+
+        return newHead;
+    }
+
+    public static void printList(Node head) {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+}
+```
