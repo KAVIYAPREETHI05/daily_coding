@@ -1,3 +1,4 @@
+
 ### Find the largest three distinct elements in an array
 The idea is to keep track of the largest three distinct element while traversing the array. If an element is greater than the first largest element, we update the first largest as well as the second largest and also third.
 
