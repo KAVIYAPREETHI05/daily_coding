@@ -241,3 +241,122 @@ int main() {
     return 0;
 }
 ```
+### missing element in array
+```c
+int missingNumber(int n, int arr[]) {
+
+    int total=0;
+    for(int i=0;i<n-1;i++){
+        total+=arr[i];
+    }
+    int sum_num=(n*(n+1))/2;
+    return sum_num-total;
+}
+```
+### kth element of two sorted array
+```c
+#include <stdio.h>
+#include<stdlib.h>
+
+void func(int n1,int n2,int arr[n1],int brr[n2],int r){
+    int m=n1+n2;
+   int * temp=(int *)malloc(m*sizeof(int));
+   int i=0;int j=0;int k=0;
+   while(i<n1 && j<n2){
+       if(arr[i]<brr[j]){
+           temp[k++]=arr[i++];
+       }
+       else{
+           temp[k++]=brr[j++];
+       }
+   }
+   while(i<n1){
+       temp[k++]=arr[i++];
+       
+   }
+   while(j<n2){
+       temp[k++]=brr[j++];
+   }
+   if(r>=0 && r<k){
+       printf("%d",temp[r]);
+   }
+   else{
+       printf("out of bounds");
+   }
+   free(temp);
+}
+int main() {
+    int n1;
+    scanf("%d",&n1);
+   int n2;
+    scanf("%d",&n2);    
+    int arr[n1];
+    for(int i=0;i<n1;i++){
+        scanf("%d",&arr[i]);
+    }
+    int brr[n2];
+    for(int i=0;i<n2;i++){
+        scanf("%d",&brr[i]);
+    }
+    int k=3;
+    func(n1,n2,arr,brr,k);
+    return 0;
+}
+```
+### check array are equal or not
+```c
+#include <stdio.h>
+#include<stdlib.h>
+#define max 100
+
+void func(int n1,int n2,int arr[n1],int brr[n2]){
+     int found=0;
+    if(n1!=n2){
+        found=1;
+    }
+    int* temp=(int*)malloc(max*sizeof(int));
+    for(int i=0;i<max;i++){
+        temp[i]=0;
+    }
+    for(int i=0;i<n1;i++){
+        temp[arr[i]]++;
+    }
+    for(int j=0;j<n2;j++){
+        temp[brr[j]]--;
+    }
+   
+    for(int i=0;i<max;i++){
+        if(temp[i]!=0){
+        found=1;
+            break;
+        }
+    }
+    if(found){
+        printf("not equal");
+    }
+    else{
+        printf("equal");
+    }
+    free(temp);
+   
+    }
+   
+int main() {
+    int n1;
+    scanf("%d",&n1);
+   int n2;
+    scanf("%d",&n2);    
+    int arr[n1];
+    for(int i=0;i<n1;i++){
+        scanf("%d",&arr[i]);
+    }
+    int brr[n2];
+    for(int i=0;i<n2;i++){
+        scanf("%d",&brr[i]);
+    }
+    int k=3;
+    func(n1,n2,arr,brr);
+    return 0;
+}
+```
+
