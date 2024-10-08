@@ -234,4 +234,55 @@ class Solution {
     }
 }
 ```
+### Triplet Sum in Array
+```java
+class Solution {
+
+    public static boolean find3Numbers(int arr[], int n, int x) {
+
+        Arrays.sort(arr);
+        for(int i=0;i<n-2;i++){
+            int left=i+1;
+            int right=n-1;
+            while(left<right){
+                if(arr[i]+arr[left]+arr[right]==x){
+                    return true;
+                }
+                if(arr[i]+arr[left]+arr[right]>x){
+                    right--;
+                }
+                else{
+                    left++;
+                }
+            }
+            
+        }
+        return false;
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
