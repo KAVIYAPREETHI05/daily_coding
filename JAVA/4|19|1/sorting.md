@@ -167,6 +167,22 @@ class Solution
     }
 }
 ```
+### max value permutation
+```java
+class Solution {
+  static final int MOD = 1000000007; 
+    int Maximize(int arr[]) {
+        int n=arr.length;
+        Arrays.sort(arr);
+        long sum=0;
+        for(int i=0;i<n;i++){
+            sum = (sum + (long)arr[i] * i) % MOD; // Calculate the sum with modulo
+        }
+        return (int)sum;
+    }
+}
+
+```
 ### floor in sorted array
 ```java
 class Solution {
@@ -194,9 +210,6 @@ class Solution {
 ```
 ### find pair given difference
 ```java
-
-
-
 class Solution {
     public int findPair(int n, int x, int[] arr) {
         Arrays.sort(arr);
@@ -221,19 +234,4 @@ class Solution {
     }
 }
 ```
-### max value permutation
-```java
-class Solution {
-  static final int MOD = 1000000007; 
-    int Maximize(int arr[]) {
-        int n=arr.length;
-        Arrays.sort(arr);
-        long sum=0;
-        for(int i=0;i<n;i++){
-            sum = (sum + (long)arr[i] * i) % MOD; // Calculate the sum with modulo
-        }
-        return (int)sum;
-    }
-}
 
-```
