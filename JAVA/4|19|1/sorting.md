@@ -261,6 +261,40 @@ class Solution {
     }
 }
 ```
+### 3sum closet
+```java
+class Solution
+{
+    static int closest3Sum(int arr[], int n, int x)
+    {
+       
+        Arrays.sort(arr);
+         int closestSum = arr[0] + arr[1] + arr[2]; 
+        for(int i=0;i<n-2;i++){
+            int left=i+1;
+            int right=n-1;
+           
+            while(left<right){
+                int currentsum=arr[i]+arr[left]+arr[right];
+                 if (Math.abs(x - currentsum) < Math.abs(x - closestSum)) {
+                    closestSum = currentsum;
+                }
+                if(currentsum==x){
+                    return currentsum;
+                }
+                if(currentsum<x){
+                    left++;
+                }
+                else{
+                    right--;
+                }
+            }
+            
+        }
+        return closestSum;
+    }
+}
+```
 
 
 
