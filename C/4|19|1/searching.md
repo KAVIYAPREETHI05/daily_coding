@@ -136,3 +136,257 @@ public int findKRotation(int n,int arr[]) {
         return index;
     }
 ```
+### search in matrix
+```c
+int matSearch (int row, int col, int mat[row][col], int x)
+{
+     for(int i=0;i<row;i++){
+            if(mat[i][col-1]>=x && mat[i][0]<=x){
+                for(int j=0;j<col;j++){
+                    if(mat[i][j]==x){
+                        return 1;
+                    }
+                }
+              
+            }
+        }
+        return 0;
+    
+}
+```
+### bitonic point
+first strictly increasing and then maybe strictly decreasing, find the maximum element in the array.
+```c
+ int findMaximum(int arr[], int n) {
+        int max=0;
+        for(int i=n-1;i>=0;i--){
+            if(arr[i]>max){
+                max=arr[i];
+            }
+        }
+        return max;
+    }
+```
+### search in rotated sorted array
+```c
+
+    int search(int n,int arr[], int key) {
+    
+        int left=0;int right=n-1;
+        while(left<=right){
+            int mid=(left+right)/2;
+            if(arr[mid]==key){
+                return mid;
+            }
+            else if(arr[left]<=arr[mid]){
+                if(key>=arr[left] && key<arr[mid]){
+                     right=mid-1;
+                }
+                else{
+                    left=mid+1;
+                }
+               
+                
+            }
+            else{
+                if(key>arr[mid] && key<=arr[right]){
+                    left=mid+1;
+                    
+                }
+                else{
+                    right=mid-1; 
+                }
+            }
+        }
+        return -1;
+    }
+
+```
+### majority element
+A majority element in an array is an element that appears strictly more than arr.size()/2 times in the array.
+```c
+int majorityElement(int n,int arr[]) {
+        if(n==1){
+            return arr[0];
+        }
+        int strictSize=n/2;
+        int count=0;
+        for(int i=0;i<n;i++){
+            count=1;
+           if(arr[i]!=-1){
+                for(int j=i+1;j<n;j++){
+                if(arr[i]==arr[j]){
+                    count++;
+                    arr[j]=-1;
+                }
+                
+            }
+           }
+            if(count>strictSize){
+                return arr[i];
+            }
+        }
+        return -1;
+    }
+```
+### kth smallest
+```c
+//time limit exceeded
+int compare(const void *a,const void *b){
+    return (*(int*)a- *(int *)b);
+}
+int kthSmallest(int arr[], int n, int k) {
+    qsort(arr,n,sizeof(int),compare);
+    
+    return arr[k-1];
+    
+}
+```
+### number of occurence
+```c
+
+    int count(int arr[], int n, int x) {
+	    int firstIndex=-1; int lastIndex=-1;
+	    for(int i=0;i<n;i++){
+	        if(arr[i]==x ){
+	            firstIndex=i;
+	            break;
+	        }
+	    }
+	    if(firstIndex==-1){
+	        return 0;
+	    }
+	    for(int i=n-1;i>=0;i--){
+	        if(arr[i]==x ){
+	            lastIndex=i;
+	            break;
+	        }
+	        
+	    }
+	    return (lastIndex-firstIndex)+1;
+    }
+
+```
+### minimum platform
+```c
+int compare(const void *a,const void *b){
+    return (*(int *)a-*(int *)b);
+}
+
+ int findPlatform(int n,int arr[], int dep[]) {
+        
+        int maxPlat=1; int plat=1;
+        qsort(arr,n,sizeof(int),compare);
+        qsort(dep,n,sizeof(int),compare);
+ 
+        int i=1;int j=0;
+        while(i<n && j<n){
+            if(arr[i]<=dep[j]){
+                plat++;
+                i++;
+                
+            }
+            else{
+                plat--;
+                j++;
+            }
+            if(plat>maxPlat){
+                maxPlat=plat;
+            }
+        }
+        return maxPlat;
+    }
+}
+```
+### peak element
+```c
+int peakElement(int arr[],int n)
+    {
+        if(n==1){
+            return 0;
+        }
+        if(arr[0]>arr[1]){
+            return 0;
+        }
+        else if(arr[n-1]>arr[n-2]){
+            return n-1;
+        }
+        for(int i=1;i<n-1;i++){
+            if(arr[i]>=arr[i+1] && arr[i]>=arr[i-1]){
+                return i;
+            }
+        }
+          return 0;
+    }
+  
+```
+### Find triplets with zero sum
+
+```c
+// two-pointer technique
+int compare(const void *a,const void *b){
+    return (*(int*)a-*(int*)b);
+}
+int findTriplets(int arr[], int n)
+    { 
+        qsort(arr,n,sizeof(int),compare);
+        for(int i=0;i<n-2;i++){
+            int left=i+1;int right=n-1;
+            while(left<right){
+                int currentSum=arr[i]+arr[left]+arr[right];
+                if(currentSum==0){
+                    return 1;
+                }
+                else if(currentSum<0){
+                    left++;
+                }
+                else{
+                    right--;
+                }
+            }
+        }
+        return 0;
+    }
+```
+### First and Last Occurrences
+```c
+void find(int arr[], int n, int x, int result[]) {
+    result[0] = -1; 
+    result[1] = -1; 
+
+    // Find the first occurrence
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == x) {
+            result[0] = i;
+            break; 
+        }
+    }
+
+    // Find the last occurrence
+    for (int i = n - 1; i >= 0; i--) {
+        if (arr[i] == x) {
+            result[1] = i;
+            break; 
+        }
+    }
+}
+```
+### Search in a row-column sorted Matrix
+```c
+
+	int search(int row, int col, int mat[][col], int x) 
+	{  
+
+     for(int i=0;i<row;i++){
+            if(mat[i][col-1]>=x && mat[i][0]<=x){
+                for(int j=0;j<col;j++){
+                    if(mat[i][j]==x){
+                        return 1;
+                    }
+                }
+              
+            }
+        }
+        return 0;
+	}
+```
