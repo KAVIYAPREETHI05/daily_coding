@@ -238,5 +238,42 @@ int findPair(int n, int x, int[] arr) {
        return -1;
     }
 ```
+### Triplet Sum in Array
+```c
+int compare(const void *a,const void *b){
+    return (*(int *)a - *(int*)b);
+}
+
+int find3Numbers(int arr[], int n, int x) {
+     qsort(arr,n,sizeof(int),compare);
+        for(int i=0;i<n-2;i++){
+            int left=i+1;
+            int right=n-1;
+            while(left<right){
+                if(arr[i]+arr[left]+arr[right]==x){
+                    return 1;
+                }
+                if(arr[i]+arr[left]+arr[right]>x){
+                    right--;
+                }
+                else{
+                    left++;
+                }
+            }
+            
+        }
+        return 0;
+}
+```
+
+
+
+
+
+
+
+
+
+
 
 
