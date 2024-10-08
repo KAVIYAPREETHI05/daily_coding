@@ -265,6 +265,45 @@ int find3Numbers(int arr[], int n, int x) {
         return 0;
 }
 ```
+### 3 sum closest
+```c
+int compare(const void*a,const void *b){
+   int int_a = *(int*)a;
+    int int_b = *(int*)b;
+    
+    if (int_a > int_b) return 1;
+    else if (int_a < int_b) return -1;
+    else return 0;
+}
+ int closest3Sum(int arr[], int n, int x)
+    {
+       qsort(arr,n,sizeof(int),compare);
+         int closestSum = arr[0] + arr[1] + arr[2]; 
+        for(int i=0;i<n-2;i++){
+            int left=i+1;
+            int right=n-1;
+           
+            while(left<right){
+                int currentsum=arr[i]+arr[left]+arr[right];
+                 if (abs(x - currentsum) < abs(x - closestSum)) {
+                    closestSum = currentsum;
+                }
+                if(currentsum==x){
+                    return currentsum;
+                }
+                if(currentsum<x){
+                    left++;
+                }
+                else{
+                    right--;
+                }
+            }
+            
+        }
+        return closestSum;
+    }
+
+```
 
 
 
