@@ -359,4 +359,74 @@ int main() {
     return 0;
 }
 ```
+## Part II
 
+### min and max in array
+```c
+strut Pair{
+    long min;
+    long max;
+};
+struct Pair getMinMax(int arr[],int n){
+    struct Pair result;
+        result.min=arr[0];
+        result.max=arr[0];
+        for(int i=1;i<n;i++){
+            if(arr[i]<result.min){
+                result.min=arr[i];
+            }
+            else if(arr[i]>result.max){
+                result.max=arr[i];
+            }
+        }
+        return result;
+        
+    }
+```
+### reverse array
+```c
+void reverseArray(int arr[],int n) {
+        for(int i=0;i<n/2;i++){
+            int temp=arr[i];
+            arr[i]=arr[n-1-i];
+            arr[n-1-i]=temp;
+            
+        }
+```
+### rotate array by 1
+```c
+ void rotate(int[] arr) {
+        int n=arr.length;
+        int temp=arr[n-1];
+        for(int i=n-1;i>0;i--){
+            arr[i]=arr[i-1];
+        }
+        arr[0]=temp;
+    }
+```
+### array duplicates
+```c
+int* duplicates(long long arr[], int n, int* returnSize) {
+    int* result = (int*)malloc(n * sizeof(int)); // Allocate memory for result array
+    int resIndex = 0; // Initialize index for result array
+
+    for (int i = 0; i < n; i++) {
+        int index = arr[i] % n;
+        arr[index] += n;
+    }
+
+    for (int i = 0; i < n; i++) {
+        if ((arr[i] / n) > 1) {
+            result[resIndex++] = i; // Add index to result if condition is met
+        }
+    }
+
+    if (resIndex == 0) {
+        result[resIndex++] = -1; // Add -1 if no duplicates found
+    }
+
+    *returnSize = resIndex; // Set the size of the result array
+    return result; // Return the result array
+}
+
+```
