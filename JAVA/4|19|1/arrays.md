@@ -779,3 +779,82 @@ class Solution {
 
     }
 ```
+### count occurence
+```java
+class Main
+{
+    // Returns number of times x occurs in arr[0..n-1]
+    static int countOccurrences(int arr[], int n, int x)
+    {
+        int res = 0;
+        for (int i=0; i<n; i++)
+            if (x == arr[i])
+              res++;
+        return res;
+    }
+    
+    public static void main(String args[])
+    {
+        int arr[] = {1, 2, 2, 2, 2, 3, 4, 7 ,8 ,8 };
+        int n = arr.length;
+        int x = 2;
+        System.out.println(countOccurrences(arr, n, x));
+    }
+}
+```
+### sort 0's 1's 2's
+```java
+
+
+class Solution {
+  
+    public void sort012(ArrayList<Integer> arr) {
+    int n=arr.size();
+    int start=0;int end=n-1;int mid=0;
+    while(mid<=end){
+        if(arr.get(mid)==0){
+            Collections.swap(arr,start,mid);
+            start++;
+            mid++;
+            
+        }
+        else if(arr.get(mid)==1){
+            
+            mid++;
+        }
+        else if(arr.get(mid)==2){
+             Collections.swap(arr,end,mid);
+                end--;
+            
+        }
+    }
+    }
+}
+```
+### move all negative to one side
+```java
+class Solution {
+    public void segregateElements(int[] arr) {
+        int n=arr.length;
+        int []temp=new int[n];
+        int j=0;
+        for(int i=0;i<n;i++){
+            if(arr[i]>=0){
+                temp[j++]=arr[i];
+                
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(arr[i]<0){
+                temp[j++]=arr[i];
+                
+            }
+        }
+        for(int i=0;i<n;i++){
+            arr[i]=temp[i];
+        }
+    }
+}
+```
+
+
