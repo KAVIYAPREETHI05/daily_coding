@@ -430,3 +430,70 @@ int* duplicates(long long arr[], int n, int* returnSize) {
 }
 
 ```
+### count occurence
+```c
+ int countOccurrences(int arr[], int n, int x)
+    {
+        int res = 0;
+        for (int i=0; i<n; i++)
+            if (x == arr[i])
+              res++;
+        return res;
+    }
+    
+```
+### sort 0's 1's 2's
+```c
+//User function Template for C
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+
+void sort012(int a[], int n) {
+    int low = 0, mid = 0, high = n - 1;
+    
+    while (mid <= high) {
+        switch (a[mid]) {
+            case 0:
+                swap(&a[low], &a[mid]);
+                low++;
+                mid++;
+                break;
+            case 1:
+                mid++;
+                break;
+            case 2:
+                swap(&a[mid], &a[high]);
+                high--;
+                break;
+        }
+    }
+}
+```
+### move all zeros to one side
+```c
+void segregateElements(int arr[],int n) {
+       int* temp = (int*)malloc(n * sizeof(int)); 
+       
+        int j=0;
+        for(int i=0;i<n;i++){
+            if(arr[i]>=0){
+                temp[j++]=arr[i];
+                
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(arr[i]<0){
+                temp[j++]=arr[i];
+                
+            }
+        }
+        for(int i=0;i<n;i++){
+            arr[i]=temp[i];
+        }
+        free(temp);
+    }
+```
