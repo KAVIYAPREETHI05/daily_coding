@@ -676,3 +676,106 @@ class Solution {
 }
 
 ```
+## part II
+### min and max in array
+
+```java
+class Solution {
+    public Pair<Long, Long> getMinMax(int[] arr) {
+        int n=arr.length;
+        Arrays.sort(arr);
+        long min=arr[0];
+        long max=arr[n-1];
+        return new Pair<>(min,max);
+        
+    }
+}
+```
+### reverse array
+```java
+class Solution {
+    public void reverseArray(int arr[]) {
+        int n=arr.length;
+        List<Integer> temp=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            temp.add(arr[i]);
+        }
+        Collections.reverse(temp);
+        for(int i=0;i<temp.size();i++){
+           arr[i]=temp.get(i); 
+        }
+        
+    }
+}
+```
+### rotate array by 1
+```java
+class Solution {
+    public void rotate(int[] arr) {
+        int n=arr.length;
+        int temp=arr[n-1];
+        for(int i=n-1;i>0;i--){
+            arr[i]=arr[i-1];
+        }
+        arr[0]=temp;
+    }
+}
+```
+### array duplicates
+```java
+class Solution {
+    public static ArrayList<Integer> duplicates(int[] arr) {
+        int n=arr.length;
+        ArrayList<Integer> temp=new ArrayList<>();
+        HashSet<Integer> unique=new HashSet<>();
+        for(int i=0;i<n;i++){
+            if(unique.contains(arr[i]) && !temp.contains(arr[i])){
+                temp.add(arr[i]);
+            }
+            else{
+                unique.add(arr[i]);
+            }
+        }
+        Collections.sort(temp);
+        if(temp.isEmpty()){
+            temp.add(-1);
+        }
+        return temp;
+    }
+}
+```
+(or)
+```java
+
+
+
+class Solution {
+    public static ArrayList<Integer> duplicates(int[] arr) {
+    
+        int n=arr.length;
+        ArrayList<Integer> result=new ArrayList<>();
+       
+           int maxValue = Arrays.stream(arr).max().orElse(0);
+            int[] temparr=new int[maxValue+1];
+       for(int i=0;i<=maxValue;i++){
+           temparr[i]=0;
+       }
+        for(int i=0;i<n;i++){
+            temparr[arr[i]]++;
+        }
+        for(int i=0;i<=maxValue;i++){
+            if(temparr[i]>1){
+                result.add(i);
+                
+            }
+        }
+        if(result.isEmpty()){
+            result.add(-1);
+        }
+        return result;
+    }
+
+
+
+    }
+```
