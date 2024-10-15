@@ -1,3 +1,4 @@
+##  part II
 ### Rotate matrix elements clockwise
 ```c
 #include <stdio.h>
@@ -53,5 +54,73 @@ void printMatrix(int M, int N, int mat[M][N]) {
         }
         printf("\n");
     }
+}
+```
+### sorted matrix
+```c
+int compare(const void *a,const void *b){
+    return *(int *)a-*(int *)b;
+}
+    int** sortedMatrix(int N, int mat[N][N]) {
+        
+        int m=N*N;
+        int * arr=(int*)malloc(m*sizeof(int));
+        int k=0;
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                arr[k++]=mat[i][j];
+            }
+        }
+        qsort(arr,k,sizeof(int),compare);
+        for(int i=0;i<k;i++){
+            mat[i/col][i%col]=arr[i];
+        }
+        free(arr);
+        return mat;
+    }
+```
+### Rotate a Rectangular Image by 90 Degree Clockwise
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+void printMatrix(int N, int** mat) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            printf("%d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void rotate90Matrix(int N, int mat[N][N]) {
+    int m = N * N;
+    int** arr = (int**)malloc(N * sizeof(int*));
+    for (int i = 0; i < N; i++) {
+        arr[i] = (int*)malloc(N * sizeof(int));
+    }
+   
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            arr[j][N-1-i] = mat[i][j];
+        }
+    }
+    printf("rotated matrix:\n");
+    printMatrix(N, arr);
+    for (int i = 0; i < N; i++) {
+        free(arr[i]);
+    }
+    free(arr); // Free allocated memory for arr
+}
+int main() {
+    int N = 3;
+    int mat[3][3] = {
+        {1,2,3},
+        {5,6,7},
+        {9,10,11}
+    };
+    rotate90Matrix(N, mat);
+    return 0;
 }
 ```
