@@ -224,6 +224,65 @@ public class RotateMatrix {
 }
 
 ```
+### multiply of two matrix
+```java
+import java.util.*;
+
+class HelloWorld {
+    static void multiply(int n,int m,int [][] mat,int [][]mat2){
+    int[][] matrix=new int[n][m];
+   
+    for(int i=0;i<n;i++){
+        for(int k=0;k<m;k++){
+        matrix[i][k]=0;
+        for(int j=0;j<m;j++){
+            matrix[i][k]+=mat[i][j]*mat2[j][i];
+        }
+        }
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+
+            System.out.print(matrix[i][j] );
+        }
+        System.out.print(" \n" );
+    }
+}
+    public static void main(String[] args) {
+    int n=2;int m=2;
+   int mat[][]={{1,1},{2,2}};
+   int mat2[][]={{1,1},{2,2}};
+   multiply(n,m,mat,mat2);
+
+}
+    }
+```
+### Find maximum element of each row in a matrix
+```java
+import java.util.*;
+class Main{
+ static void multiply(int n,int m,int [][]mat){
+   
+    for(int i=0;i<n;i++){
+       int max=mat[i][0];
+        for(int j=0;j<m;j++){
+            if(mat[i][j]>max){
+                max=mat[i][j];
+            }
+        }
+    System.out.println(max);
+    }
+}
+public static void  main(String [] args) {
+    int n=2;int m=2;
+   int mat[][]={{1,4},{6,2}};
+
+   multiply(n,m,mat);
+
+}
+}
+```
+
 
 
 
