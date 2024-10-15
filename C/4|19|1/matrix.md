@@ -124,3 +124,64 @@ int main() {
     return 0;
 }
 ```
+### multiply two matrices
+```c
+#include <stdio.h>
+#include<stdlib.h>
+void multiply(int n,int m,int mat[n][m],int mat2[n][m]){
+    int** matrix=(int **)malloc(n*sizeof(int*));
+    for(int i=0;i<n;i++){
+            matrix[i]=(int *)malloc(m*sizeof(int));
+    }
+    for(int i=0;i<n;i++){
+        for(int k=0;k<m;k++){
+        matrix[i][k]=0;
+        for(int j=0;j<m;j++){
+            matrix[i][k]+=mat[i][j]*mat2[j][i];
+        }
+        }
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            printf("%d ",matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+int main() {
+    int n=2;int m=2;
+   int mat[2][2]={{1,1},{2,2}};
+   int mat2[2][2]={{1,1},{2,2}};
+   multiply(n,m,mat,mat2);
+
+    return 0;
+}
+```
+### Find maximum element of each row in a matrix
+
+```c
+#include <stdio.h>
+#include<stdlib.h>
+void multiply(int n,int m,int mat[n][m]){
+   
+    for(int i=0;i<n;i++){
+       int max=mat[i][0];
+        for(int j=0;j<m;j++){
+            if(mat[i][j]>max){
+                max=mat[i][j];
+            }
+        }
+        printf("%d\n",max);
+    }
+}
+int main() {
+    int n=2;int m=2;
+   int mat[2][2]={{1,4},{6,2}};
+
+   multiply(n,m,mat);
+
+    return 0;
+}
+```
+
+
