@@ -160,3 +160,70 @@ class Solution {
 //traffic analysis & academic performance
 ```
 
+## part II
+
+### sorted matrix
+```java
+class Solution {
+    int[][] sortedMatrix(int N, int mat[][]) {
+        int row=mat.length;
+        int col=mat[0].length;
+        int m=row*col;
+        int[] arr=new int[m];
+        int k=0;
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                arr[k++]=mat[i][j];
+            }
+        }
+        Arrays.sort(arr);
+        for(int i=0;i<k;i++){
+            mat[i/col][i%col]=arr[i];
+        }
+        return mat;
+    }
+};
+```
+
+### Rotate a Rectangular Image by 90 Degree Clockwise
+```java
+public class RotateMatrix {
+    // Function to print the matrix
+    public static void printMatrix(int N, int[][] mat) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                System.out.print(mat[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+    public static void rotate90Matrix(int N, int[][] mat) {
+        int[][] arr = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                arr[j][N - 1 - i] = mat[i][j];
+            }
+        }
+        System.out.println("Rotated matrix:");
+        printMatrix(N, arr); 
+    }
+
+    public static void main(String[] args) {
+        int N = 3;
+        int[][] mat = {
+            {1, 2, 3},
+            {5, 6, 7},
+            {9, 10, 11}
+        };
+
+        System.out.println("Original matrix:");
+        printMatrix(N, mat);
+
+        rotate90Matrix(N, mat);
+    }
+}
+
+```
+
+
+
