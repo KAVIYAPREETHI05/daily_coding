@@ -282,6 +282,177 @@ public static void  main(String [] args) {
 }
 }
 ```
+### Count all sorted rows in a matrix
+```java
+import java.util.*;
+class Main{
+ static void multiply(int n,int m,int [][]mat){
+  int count=0;
+    for(int i=0;i<n;i++){
+         int isAscending=1;
+        for(int j=0;j<m-1;j++){
+            if(mat[i][j]>mat[i][j+1]){
+                isAscending=0;
+                break;
+            }
+        }
+        if(isAscending==1){
+            count++;
+        }
+     
+    }
+    for(int i=0;i<n;i++){
+        int isDescending=1;
+        for(int j=0;j<m-1;j++){
+            if(mat[i][j]<mat[i][j+1]){
+                 isDescending=0;
+                break;
+            }
+        }
+        if( isDescending==1){
+            count++;
+        }
+    }
+       System.out.println(count);
+}
+public static void  main(String [] args) {
+   int n=4;int m=5;
+   int mat[][]={{1, 2, 3, 4, 5},
+                  {  4, 3, 1, 2, 6},
+                    {8, 7, 6, 5, 4},
+                    {5, 7, 8, 9, 10}};
+
+   multiply(n,m,mat);
+}
+}
+```
+### snake pattern
+```java
+import java.util.*;
+class Main{
+ static void multiply(int n,int m,int [][]mat){
+   for(int i=0;i<n;i=i+2){
+        for(int j=0;j<m;j++){
+            System.out.print(mat[i][j]+" ");
+
+        }
+        for(int l=m-1;l>=0;l--){
+            System.out.print(mat[i+1][l]+" ");
+         }
+    }
+}
+public static void  main(String [] args) {
+   int n=4;int m=5;
+   int mat[][]={{1, 2, 3, 4, 5},
+                  {  4, 3, 1, 2, 6},
+                    {8, 7, 6, 5, 4},
+                    {5, 7, 8, 9, 10}};
+
+   multiply(n,m,mat);
+}
+}
+```
+### Sort a Matrix in all way increasing order
+```java
+import java.util.*;
+class Main{
+ static void multiply(int n,int m,int [][]mat){
+     int l=n*m;
+  int[]temp=new int[l];
+    int k=0;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            temp[k++]=mat[i][j];
+        }
+        }
+        Arrays.sort(temp);
+    k=0;
+      for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            mat[i][j]=temp[k++];
+             System.out.print(mat[i][j]+" ");
+        }
+        }
+}
+public static void  main(String [] args) {
+   int n=4;int m=4;
+   int mat[][]={ {10, 20, 30, 40},
+                            {15, 25, 35, 45},
+                           {27, 29, 37, 48},
+                           {32, 33, 39, 50}};
+
+   multiply(n,m,mat);
+}
+}
+```
+### Find the row with maximum number of 1s
+```java
+import java.util.*;
+class Main{
+ static void multiply(int n,int m,int [][]mat){
+    int rowCount=0;int row=-1;
+    for(int i=0;i<n;i++){
+        int count=0;
+        for(int j=m-1;j>=0;j--){
+            if(mat[i][j]==0){
+                break;
+            }
+            else{
+                count++;
+            }
+        }
+        if(count>rowCount){
+            rowCount=count;
+            row=i;
+        }
+        }
+       if (row != -1) {
+        System.out.print("Row "+row+" has the maximum consecutive 1s, count ="+rowCount);
+    } else {
+        System.out.print("No row with 1s found\n");
+    }
+}
+public static void  main(String [] args) {
+   int n=4;int m=4;
+   int mat[][]={  {0,1,1,1},
+                            {0,0,1,1},
+                           {0,1,1,1},
+                           {1,1,1,1}};
+
+   multiply(n,m,mat);
+}
+}
+```
+### Efficiently compute sums of diagonals of a matrix
+```java
+import java.util.*;
+class Main{
+ static void multiply(int n,int m,int [][]mat){
+   int primarySum=0;int secondarySum=0;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(i==j){
+                primarySum+=mat[i][j];
+            }
+            if((i+j)==(n-1)){
+                secondarySum+=mat[i][j];
+            }
+      }
+    }
+    System.out.println(primarySum);
+    System.out.println(secondarySum);
+}
+public static void  main(String [] args) {
+   int n=4;int m=4;
+   int mat[][]={ { 1, 2, 3, 4 },
+                      { 5, 6, 7, 8 }, 
+                      { 1, 2, 3, 4 },
+                      { 5, 6, 7, 8 } };
+
+   multiply(n,m,mat);
+}
+}
+```
 
 
 
