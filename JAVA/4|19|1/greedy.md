@@ -329,3 +329,50 @@ class Solution {
     }
 }
 ```
+## part II
+### 455. Assign Cookies
+```java
+class Solution {
+    public int findContentChildren(int[] g, int[] s) {
+        int n=g.length;
+        int m=s.length;
+        Arrays.sort(g);
+        Arrays.sort(s);
+      int j=0;int i=0;int count=0;
+            while(j<m && i<n){
+                if(g[i]<=s[j]){
+                    count++;
+                    i++;
+
+                }
+                j++;
+                
+            }
+            return count;
+        }
+        
+    }
+
+```
+### 121. Best Time to Buy and Sell Stock
+
+```java
+class Solution {
+    public int maxProfit(int[] arr) {
+       int n=arr.length;
+       if(n==0){
+        return 0;
+       }
+       int minPrice=arr[0]; int maxProfit=0;
+       for(int i=1;i<n;i++){
+        if(arr[i]<minPrice){
+            minPrice=arr[i];
+        }
+        if((arr[i]-minPrice)>maxProfit){
+            maxProfit=arr[i]-minPrice;
+        }
+       }
+       return maxProfit;
+    }
+}
+```
