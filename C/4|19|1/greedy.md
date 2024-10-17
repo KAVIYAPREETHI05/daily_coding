@@ -45,3 +45,25 @@ int maxProfit(int* arr, int pricesSize) {
        return maxProfit;
 }
 ```
+### gas station
+```c
+int canCompleteCircuit(int* gas, int gasSize, int* cost, int costSize) {
+
+        int gasSum=0; int costSum=0;int currentSum=0;int start=0;
+        for(int i=0;i<gasSize;i++){
+            gasSum+=gas[i];
+            costSum+=cost[i];
+            currentSum+=gas[i]-cost[i];
+            if(currentSum<0){
+                start=i+1;
+                currentSum=0;
+            }
+        }
+        if(gasSum<costSum){
+            return -1;
+        }
+return start;
+        
+    }
+```
+### 406. Queue Reconstruction by Height
