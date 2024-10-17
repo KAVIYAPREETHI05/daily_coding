@@ -376,3 +376,48 @@ class Solution {
     }
 }
 ```
+### gas station
+```java
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int n=gas.length;
+        int gasSum=0; int costSum=0;int currentSum=0;int start=0;
+        for(int i=0;i<n;i++){
+            gasSum+=gas[i];
+            costSum+=cost[i];
+            currentSum+=gas[i]-cost[i];
+            if(currentSum<0){
+                start=i+1;
+                currentSum=0;
+            }
+        }
+        if(gasSum<costSum){
+            return -1;
+        }
+return start;
+        
+    }
+}
+```
+### 406. Queue Reconstruction by Height
+```java
+class Solution {
+    public int[][] reconstructQueue(int[][] people) {
+        Arrays.sort(people,(a,b)->{
+            if(a[0]==b[0]){
+                return a[1]-b[1];
+            }
+            else{
+                return b[0]-a[0];
+            }
+        });
+        List<int[]> temp=new ArrayList<>();
+
+        for(int i=0;i<people.length;i++){
+            temp.add(people[i][1],people[i]);
+        }
+
+       return temp.toArray(new int[people.length][2]) ;
+    }
+}
+```
