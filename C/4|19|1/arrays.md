@@ -191,9 +191,15 @@ int main() {
 void func(int n,int arr[n]){
     int * temp=(int *)malloc(n*sizeof(int));
     int start=0;int end=n-1;int j=0;
-    while(start<end){
-        temp[j++]=arr[end];
-        temp[j++]=arr[start];
+    while(start<=end){
+         if (start == end) {  
+            temp[j++] = arr[start];  
+            
+             
+         } else {
+            temp[j++] = arr[end];  
+            temp[j++] = arr[start];  
+        }
         start++;
         end--;
     }
