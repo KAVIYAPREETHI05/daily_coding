@@ -436,6 +436,64 @@ int* duplicates(long long arr[], int n, int* returnSize) {
 }
 
 ```
+(or)
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to compare two integers for qsort
+int compare(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+
+// Function to find duplicates in the sorted array
+int* findDuplicatesUsingSort(int arr[], int n, int* returnSize) {
+    qsort(arr, n, sizeof(int), compare); // Sort the array
+    int* result = (int*)malloc(n * sizeof(int)); // Allocate memory for the result
+    int resIndex = 0;
+
+    for (int i = 1; i < n; i++) {
+        if (arr[i] == arr[i - 1]) { // Check for duplicates
+            if (resIndex == 0 || result[resIndex - 1] != arr[i]) { // Avoid adding the same duplicate again
+                result[resIndex++] = arr[i];
+            }
+        }
+    }
+
+    if (resIndex == 0) {
+        result[resIndex++] = -1; // If no duplicates are found
+    }
+
+    *returnSize = resIndex;
+    return result;
+}
+
+// Main function to test the method
+int main() {
+    int n;
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter the elements of the array:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int returnSize;
+    int* result = findDuplicatesUsingSort(arr, n, &returnSize); // Call the sorting method
+
+    printf("Duplicate elements are: ");
+    for (int i = 0; i < returnSize; i++) {
+        printf("%d ", result[i]);
+    }
+    printf("\n");
+
+    free(result); // Free allocated memory
+    return 0;
+}
+
+```
 ### count occurence
 ```c
  int countOccurrences(int arr[], int n, int x)
