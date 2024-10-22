@@ -421,3 +421,29 @@ class Solution {
     }
 }
 ```
+
+
+### merge intervals
+```java
+class compInt implements Comparator<int[]>{
+    public int compare(int a[],int b[]){
+        return a[0]-b[0];
+    }
+
+}
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals,new compInt());
+        ArrayList <int[]>temp=new ArrayList<>();
+        for(int i=0;i<intervals.length;i++){
+            if(temp.isEmpty() || intervals[i][0]>temp.get(temp.size()-1)[1]){
+                temp.add(intervals[i]);
+            }
+            else{
+                temp.get(temp.size()-1)[1]=Math.max(intervals[i][1],temp.get(temp.size()-1)[1]);
+            }
+        }
+       return temp.toArray(new int[temp.size()][]) ;
+    }
+}
+```
