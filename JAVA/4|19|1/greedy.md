@@ -447,3 +447,60 @@ class Solution {
     }
 }
 ```
+### non-overlapping 
+```java
+class compINT implements Comparator<int[]>{
+    public int compare(int a[],int b[]){
+        return a[1]-b[1];
+    }
+}
+class Solution {
+    public int eraseOverlapIntervals(int[][] intervals) {
+       
+        Arrays.sort(intervals,new compINT());
+        int n=intervals.length;
+        int cet=Integer.MIN_VALUE;
+        int removeCount=0;
+        for(int i=0;i<n;i++){
+            if(intervals[i][0]>=cet){
+                cet=intervals[i][1];
+            }
+            else{
+                removeCount++;
+
+            }
+        }
+        return removeCount;
+    }
+}
+```
+
+### 452. Minimum Number of Arrows to Burst Balloons
+
+```java
+class compInt implements Comparator<int[]>{
+    public int compare(int[] a,int[]b){
+        return Integer.compare(a[1],b[1]);
+    }
+}
+class Solution {
+
+    public int findMinArrowShots(int[][] points) {
+             if (points.length == 0) return 0;
+        int len=points.length;
+      
+
+        Arrays.sort(points,new compInt());  
+        int cet=points[0][1];
+int count=1;
+        for(int i=1;i<len;i++){
+            if(points[i][0]>cet){
+                cet=points[i][1];
+                count++;
+            }
+        }
+        return count;
+        
+    }
+}
+```
