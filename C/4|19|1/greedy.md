@@ -67,3 +67,46 @@ return start;
     }
 ```
 ### 406. Queue Reconstruction by Height
+
+### Merge Intervals
+```c
+int compare(const void *a,const void*b){
+    int *intervalA=*(int**)a;
+    int *intervalB=*(int **)b;
+    return intervalA[0]-intervalB[0];
+}
+int** merge(int** intervals, int intervalsSize, int* intervalsColSize, int* returnSize, int** returnColumnSizes) {
+    qsort(intervals,intervalsSize,sizeof(int*),compare);
+
+    int**mergedInterval=(int**)malloc(intervalsSize*sizeof(int*));
+    *returnColumnSizes=(int*)malloc(intervalsSize*sizeof(int));
+    int count=0;
+
+    mergedInterval[count]=(int*)malloc(2*sizeof(int));
+    mergedInterval[count][0]=intervals[0][0];
+    mergedInterval[count][1]=intervals[0][1];
+        (*returnColumnSizes)[count]=2;
+        
+        for(int i=1;i<intervalsSize;i++){
+            if(intervals[i][0]>mergedInterval[count][1]){
+                count++;
+    mergedInterval[count]=(int*)malloc(2*sizeof(int));
+    mergedInterval[count][0]=intervals[i][0];
+    mergedInterval[count][1]=intervals[i][1];
+        (*returnColumnSizes)[count]=2;
+            }
+            else{
+                mergedInterval[count][1]=(intervals[i][1] > mergedInterval[count][1]) ? intervals[i][1] : mergedInterval[count][1];
+            }
+        }
+        *returnSize=count+1;
+        return mergedInterval; 
+}
+```
+
+
+
+
+
+
+
