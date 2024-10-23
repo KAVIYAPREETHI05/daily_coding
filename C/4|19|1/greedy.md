@@ -159,6 +159,31 @@ int count=1;
 }
 ```
 
+### 1029. Two City Scheduling
+```c
+int compare(const void *a, const void *b){
+   const int * costA=*(const int **)a;
+      const int * costB=*(const int **)b;
+
+    return (costA[0]-costA[1]) - (costB[0]-costB[1]);
+}
+
+
+int twoCitySchedCost(int** costs, int costsSize, int* costsColSize) {
+    qsort(costs,costsSize,sizeof(int*),compare);
+int n=costsSize/2;
+int sum=0;
+    for(int i=0;i<n;i++){
+        sum+=costs[i][0];
+    }
+    for(int i=n;i<costsSize;i++){
+        sum+=costs[i][1];
+    }
+    return sum;
+    
+}
+```
+
 
 
 
