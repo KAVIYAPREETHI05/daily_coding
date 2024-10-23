@@ -504,3 +504,28 @@ int count=1;
     }
 }
 ```
+### 1029. Two City Scheduling
+```java
+class compInt implements Comparator<int[]>{
+    public int compare(int [] a,int[]b){
+        return (a[0]-a[1])-(b[0]-b[1]);
+    }
+}
+class Solution {
+    public int twoCitySchedCost(int[][] costs) {
+        int len=costs.length;
+        Arrays.sort(costs,new compInt());
+        int sum=0;
+        int n=len/2;
+        for(int i=0;i<n;i++){
+            sum+=costs[i][0];
+        }
+        for(int i=n;i<2*n;i++){
+            sum+=costs[i][1];
+        }
+        return sum;
+        
+    }
+}
+```
+
