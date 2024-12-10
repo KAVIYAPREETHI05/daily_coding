@@ -1,3 +1,23 @@
+## gfg
+
+### missing number in array
+
+```java
+class Solution {
+    int missingNumber(int arr[]) {
+            int n=arr.length;int origiSum=0;
+            int arrSum=0;
+            for(int i=0;i<n;i++){
+                arrSum+=arr[i];
+            }
+            for(int i=1;i<=n+1;i++){
+                origiSum+=i;
+            }
+            return origiSum-arrSum;
+    }
+}
+```
+
 ### second largest
 ```java
 int secondLargest(int n,int []arr){
