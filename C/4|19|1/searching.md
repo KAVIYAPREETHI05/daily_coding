@@ -1,3 +1,34 @@
+## gfg
+
+### missing number in array
+```c
+#include <stdio.h>
+
+int missingNumber(int arr[], int n) {
+    int origiSum = 0, arrSum = 0;
+
+    // Calculate the sum of elements in the array
+    for (int i = 0; i < n; i++) {
+        arrSum += arr[i];
+    }
+
+    // Calculate the sum of numbers from 1 to n+1
+    for (int i = 1; i <= n + 1; i++) {
+        origiSum += i;
+    }
+
+    // Return the missing number
+    return origiSum - arrSum;
+}
+
+int main() {
+    int arr[] = {1, 2, 4, 6, 5}; // Example array
+    int n = sizeof(arr) / sizeof(arr[0]); // Number of elements in the array
+    printf("The missing number is: %d\n", missingNumber(arr, n));
+    return 0;
+}
+
+```
 ### second largest
 ```c
 #include <stdio.h>
