@@ -1,3 +1,71 @@
+## Linear Search
+
+```c
+#include <stdio.h>
+int linearSearch(int n,int arr[],int find){
+    for(int i=0;i<n;i++){
+       if(arr[i]==find){
+           return 1;
+       }
+   }
+   return 0;
+}
+
+int main() {
+   int n;
+   int arr[]={1,2,3,5,6,3,9,8,0};
+   n=sizeof(arr)/sizeof(arr[0]);
+   int find=6;
+   
+   if(linearSearch(n,arr,find)){
+       printf("%d is found", find);
+   }
+   else{
+       printf("%d is not found", find);
+   }
+   
+
+    return 0;
+}
+```
+
+## Binary Search
+```c
+#include <stdio.h>
+int linearSearch(int n,int arr[],int find){
+    int left=0;int right=n-1;
+    while(left<=right){
+        int mid=(left+right)/2;
+        if(arr[mid]==find){
+            return 1;
+        }
+        else if(arr[mid]>find){
+            right=mid-1;
+        }
+        else if(arr[mid]<find){
+            left=mid+1;
+        }
+    }
+    return 0;
+}
+
+int main() {
+   int n;
+   int arr[]={13,45,56,67,78,89};
+   n=sizeof(arr)/sizeof(arr[0]);
+   int find=78;
+   
+   if(linearSearch(n,arr,find)){
+       printf("%d is found", find);
+   }
+   else{
+       printf("%d is not found", find);
+   }
+   
+
+    return 0;
+}
+```
 ## gfg
 
 ### missing number in array
