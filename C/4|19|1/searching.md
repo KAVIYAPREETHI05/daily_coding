@@ -32,7 +32,7 @@ int main() {
 ## Binary Search
 ```c
 #include <stdio.h>
-int linearSearch(int n,int arr[],int find){
+int binarySearch(int n,int arr[],int find){
     int left=0;int right=n-1;
     while(left<=right){
         int mid=(left+right)/2;
@@ -55,7 +55,7 @@ int main() {
    n=sizeof(arr)/sizeof(arr[0]);
    int find=78;
    
-   if(linearSearch(n,arr,find)){
+   if(binarySearch(n,arr,find)){
        printf("%d is found", find);
    }
    else{
