@@ -312,7 +312,43 @@ int main(){
  1 3 3 1 
 1 4 6 4 1
 ```
-### change
+
+
+```c
+#include<stdio.h>
+int main(){
+    int num;
+    scanf("%d",&num);
+    for(int i=1;i<=num;i++){
+        if(i%2!=0){
+            for(int j=1;j<=num;j++){
+                printf("%d ",i);
+            }
+            printf("%d\n",i+1);
+        }
+        else{
+             printf("%d ",i+1);
+            for(int j=1;j<=num;j++){
+                printf("%d ",i);
+            }
+            printf("\n");
+        }
+    }
+    
+    
+}
+```
+```
+
+1 1 1 1 1 1 2
+3 2 2 2 2 2 2
+3 3 3 3 3 3 4
+5 4 4 4 4 4 4
+5 5 5 5 5 5 6
+6 6 6 6 6 6 7
+
+```
+
 
 
 
