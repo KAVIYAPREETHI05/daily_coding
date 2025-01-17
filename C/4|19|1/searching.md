@@ -470,6 +470,7 @@ void find(int arr[], int n, int x, int result[]) {
     }
 }
 ```
+
 ### Search in a row-column sorted Matrix
 ```c
 
