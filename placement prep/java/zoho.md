@@ -156,6 +156,77 @@ class pivotIndex{
     }
 }
 ```
+### 29.2 GROUP ANAGRAM
+
+
+### 29.3 CLIMBING STAIRS
+
+```java
+class Solution {
+    int findways(int n){
+        if(n<=2){
+            return n;
+        }
+       int first=1;int second=2;
+       int[] arr=new int[n];int third=0;
+       for(int i=3;i<=n;i++){
+       third=first+second;
+        first=second;
+        second=third;
+
+       }
+       return third;
+    }
+    public int climbStairs(int n) {
+        return findways(n);
+        
+    }
+}
+```
+
+### 30.1 MAXIMUM PRODUCT SUBARRAY
+
+```java
+package file1;
+
+import java.util.Scanner;
+
+
+class subarray{
+	static int productSubarray(int n,int[] arr) {
+		int maxproduct=arr[0]; int minproduct=arr[0]; int result=arr[0];
+		
+		for(int i=1;i<n;i++) {
+			
+			maxproduct=Math.max(arr[i], maxproduct*arr[i]);
+			minproduct=Math.min(arr[i], minproduct*arr[i]);
+			
+			result=Math.max(maxproduct, result);
+			
+		}
+		
+		return result;
+		
+	}
+	
+	
+    
+    public static void main(String[] args){
+        Scanner s=new Scanner(System.in);
+        int n=s.nextInt();
+        int[] arr=new int[n];
+
+        for(int i=0;i<n;i++) {
+        	arr[i]=s.nextInt();
+        }
+        
+        System.out.print(productSubarray(n,arr));
+
+
+    }
+}
+```
+
 
 ### ROMAN TO INTEGER
 
