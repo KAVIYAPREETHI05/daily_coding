@@ -1,6 +1,7 @@
-### NUMBER OF ISLANDS
 
-### LONGEST PALINDROME
+### 28.1 NUMBER OF ISLANDS
+
+### 28.2 LONGEST PALINDROME
 
 i/p babad
 o/p bab
@@ -46,8 +47,156 @@ public static void main(String[] args){
 }
 }
 ```
+### 28.3 COUNT PAIRS OF STRINGS
 
-### Count Pairs Of Similar Strings
+```java
+package file1;
+
+import java.util.Scanner;
+import java.util.HashMap;
+
+class pairCount{
+	static int countPairs(int n,String[] str1) {
+		String[] str2unique=new String[n]; int a=0;
+		
+		for(int i=0;i<n;i++) {
+			String str=str1[i];
+			int[] temp=new int[26];
+			for(int j=0;j<str.length();j++) {
+				temp[str.charAt(j)-'a']++;
+			}
+			
+			StringBuilder sb=new StringBuilder();
+			
+			for(int k=0;k<26;k++) {
+				if(temp[k]!=0) {
+					sb.append((char)(k+'a'));
+					temp[k]=0;
+					
+				}
+			}
+			str2unique[a++]=sb.toString();
+			
+		}
+		for(int i=0;i<n;i++) {
+			System.out.print(str2unique[i]+" ");
+		}
+		int pairs=0;
+		for(int i=0;i<n;i++) {
+			int count=1;
+			for(int j=i+1;j<n;j++) {
+				if(!str2unique[i].equals("0") && str2unique[i].equals(str2unique[j])) {
+					count++;
+					str2unique[j]="0";
+					
+				}
+			}
+			pairs+= (count*(count-1))/2;
+			
+		}
+		return pairs;
+	}
+    
+    public static void main(String[] args){
+        Scanner s=new Scanner(System.in);
+        int n=s.nextInt();
+        s.nextLine();
+        String[] str=new String[n];
+
+        for(int i=0;i<n;i++) {
+        	str[i]=s.nextLine();
+        }
+        
+        System.out.print(countPairs(n,str));
+
+
+    }
+}
+
+```
+### 29.1 FIND PIVOT INDEX
+
+```java
+package file1;
+
+import java.util.Scanner;
+import java.util.HashMap;
+
+class pivotIndex{
+	static int findPivot(int n,int[] arr) {
+		int totalsum=0;int leftsum=0;
+		
+		for(int i=0;i<n;i++) {
+			totalsum+=arr[i];
+		}
+		
+		for(int i=0;i<n;i++) {
+			if(leftsum== totalsum-leftsum-arr[i]) {
+				return i;
+			}
+			leftsum+=arr[i];
+			
+		}
+		return -1;
+		
+	}	
+    
+    public static void main(String[] args){
+        Scanner s=new Scanner(System.in);
+        int n=s.nextInt();
+        int[] arr=new int[n];
+
+        for(int i=0;i<n;i++) {
+        	arr[i]=s.nextInt();
+        }
+        
+        System.out.print(findPivot(n,arr));
+
+
+    }
+}
+```
+
+### ROMAN TO INTEGER
+
+```java
+package file1;
+
+import java.util.Scanner;
+import java.util.HashMap;
+
+class romanInteger{
+    static int romanToInteger(String str){
+        int n=str.length(); int sum=0;
+        HashMap<Character,Integer> map=new HashMap<>();
+        map.put('I',1);
+        map.put('V',5);
+        map.put('X',10);
+        map.put('L',50);
+        map.put('C',100);
+        map.put('D',500);
+        map.put('M',1000);
+
+        for(int i=0;i<n;i++){
+            sum+=map.get(str.charAt(i));
+        }
+
+        return sum;
+    }
+    public static void main(String[] args){
+        Scanner s=new Scanner(System.in);
+        String str=s.nextLine();
+
+        System.out.print(romanToInteger(str));
+
+
+    }
+}
+```
+
+### 
+
+
 
 i/p  words = ["aba","aabb","abcd","bac","aabc"]
 o/p 2
