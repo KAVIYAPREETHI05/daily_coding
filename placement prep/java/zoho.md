@@ -232,8 +232,141 @@ class subarray{
 }
 ```
 
+### 30.2 MOVE ZEROS TO END
 
-### ROMAN TO INTEGER
+```java
+package file1;
+
+import java.util.Scanner;
+
+
+class moveZerosToEnd{
+	static void moveZeros(int n,int[] arr) {
+		int j=0;
+		
+		for(int i=0;i<n;i++) {
+			if(arr[i]!=0) {
+				int temp=arr[i];
+				arr[i]=arr[j];
+				arr[j]=temp;
+				j++;
+			}
+			
+		}
+		
+		for(int i=0;i<n;i++) {
+			System.out.print(arr[i]+" ");
+		}
+		
+	}	
+    
+    public static void main(String[] args){
+        Scanner s=new Scanner(System.in);
+        int n=s.nextInt();
+        int[] arr=new int[n];
+
+        for(int i=0;i<n;i++) {
+        	arr[i]=s.nextInt();
+        }        
+        moveZeros(n,arr);
+    }
+}
+
+```
+
+### 30.3 SPIRAL MATRIX
+
+```java
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+                ArrayList<Integer> arr=new ArrayList<>();
+
+         if (matrix == null || matrix.length == 0) {
+            return arr;
+        }
+
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int left=0;int right=m-1;int top=0;int bottom=n-1;int j=0;
+
+        while(left<=right && top<=bottom){
+            for(j=left;j<=right;j++){
+            arr.add(matrix[top][j]);
+
+        }
+        top++;
+
+        for(j=top;j<=bottom;j++){
+            arr.add(matrix[j][right]);
+        }
+        right--;
+
+        if(top<=bottom){
+            for(j=right;j>=left;j--){
+            arr.add(matrix[bottom][j]);
+        }
+        bottom--;
+        }
+
+       if(left<=right){
+         for(j=bottom;j>=top;j--){
+            arr.add(matrix[j][left]);
+        }
+        left++;
+       }
+        }
+        return arr;
+        
+    }
+}
+```
+
+### 31.1
+
+### 31.2
+
+### 31.3 NEXT GREATER
+
+```java
+package file1;
+
+import java.util.Scanner;
+
+
+class romanInteger{
+	static void nextGreater(int n,int[] arr) {
+
+		for(int i=0;i<n-1;i++) {
+			int max=arr[i+1];
+			for(int j=i+1;j<n;j++) {
+				if(arr[j]>max) {
+					max=arr[j];
+				}				
+			}			
+			arr[i]=max;
+					}
+		arr[n-1]=-1;
+				for(int i=0;i<n;i++) {
+			System.out.print(arr[i]+" ");
+		}
+			
+	}	    
+    public static void main(String[] args){
+        Scanner s=new Scanner(System.in);
+        int n=s.nextInt();
+        int[] arr=new int[n];
+
+        for(int i=0;i<n;i++) {
+        	arr[i]=s.nextInt();
+        }        
+        nextGreater(n,arr);
+    }
+}
+
+```
+
+
+### 1.1 ROMAN TO INTEGER
 
 ```java
 package file1;
@@ -270,5 +403,22 @@ class romanInteger{
 }
 ```
 
-### 
+### 1.2 EQUILIBRIUM POINT
+
+same as pivot point
+
+### 1.3 LONGEST COMMON SUBSEQUENCE
+
+### string
+
+### PATTERN PRINTING
+
+
+1            1             1
+    2        2        2
+        3    3    3
+1   2   3    4    5   6    7
+        5    5    5
+    6	     6        6
+7            7             7
 
