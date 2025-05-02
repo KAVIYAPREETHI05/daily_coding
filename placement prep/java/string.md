@@ -1,3 +1,155 @@
+### check palindrome
+```java
+import java.util.Scanner;
+
+public class palindrome{
+    public static void main(String[] args){
+        Scanner s=new Scanner(System.in);
+        String s1=s.nextLine();
+        boolean found=true;
+        int n=s1.length();
+
+        for(int i=0;i<n/2;i++){
+            if(s1.charAt(i)!=(s1.charAt(n-1-i))){
+                found=false;
+                break;
+
+            }
+        }
+        if(found){
+            System.out.print("yes it is palindrome");
+        }
+        else{
+            System.out.print("no it is not palindrome");
+        }
+        s.close();
+    }
+}
+```
+### reverse word
+```java
+import java.util.Scanner;
+public class reverse {
+    public static void main(String[] args){
+        Scanner s=new Scanner(System.in);
+        String s1=s.nextLine();
+
+        int n=s1.length();
+        StringBuilder sb=new StringBuilder(s1);
+
+
+        for(int i=0;i<n/2;i++){
+            char temp=sb.charAt(i);
+            sb.setCharAt(i,sb.charAt(n-1-i));
+            sb.setCharAt(n-1-i,temp);
+
+        }
+        System.out.print(sb.toString());
+        s.close();
+    }
+    
+}
+
+```
+
+### reverse words
+
+```java
+import java.util.Scanner;
+
+public class reverseWords {
+    public static void main(String[] args){
+        Scanner s=new Scanner(System.in);
+        String s1=s.nextLine();
+
+        int n=s1.length();
+        int i=n-1;int end=n-1;
+
+        while(i>=0){
+            if(s1.charAt(i)=='.'){
+                int start=i+1;
+                for(int j=start;j<=end;j++){
+                    System.out.print(s1.charAt(j));
+                }
+                System.out.print('.');
+                while(i>=0 && s1.charAt(i)=='.'){
+                    i--;
+                }
+                end=i;
+            }
+
+
+i--;
+
+        }
+        i=0;
+        while(s1.charAt(i)!='.'){
+            System.out.print(s1.charAt(i));
+            i++;
+        }
+    }
+    
+}
+
+```
+
+
+### Check if Strings Are Rotations of Each Other
+
+```java
+import java.util.Scanner;
+// Check if Strings Are Rotations of Each Other
+
+public class checkSubstring {
+    static boolean contains(String temp,String s2){
+        int n=temp.length();
+        int m=s2.length();
+        if(m>n){
+            return false;
+        }
+
+        for(int i=0;i<n-m;i++){
+            int j=0;
+            while(j<m && temp.charAt(i+j)==s2.charAt(j)){
+                j++;
+            }
+            if(j==m){
+                return true;
+            }
+        }
+
+        return false;
+    }
+    static boolean isRotation(String s1,String s2){
+        int n=s1.length();
+        int m=s2.length();
+        if(n!=m){
+            // since we are checking rotation, s2 should contain all char from s1
+            return false;
+        }
+        String temp=s1+s1;
+        if(contains(temp,s2)){
+            return true;
+        }
+        return false;
+    }
+    public static void main(String[] args){
+        Scanner s=new Scanner(System.in);
+        String s1=s.nextLine();
+        String s2=s.nextLine();
+
+        if(isRotation(s1,s2)){
+            System.out.print("true");
+        }
+        else{
+            System.out.print("false");
+        }
+    }
+    
+}
+```
+
+
 ### REVERSE VOWELS IN STRING
 
 ```java
