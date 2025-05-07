@@ -71,59 +71,111 @@ class Solution {
 
 ```java
 class Solution {
-    static long[] fact = new long[21];  // For factorials up to 20
-
-    // Precompute factorials
-    static void computeFactorials() {
-        fact[0] = 1;
-        for (int i = 1; i <= 20; i++) {
-            fact[i] = fact[i - 1] * i;
+    long factorial(int n){
+        if(n<=1){
+            return 1;
         }
+        return n*factorial(n-1);
     }
-
-    // Function to calculate the product of factorials of char frequencies
-    static long calculateDenominator(int[] freq) {
-        long denom = 1;
-        for (int i = 0; i < 256; i++) {
-            if (freq[i] > 1) {
-                denom *= fact[freq[i]];
+    long smallerLetter(int index,String s){
+        long count=0;
+        for(int i=index+1;i<s.length();i++){
+            if(s.charAt(index)>s.charAt(i)){
+                count++;
             }
+            
         }
-        return denom;
+        return count;
+        
     }
-    public long findRank(String s) {
-        // Code here
-        computeFactorials();
-        int n = s.length();
-        long rank = 1;
-
-        int[] freq = new int[256];
-        for (char c : s.toCharArray()) {
-            freq[c]++;
+    long findPermutation(String s){
+        int n=s.length();
+        long rank=1;
+        for(int i=0;i<n;i++){
+            long count=smallerLetter(i,s) ;
+            rank+=(count* factorial(n-1-i));
         }
-
-        for (int i = 0; i < n; i++) {
-            long countSmaller = 0;
-
-            for (int ch = 0; ch < s.charAt(i); ch++) {
-                if (freq[ch] > 0) {
-                    freq[ch]--;
-                    long num = fact[n - i - 1];
-                    long denom = calculateDenominator(freq);
-                    countSmaller += num / denom;
-                    freq[ch]++;
-                }
-            }
-
-            rank += countSmaller;
-            freq[s.charAt(i)]--;
-
-            if (freq[s.charAt(i)] < 0) {
-                return -1;  // Invalid input with repeated characters beyond frequency
-            }
-        }
-
         return rank;
+    }
+    public long findRank(String S) {
+        
+        return findPermutation(S);
+        
+    }
+}
+```
+
+### no of combinations
+
+```java
+import java.util.Scanner;
+public class noOfCombinations {
+    static int numOfCom(int[] arr,int n){
+        int[]c={0,0,0};
+
+        for(int i=0;i<n;i++){
+            ++c[arr[i]%3];
+           
+        }
+
+        int pair_1_2=c[1]*c[2];
+        int pair_00=c[0]*(c[0]-1)/2;
+        int triplet_000=c[0]*(c[0]-1)*(c[0]-2)/6;
+        int triplet_111=c[1]*(c[1]-1)*(c[1]-2)/6;
+        int triplet_222=c[2]*(c[2]-1)*(c[2]-2)/6;
+        int triplet_012=c[0]*c[1]*c[2];
+
+        return pair_1_2+pair_00+triplet_000+triplet_111+triplet_222+triplet_012;
+
+    }
+    public static void main(String[] args){
+     
+        int[] arr1 = { 1, 5, 7, 2, 9, 14 }; 
+    System.out.println("Result for arr1"+numOfCom(arr1, arr1.length));
+
+    int arr2[] = { 3, 6, 9, 12 }; 
+    System.out.print("Result for arr2"+numOfCom(arr2, arr2.length));
+
+
+
+    }
+    
+}
+
+
+```
+
+### wildcard matching
+
+```java
+class Solution {
+    public boolean isMatch(String s, String p) {
+        int sIndex=0;int pIndex=0;int starIndex=-1;int sTempIndex=-1;
+
+        while(sIndex<s.length()){
+            if(pIndex<p.length() && (p.charAt(pIndex)==s.charAt(sIndex) || p.charAt(pIndex)=='?')){
+                pIndex++;
+                sIndex++;
+            }
+            else if(pIndex<p.length() && p.charAt(pIndex)=='*'){
+                starIndex=pIndex;
+                sTempIndex=sIndex;
+                pIndex++;
+            }
+            else if(starIndex==-1){
+                return false;
+            }
+            else{
+                pIndex=starIndex+1;
+                sTempIndex++;
+                sIndex=sTempIndex;
+            }
+        }
+
+        while(pIndex<p.length() && p.charAt(pIndex)=='*'){
+            pIndex++;
+        }
+        return pIndex==p.length();
         
     }
 }
