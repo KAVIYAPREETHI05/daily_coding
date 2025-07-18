@@ -467,3 +467,29 @@ public class SortString {
 }
 
 ```
+
+### sumof digonal matrix
+
+```java
+import java.util.Scanner;
+public class Main
+{
+    public static void sumDiagonal(int[][] matrix){
+        int row=matrix.length;
+        int col=matrix[0].length;
+        int sum=0;int inverse=0;
+        for(int i=0;i<row;i++){
+                    sum+=matrix[i][i];
+                    inverse+=matrix[i][row-1-i];
+                
+            
+        }
+        System.out.print(sum + " "+ inverse);
+    }
+	public static void main(String[] args) {
+	    Scanner sc=new Scanner(System.in);
+	    int[][] matrix={{1,2,3},{4,3,2},{2,5,7}};
+	    sumDiagonal(matrix);
+	}
+}
+```
