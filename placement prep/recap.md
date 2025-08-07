@@ -16,5 +16,23 @@
 ### longest common substring
 <img width="1919" height="632" alt="image" src="https://github.com/user-attachments/assets/0fc58d1c-f24b-4542-a169-f229c6b2e6f3" />
 
+### two sum
+<img width="1534" height="758" alt="image" src="https://github.com/user-attachments/assets/2e308919-83ba-4359-9c1c-b3d6c7e8e264" />
+
+### contains duplicate
+<img width="1534" height="523" alt="image" src="https://github.com/user-attachments/assets/adc3a2db-d7e2-418b-ae47-16b5cd8724bd" />
+
+<img width="1742" height="634" alt="image" src="https://github.com/user-attachments/assets/16f5a3c2-0131-469f-8c22-4b8d4fe6ff9f" />
+
+### product of array itself
+<img width="1442" height="633" alt="image" src="https://github.com/user-attachments/assets/caeedafc-f8db-4830-9a11-6efaa39439a1" />
+
+### maximum subarray- kadane's algo
+<img width="1525" height="655" alt="image" src="https://github.com/user-attachments/assets/d829d784-2701-4729-a818-b4cc3523ffd8" />
+
+### 
+<img width="1531" height="607" alt="image" src="https://github.com/user-attachments/assets/4af3cd4b-38d2-4440-83b7-c51250c29dd0" />
+
+
 
 
