@@ -33,6 +33,17 @@
 ### 
 <img width="1531" height="607" alt="image" src="https://github.com/user-attachments/assets/4af3cd4b-38d2-4440-83b7-c51250c29dd0" />
 
+### search in rotated sorted array 
+<img width="1557" height="704" alt="image" src="https://github.com/user-attachments/assets/c55c0013-f730-404d-a6d3-350bc57bdafc" />
+
+### merge sorted array
+<img width="1526" height="657" alt="image" src="https://github.com/user-attachments/assets/831e7930-e68e-4ee9-9dc0-7c9ecaa505cb" />
+
+### rotate array
+<img width="1360" height="651" alt="image" src="https://github.com/user-attachments/assets/9e71474d-af3d-4ad6-9d68-ed7ba23f3d62" />
+
+### Longest Substring Without Repeating Characters
+
 
 
 
