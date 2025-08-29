@@ -179,3 +179,77 @@ CREATE TABLE Demo.Table5 (
 ('Demo', 'Table3', 90),
 ('Demo', 'Table4', 7),
 ('Demo', 'Table5', 45);
+
+________
+CREATE PROCEDURE DeleteOldRecords
+AS
+BEGIN
+    DECLARE @TableName NVARCHAR(100),
+            @SchemaName NVARCHAR(100),
+            @NoOfDays INT,
+            @SQL NVARCHAR(MAX),
+            @RowCount INT;
+
+    BEGIN TRY
+        BEGIN TRANSACTION;  -- 🚀 Start transaction
+
+        DECLARE DeleteCursor CURSOR FOR
+            SELECT TableName, SchemaName, NoOfDays
+            FROM TableConfig;
+
+        OPEN DeleteCursor;
+
+        FETCH NEXT FROM DeleteCursor 
+        INTO @TableName, @SchemaName, @NoOfDays;
+
+        WHILE @@FETCH_STATUS = 0
+        BEGIN
+            SET @SQL = '
+                DELETE FROM ' + QUOTENAME(@SchemaName) + '.' + QUOTENAME(@TableName) + '
+                WHERE DateColumn < DATEADD(DAY, -' + CAST(@NoOfDays AS NVARCHAR(10)) + ', GETDATE());';
+
+            PRINT @SQL;
+
+            EXEC sp_executesql @SQL;
+
+            -- Get number of deleted rows
+            SET @RowCount = @@ROWCOUNT;
+
+            -- Insert into logs
+            INSERT INTO DeleteLogs (schema_name, table_name, deleted_rows, status)
+            VALUES (@SchemaName, @TableName, @RowCount, 'SUCCESS');
+
+            FETCH NEXT FROM DeleteCursor 
+            INTO @TableName, @SchemaName, @NoOfDays;
+        END;
+
+        CLOSE DeleteCursor;
+        DEALLOCATE DeleteCursor;
+
+        COMMIT TRANSACTION;  -- ✅ Commit only if all succeed
+    END TRY
+    BEGIN CATCH
+        -- Log error
+        INSERT INTO DeleteLogs (schema_name, table_name, deleted_rows, status, error_message)
+        VALUES (@SchemaName, @TableName, 0, 'FAILED', ERROR_MESSAGE());
+
+        ROLLBACK TRANSACTION;  -- ❌ Rollback everything if error occurs
+        THROW; -- re-raise error
+    END CATCH
+END;
+GO
+
+
+
+
+
+
+CREATE TABLE DeleteLogs (
+    log_id INT IDENTITY PRIMARY KEY,
+    schema_name NVARCHAR(100),
+    table_name NVARCHAR(100),
+    deleted_rows INT,
+    deleted_on DATETIME DEFAULT GETDATE(),
+    status NVARCHAR(20),
+    error_message NVARCHAR(MAX) NULL
+);
