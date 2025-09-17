@@ -432,3 +432,90 @@ namespace WeatherFunctionApp
         public string? Id { get; set; }
     }
 }
+
+
+
+1
+2
+3
+4
+5
+6
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+
+namespace FunctionApp
+{
+    public class WeatherFunction
+    {
+        private readonly string rawFilePath = Path.Combine("data", "raw.json");
+        private readonly string processedFilePath = Path.Combine("data", "processed.json");
+
+        [FunctionName("WeatherDataProcessorHttp")]
+        public async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req,
+            ILogger log)
+        {
+            log.LogInformation("➡️ HTTP trigger function started.");
+
+            if (!File.Exists(rawFilePath))
+            {
+                log.LogError("❌ raw.json not found.");
+                return new NotFoundObjectResult("raw.json not found in data folder.");
+            }
+
+            // ✅ Read raw.json
+            string rawJson = await File.ReadAllTextAsync(rawFilePath);
+            if (string.IsNullOrWhiteSpace(rawJson))
+            {
+                log.LogError("❌ raw.json is empty.");
+                return new BadRequestObjectResult("raw.json is empty.");
+            }
+
+            // ✅ Deserialize into WeatherRecord list
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var weatherData = JsonSerializer.Deserialize<List<WeatherRecord>>(rawJson, options) ?? new List<WeatherRecord>();
+
+            // ✅ Clean data
+            foreach (var record in weatherData)
+            {
+                record.Location ??= "Unknown";
+                record.Weather ??= "Not Available";
+                record.Date = string.IsNullOrWhiteSpace(record.Date)
+                    ? DateTime.UtcNow.ToString("yyyy-MM-dd")
+                    : record.Date;
+            }
+
+            // ✅ Serialize cleaned data
+            string processedJson = JsonSerializer.Serialize(weatherData, new JsonSerializerOptions { WriteIndented = true });
+
+            // ✅ Write to processed.json
+            Directory.CreateDirectory("data"); // ensure folder exists
+            await File.WriteAllTextAsync(processedFilePath, processedJson);
+
+            log.LogInformation("✅ Cleaned data saved to data/processed.json");
+
+            return new OkObjectResult("✅ Cleaned data written to data/processed.json");
+        }
+    }
+
+    // ✅ Model for weather data
+    public class WeatherRecord
+    {
+        public string? Location { get; set; }
+        public string? Date { get; set; }
+        public string? TempMax { get; set; }
+        public string? TempMin { get; set; }
+        public string? Weather { get; set; }
+        public string? Id { get; set; }
+    }
+}
