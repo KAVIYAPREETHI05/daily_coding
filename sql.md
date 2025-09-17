@@ -345,5 +345,90 @@ namespace FunctionApp
         public string? TempMin { get; set; }
         public string? Weather { get; set; }
         public string? Id { get; set; }
+    
+
+
+
+
+___________
+
+using System.Text.Json;
+using Azure.Storage.Blobs;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+
+namespace WeatherFunctionApp
+{
+    public class WeatherDataProcessor
+    {
+        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureWebJobsStorage");
+        private readonly string containerName = "kaviya";
+        private readonly string rawBlobPath = "weather/raw.json";
+        private readonly string processedBlobPath = "weather/processed.json";
+
+        [Function("WeatherDataProcessorHttp")]
+        public async Task<HttpResponseData> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
+            FunctionContext context)
+        {
+            var logger = context.GetLogger("WeatherDataProcessor");
+            logger.LogInformation("➡️ .NET 8 isolated function triggered...");
+
+            var blobServiceClient = new BlobServiceClient(connectionString);
+            var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+
+            // ✅ Get raw blob
+            var rawBlobClient = containerClient.GetBlobClient(rawBlobPath);
+            if (!await rawBlobClient.ExistsAsync())
+            {
+                var notFound = req.CreateResponse(System.Net.HttpStatusCode.NotFound);
+                await notFound.WriteStringAsync("raw.json not found in blob storage.");
+                return notFound;
+            }
+
+            // ✅ Read raw JSON
+            string rawJson;
+            using (var stream = await rawBlobClient.OpenReadAsync())
+            using (var reader = new StreamReader(stream))
+            {
+                rawJson = await reader.ReadToEndAsync();
+            }
+
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var weatherData = JsonSerializer.Deserialize<List<WeatherRecord>>(rawJson, options) ?? new();
+
+            // ✅ Clean
+            foreach (var record in weatherData)
+            {
+                record.Location ??= "Unknown";
+                record.Weather ??= "Not Available";
+                record.Date = string.IsNullOrWhiteSpace(record.Date)
+                    ? DateTime.UtcNow.ToString("yyyy-MM-dd")
+                    : record.Date;
+            }
+
+            // ✅ Save processed
+            string processedJson = JsonSerializer.Serialize(weatherData, new JsonSerializerOptions { WriteIndented = true });
+            var processedBlobClient = containerClient.GetBlobClient(processedBlobPath);
+
+            using (var uploadStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(processedJson)))
+            {
+                await processedBlobClient.UploadAsync(uploadStream, overwrite: true);
+            }
+
+            var response = req.CreateResponse(System.Net.HttpStatusCode.OK);
+            await response.WriteStringAsync("✅ Cleaned data uploaded to weather/processed.json");
+            return response;
+        }
+    }
+
+    public class WeatherRecord
+    {
+        public string? Location { get; set; }
+        public string? Date { get; set; }
+        public string? TempMax { get; set; }
+        public string? TempMin { get; set; }
+        public string? Weather { get; set; }
+        public string? Id { get; set; }
     }
 }
