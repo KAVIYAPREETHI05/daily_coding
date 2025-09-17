@@ -253,3 +253,97 @@ CREATE TABLE DeleteLogs (
     status NVARCHAR(20),
     error_message NVARCHAR(MAX) NULL
 );
+
+
+
+
+
+
+44444444
+
+
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+
+namespace FunctionApp
+{
+    public class WeatherFunction
+    {
+        private readonly string dataFolder = Path.Combine(Environment.CurrentDirectory, "Data");
+        private readonly string rawFilePath;
+        private readonly string processedFilePath;
+
+        public WeatherFunction()
+        {
+            rawFilePath = Path.Combine(dataFolder, "raw.json");
+            processedFilePath = Path.Combine(dataFolder, "processed.json");
+        }
+
+        [FunctionName("WeatherDataProcessorHttp")]
+        public async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req,
+            ILogger log)
+        {
+            log.LogInformation($"➡️ HTTP trigger executed at: {DateTime.Now}");
+
+            // ✅ Check if raw.json exists
+            if (!File.Exists(rawFilePath))
+            {
+                log.LogError("❌ raw.json not found.");
+                return new NotFoundObjectResult("raw.json not found in Data folder.");
+            }
+
+            // ✅ Read raw.json
+            string rawJson = await File.ReadAllTextAsync(rawFilePath);
+            if (string.IsNullOrWhiteSpace(rawJson))
+            {
+                log.LogError("❌ raw.json is empty.");
+                return new BadRequestObjectResult("raw.json is empty.");
+            }
+
+            // ✅ Deserialize JSON
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var weatherData = JsonSerializer.Deserialize<List<WeatherRecord>>(rawJson, options) ?? new List<WeatherRecord>();
+
+            // ✅ Clean data
+            foreach (var record in weatherData)
+            {
+                record.Location ??= "Unknown";
+                record.Weather ??= "Not Available";
+                record.Date = string.IsNullOrWhiteSpace(record.Date) ? DateTime.UtcNow.ToString("yyyy-MM-dd") : record.Date;
+                record.TempMax ??= "0";
+                record.TempMin ??= "0";
+                record.Id ??= Guid.NewGuid().ToString(); // if missing, assign new id
+            }
+
+            // ✅ Serialize cleaned data
+            string processedJson = JsonSerializer.Serialize(weatherData, new JsonSerializerOptions { WriteIndented = true });
+
+            // ✅ Write into processed.json
+            Directory.CreateDirectory(dataFolder); // ensure Data folder exists
+            await File.WriteAllTextAsync(processedFilePath, processedJson);
+
+            log.LogInformation("✅ Cleaned data written to processed.json");
+            return new OkObjectResult("✅ Cleaned data successfully written to processed.json");
+        }
+    }
+
+    // ✅ Model
+    public class WeatherRecord
+    {
+        public string? Location { get; set; }
+        public string? Date { get; set; }
+        public string? TempMax { get; set; }
+        public string? TempMin { get; set; }
+        public string? Weather { get; set; }
+        public string? Id { get; set; }
+    }
+}
