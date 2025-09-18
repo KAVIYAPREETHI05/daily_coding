@@ -1,3 +1,92 @@
+
+
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Logging;
+using System.Text.Json;
+using Snowflake.Data.Client;
+using System.Data;
+
+namespace weatherDataProcessing
+{
+    public class SnowflakeFunction
+    {
+        private readonly ILogger _logger;
+
+        public SnowflakeFunction(ILoggerFactory loggerFactory)
+        {
+            _logger = loggerFactory.CreateLogger<SnowflakeFunction>();
+        }
+
+        [Function("FetchFromSnowflake")]
+        public async Task<HttpResponseData> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequestData req)
+        {
+            _logger.LogInformation("Snowflake function triggered.");
+
+            // ✅ Replace with your Snowflake connection details
+            string connectionString = "account=<your_account>;" +
+                                      "user=<your_username>;" +
+                                      "password=<your_password>;" +
+                                      "db=<your_db>;" +
+                                      "schema=<your_schema>;" +
+                                      "warehouse=<your_warehouse>;" +
+                                      "role=<your_role>";
+
+            List<Dictionary<string, object>> results = new();
+
+            try
+            {
+                using (var conn = new SnowflakeDbConnection())
+                {
+                    conn.ConnectionString = connectionString;
+                    conn.Open();
+
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = "SELECT CURRENT_TIMESTAMP AS NOW, CURRENT_VERSION() AS VERSION;"; 
+                        using (IDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var row = new Dictionary<string, object>();
+                                for (int i = 0; i < reader.FieldCount; i++)
+                                {
+                                    row[reader.GetName(i)] = reader.GetValue(i);
+                                }
+                                results.Add(row);
+
+                                // print to console
+                                Console.WriteLine(JsonSerializer.Serialize(row));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Snowflake query failed: {ex.Message}");
+                var errorRes = req.CreateResponse(System.Net.HttpStatusCode.InternalServerError);
+                await errorRes.WriteStringAsync($"Error: {ex.Message}");
+                return errorRes;
+            }
+
+            var response = req.CreateResponse(System.Net.HttpStatusCode.OK);
+            await response.WriteStringAsync(JsonSerializer.Serialize(results, new JsonSerializerOptions { WriteIndented = true }));
+            return response;
+        }
+    }
+}
+----------_------------
+
+
+
+
+
+
+
+
+
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
