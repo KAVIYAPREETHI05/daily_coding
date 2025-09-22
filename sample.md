@@ -1,3 +1,50 @@
+CREATE OR REPLACE VIEW hospital_analytics AS
+WITH dept_revenue AS (
+    SELECT d.Department_Name, SUM(f.Treatment_Cost) AS total_revenue
+    FROM fact_admissions f
+    JOIN dim_department d ON f.Department_ID = d.Department_ID
+    GROUP BY d.Department_Name
+),
+doctor_stay AS (
+    SELECT doc.Doctor_Name, AVG(f.Days_Stayed) AS avg_days
+    FROM fact_admissions f
+    JOIN dim_doctor doc ON f.Doctor_ID = doc.Doctor_ID
+    GROUP BY doc.Doctor_Name
+),
+city_spending AS (
+    SELECT p.City, SUM(f.Treatment_Cost) AS city_spending
+    FROM fact_admissions f
+    JOIN dim_patient p ON f.Patient_ID = p.Patient_ID
+    GROUP BY p.City
+)
+SELECT
+    dr.Department_Name,
+    dr.total_revenue,
+    ds.Doctor_Name,
+    ds.avg_days,
+    cs.City,
+    cs.city_spending
+FROM dept_revenue dr
+LEFT JOIN doctor_stay ds ON 1=1   -- cross join to combine outputs
+LEFT JOIN city_spending cs ON 1=1;
+
+
+
+CREATE OR REPLACE VIEW fact_admissions AS
+SELECT 
+    Admission_ID,
+    Patient_ID,
+    Doctor_ID,
+    Department_ID,
+    TO_DATE(REPLACE("Date", '''', ''), 'YYYY-MM-DD') AS Admission_Date,
+    CAST(Treatment_Cost AS NUMBER) AS Treatment_Cost,
+    CAST(Days_Stayed AS INT) AS Days_Stayed
+FROM raw_hospital_data;
+
+
+
+
+
 A function app lets you group functions as a logical unit for easier management, deployment, scaling and sharing of resources. It runs code in a serverless environment without having to create a virtual machine or publish a web application. 
 Basically, it's a piece of code that runs on Microsoft's cloud computing platform and can be written in various languages (JavaScript, C#, or Java, to name a few). It will work the same whether you use Windows or Linux as your operating system.
 
