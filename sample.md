@@ -1,3 +1,65 @@
+
+
+
+CREATE OR REPLACE TABLE fact_hospital_admissions AS
+SELECT
+    p.Patient_ID,
+    d.Doctor_ID,
+    dept.Department_ID,
+    v.Admitted_Date,
+    v.Stayed_Days,
+    v.Total_Amount,
+
+    -- Derived Measures
+    (v.Total_Amount / NULLIF(v.Stayed_Days, 0)) AS Avg_Cost_Per_Day, -- avoid divide by zero
+    CASE 
+        WHEN v.Stayed_Days > 10 THEN 'Long Stay'
+        WHEN v.Stayed_Days BETWEEN 5 AND 10 THEN 'Medium Stay'
+        ELSE 'Short Stay'
+    END AS Stay_Category
+
+FROM stg_admissions_v v
+JOIN dim_patient p ON v.Patient_ID = p.Patient_ID
+JOIN dim_doctor d ON v.Doctor_ID = d.Doctor_ID
+JOIN dim_department dept ON v.Department_ID = dept.Department_ID;
+-------
+
+SELECT dept.Department_Name, SUM(f.Total_Amount) AS Total_Revenue
+FROM fact_hospital_admissions f
+JOIN dim_department dept ON f.Department_ID = dept.Department_ID
+GROUP BY dept.Department_Name;
+
+
+
+Average Stay Days by Doctor
+
+SELECT d.Doctor_Name, AVG(f.Stayed_Days) AS Avg_Stay
+FROM fact_hospital_admissions f
+JOIN dim_doctor d ON f.Doctor_ID = d.Doctor_ID
+GROUP BY d.Doctor_Name;
+
+
+Patient Cost Trend (per month)
+
+SELECT DATE_TRUNC('month', f.Admitted_Date) AS Month, SUM(f.Total_Amount) AS Monthly_Revenue
+FROM fact_hospital_admissions f
+GROUP BY Month
+ORDER BY Month;
+
+
+Stay Category Distribution
+
+SELECT Stay_Category, COUNT(*) AS Count
+FROM fact_hospital_admissions
+GROUP BY Stay_Category;
+
+
+
+
+
+
+
+
 CREATE OR REPLACE VIEW hospital_analytics AS
 WITH dept_revenue AS (
     SELECT d.Department_Name, SUM(f.Treatment_Cost) AS total_revenue
