@@ -150,3 +150,37 @@ JOIN Dim_Location l ON pv.property_id = l.property_id
 GROUP BY p.property_type, p.owner_type, property_size_category, l.city, l.locality
 ORDER BY l.city, p.property_type;
 
+
+
+CREATE OR REPLACE VIEW Fact_AmenitiesByCity AS
+SELECT
+    p.property_type,
+    l.city,
+    COUNT(p.property_id) AS total_properties,
+    ROUND(AVG(a.bedrooms), 2) AS avg_bedrooms,
+    ROUND(AVG(a.bathrooms), 2) AS avg_bathrooms,
+    ROUND(AVG(a.parking_spaces), 2) AS avg_parking_spaces,
+    ROUND(SUM(CASE WHEN a.loan_available = 'Yes' THEN 1 ELSE 0 END) * 100.0 / COUNT(p.property_id), 2) AS pct_properties_with_loan
+FROM Dim_Property p
+JOIN Dim_Location l ON p.property_id = l.property_id
+JOIN Dim_Amenities a ON p.property_id = a.property_id
+GROUP BY p.property_type, l.city
+ORDER BY l.city, p.property_type;
+
+
+
+CREATE OR REPLACE VIEW Fact_SaleStatus AS
+SELECT
+    l.city,
+    l.locality,
+    p.owner_type,
+    COUNT(s.property_id) AS total_properties,
+    SUM(CASE WHEN s.sale_status = 'Sold' THEN 1 ELSE 0 END) AS sold_count,
+    SUM(CASE WHEN s.sale_status = 'Available' THEN 1 ELSE 0 END) AS available_count,
+    SUM(CASE WHEN s.sale_status = 'Pending' THEN 1 ELSE 0 END) AS pending_count,
+    ROUND(SUM(CASE WHEN s.sale_status = 'Sold' THEN 1 ELSE 0 END) * 100.0 / COUNT(s.property_id), 2) AS sold_pct
+FROM Dim_Property p
+JOIN Dim_Location l ON p.property_id = l.property_id
+JOIN Dim_Sale s ON p.property_id = s.property_id
+GROUP BY l.city, l.locality, p.owner_type
+ORDER BY l.city, l.locality, p.owner_type;
