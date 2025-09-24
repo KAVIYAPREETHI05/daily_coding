@@ -126,3 +126,27 @@ GROUP BY
 
 ORDER BY a.bedrooms, a.bathrooms;
 
+
+
+CREATE OR REPLACE VIEW Fact_PropertyPricing AS
+SELECT 
+    p.property_type,
+    p.owner_type,
+    CASE 
+        WHEN p.square_feet < 600 THEN 'Small'
+        WHEN p.square_feet BETWEEN 600 AND 1200 THEN 'Medium'
+        ELSE 'Large'
+    END AS property_size_category,
+    l.city,
+    l.locality,
+    COUNT(pv.property_id) AS total_properties,
+    ROUND(AVG(pv.price), 2) AS avg_price,
+    ROUND(MIN(pv.price), 2) AS min_price,
+    ROUND(MAX(pv.price), 2) AS max_price,
+    ROUND(AVG(pv.price / NULLIF(pv.square_feet,0)), 2) AS avg_price_per_sqft
+FROM Property_View pv
+JOIN Dim_Property p ON pv.property_id = p.property_id
+JOIN Dim_Location l ON pv.property_id = l.property_id
+GROUP BY p.property_type, p.owner_type, property_size_category, l.city, l.locality
+ORDER BY l.city, p.property_type;
+
